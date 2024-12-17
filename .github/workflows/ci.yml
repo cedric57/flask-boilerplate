@@ -1,0 +1,38 @@
+# .github/workflows/ci.yml
+
+# Nom du workflow
+name: CI Pipeline
+
+# Événements qui déclenchent le workflow
+on:
+  push:  # Lorsque du code est poussé
+    branches:
+      - main  # Sur la branche principale
+  pull_request:  # Lorsqu'une pull request est ouverte
+    branches:
+      - main  # Sur la branche principale
+
+# Définition des jobs
+jobs:
+  build:  # Nom du job
+    name: Build Package
+    runs-on: ubuntu-latest  # Environnement dans lequel le job s'exécute
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    steps:  # Liste des étapes à exécuter dans le job
+    - name: Checkout code  # Étape pour récupérer le code du dépôt
+      uses: actions/checkout@v3  # Utilisation de l'action checkout
+
+    - name: Set up Python  # Étape pour configurer Python
+      uses: actions/setup-python@v4  # Utilisation de l'action setup-python
+      with:
+        python-version: '3.12'  # Version de Python à utiliser
+
+    - name: Install dependencies  # Étape pour installer les dépendances
+      run: |  # Commandes à exécuter
+        python -m pip install --upgrade pip  # Mettre à jour pip
+        pip install poetry  # Installer Poetry
+        poetry install  # Installer les dépendances définies dans pyproject.toml
+
+    - name: Run tests  # Étape pour exécuter les tests
+      run: poetry run pytest  # Exécuter les tests avec Pytest via Poetry

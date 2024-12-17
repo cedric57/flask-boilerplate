@@ -3,13 +3,20 @@
 [![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/cedric57/flask-boilerplate/blob/main/README.md)
 [![fr](https://img.shields.io/badge/lang-fr-green.svg)](https://github.com/cedric57/flask-boilerplate/blob/main/README.fr.md)
 [![MIT License](https://img.shields.io/github/license/cedric57/flask-boilerplate)](https://github.com/cedric57/flask-boilerplate/blob/main/LICENSE)
+[![](https://readthedocs.org/projects/flask-boilerplate/badge/?version=latest)](https://flask-boilerplate.readthedocs.io)
 
 This boilerplate is a robust starting point for creating production-ready Flask applications. Although tailored for Flask, its core principles are versatile enough for other frameworks and languages. These include maintaining clean architecture, implementing domain-driven design (DDD), and adhering to the SOLID principles for object-oriented design. The project also incorporates the Command Query Responsibility Segregation (CQRS) and Data Transfer Object (DTO) patterns, which enhance data management and system clarity. Embracing test-driven development (TDD), the boilerplate ensures high-quality, reliable code. By applying these best practices, developers can create scalable, maintainable applications that align with modern software engineering standards.
 
 ## ⚡ Features
 
 - Dependency and package management: [Poetry](https://python-poetry.org/)
-
+- Hooks: [Pre-commit](https://github.com/pre-commit/pre-commit-hooks)
+- Framework: [Flask](https://flask.palletsprojects.com/en/stable/)
+- ORM: [SQLAlchemy](https://www.sqlalchemy.org/)
+- Format and Style: [Black](https://github.com/psf/black) + [ISort](https://pycqa.github.io/isort/) + [Flake8](https://github.com/PyCQA/flake8) + [MyPy](https://github.com/python/mypy)
+- Tests: [Pytest](https://docs.pytest.org/en/stable/)
+- Documentation: [Sphinx](https://www.sphinx-doc.org/en/master/)
+ 
 ## 👉 Table of Contents
 
 - [Getting Started](#start)

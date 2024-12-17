@@ -9,11 +9,18 @@ Ce modèle de base est un point de départ solide pour créer des applications F
 ## ⚡ Caractéristiques
 
 - Gestion des dépendances et des paquets : [Poetry](https://python-poetry.org/)
+- Hooks: [Pre-commit](https://github.com/pre-commit/pre-commit-hooks)
+- Framework: [Flask](https://flask.palletsprojects.com/en/stable/)
+- ORM: [SQLAlchemy](https://www.sqlalchemy.org/)
+- Format et Style: [Black](https://github.com/psf/black) + [ISort](https://pycqa.github.io/isort/) + [Flake8](https://github.com/PyCQA/flake8) + [MyPy](https://github.com/python/mypy)
+- Tests: [Pytest](https://docs.pytest.org/en/stable/)
+- Documentation: [Sphinx](https://www.sphinx-doc.org/en/master/)
 
 ## 👉 Table des matières
  
 - [Pour commencer](#start)
 - [Principes](#principles)
+- [Structure des répertoires et organisation du code](#folder)
 - [Ressources utiles](#resources)
 - [Génération de types de clients](#client-types)
 

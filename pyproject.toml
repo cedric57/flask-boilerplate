@@ -2,13 +2,29 @@
 name = "flask-boilerplate"
 version = "0.1.0"
 description = ""
-authors = ["Cedric GRUN <cedric.grun@cebi.com>"]
+authors = ["Cedric Grun <cedric.grun@gmail.com>"]
+license = "MIT"
 readme = "README.md"
+homepage = "https://github.com/cedric57/flask-boilerplate"
+repository = "https://github.com/cedric57/flask-boilerplate"
+documentation = "https://flask-boilerplate.readthedocs.io"
 
 [tool.poetry.dependencies]
 python = "^3.12"
+flask = "^3.1.0"
+sqlalchemy = "^2.0.36"
 
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.4"
+black = "^24.10.0"
+isort = "^5.13.2"
+flake8 = "^7.1.1"
+mypy = "^1.13.0"
+sphinx = "^8.1.3"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.extras]
+docs = ["sphinx"]

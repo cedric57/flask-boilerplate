@@ -14,8 +14,75 @@ on:
 
 # Définition des jobs
 jobs:
-  build:  # Nom du job
+  quality:
+    name: Code Quality & Tests
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12"]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install Poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | python3 -
+          poetry config virtualenvs.create true
+          poetry config virtualenvs.in-project true
+
+      - name: Cache Poetry dependencies
+        uses: actions/cache@v3
+        with:
+          path: .venv
+          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
+
+      - name: Install dependencies
+        run: poetry install
+
+      - name: Run black
+        run: poetry run black . --check
+
+      - name: Run isort
+        run: poetry run isort . --check-only
+
+      - name: Run flake8
+        run: poetry run flake8 .
+
+      - name: Run mypy
+        run: poetry run mypy .
+
+      - name: Run tests with coverage
+        run: poetry run pytest --cov=domaining --cov-report=xml
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+
+  security:
+    name: Security Checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Security vulnerabilities scan
+        uses: snyk/actions/python@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+      - name: Run bandit
+        run: |
+          poetry install
+          poetry run bandit -r domaining/
+
+  build:
     name: Build Package
+    needs: [quality, security]
     runs-on: ubuntu-latest  # Environnement dans lequel le job s'exécute
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
 

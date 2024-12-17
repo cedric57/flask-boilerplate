@@ -1,8 +1,14 @@
 # flask-boilerplate
 
+[![cedric57 github](https://img.shields.io/badge/GitHub-cedric57-181717.svg?style=flat&logo=github)](https://github.com/cedric57)
 [![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/cedric57/flask-boilerplate/blob/main/README.md)
 [![fr](https://img.shields.io/badge/lang-fr-green.svg)](https://github.com/cedric57/flask-boilerplate/blob/main/README.fr.md)
 [![MIT License](https://img.shields.io/github/license/cedric57/flask-boilerplate)](https://github.com/cedric57/flask-boilerplate/blob/main/LICENSE)
+[![](https://readthedocs.org/projects/flask-boilerplate/badge/?version=latest)](https://flask-boilerplate.readthedocs.io)
+[![python](https://img.shields.io/badge/Python-3.12-3776AB.svg?style=flat&logo=python&logoColor=white)](https://www.python.org)
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![Checked with mypy](http://www.mypy-lang.org/static/mypy_badge.svg)](http://mypy-lang.org/)
 
 Ce modèle de base est un point de départ solide pour créer des applications Flask prêtes à la production. Bien que conçu pour Flask, ses principes de base sont suffisamment polyvalents pour s'appliquer à d'autres frameworks et langages. Il s'agit notamment de maintenir une architecture propre, de mettre en œuvre une conception axée sur le domaine (DDD) et d'adhérer aux principes SOLID pour la conception orientée objet. Le projet intègre également les modèles CQRS (Command Query Responsibility Segregation) et DTO (Data Transfer Object), qui améliorent la gestion des données et la clarté du système. En adoptant le développement piloté par les tests (TDD), le boilerplate garantit un code fiable et de haute qualité. En appliquant ces meilleures pratiques, les développeurs peuvent créer des applications évolutives et faciles à maintenir, conformes aux normes modernes d'ingénierie logicielle.
 

@@ -1,0 +1,24 @@
+# .github/workflows/cd.yml
+
+# Nom du workflow
+name: CD Pipeline
+
+# Événements qui déclenchent le workflow
+on:
+  push:  # Lorsque du code est poussé
+    tags:
+      - 'v*.*.*'  # Sur les tags correspondant au format de version (par exemple, v1.0.0)
+
+# Définition des jobs
+jobs:
+  deploy:  # Nom du job
+    name: Deploy to Production
+    needs: [publish]
+    runs-on: ubuntu-latest  # Environnement dans lequel le job s'exécute
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+
+    steps:  # Liste des étapes à exécuter dans le job
+    - name: Deploy to Production  # Étape pour déployer en production
+      run: |  # Commandes spécifiques au déploiement
+        # Ajoutez ici les commandes spécifiques à votre processus de déploiement
+        echo "Déploiement en production"

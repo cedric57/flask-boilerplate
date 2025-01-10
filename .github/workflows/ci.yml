@@ -22,7 +22,7 @@ jobs:
         python-version: ["3.12"]
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
@@ -36,7 +36,7 @@ jobs:
           poetry config virtualenvs.in-project true
 
       - name: Cache Poetry dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: .venv
           key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
@@ -68,7 +68,7 @@ jobs:
     name: Security Checks
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Security vulnerabilities scan
         uses: snyk/actions/python@master
@@ -88,10 +88,10 @@ jobs:
 
     steps:  # Liste des étapes à exécuter dans le job
     - name: Checkout code  # Étape pour récupérer le code du dépôt
-      uses: actions/checkout@v3  # Utilisation de l'action checkout
+      uses: actions/checkout@v4  # Utilisation de l'action checkout
 
     - name: Set up Python  # Étape pour configurer Python
-      uses: actions/setup-python@v4  # Utilisation de l'action setup-python
+      uses: actions/setup-python@v5  # Utilisation de l'action setup-python
       with:
         python-version: '3.12'  # Version de Python à utiliser
 

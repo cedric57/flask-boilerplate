@@ -12,7 +12,7 @@ documentation = "https://flask-boilerplate.readthedocs.io"
 [tool.poetry.dependencies]
 python = "^3.12"
 flask = "^3.1.0"
-sqlalchemy = "^2.0.36"
+sqlalchemy = "^2.0.37"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.4"

@@ -57,7 +57,7 @@ jobs:
         run: poetry run mypy .
 
       - name: Run tests with coverage
-        run: poetry run pytest --cov=domaining --cov-report=xml
+        run: poetry run pytest --cov=flask-boilerplate --cov-report=xml
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v5
@@ -85,7 +85,7 @@ jobs:
       - name: Run bandit
         run: |
           poetry install
-          poetry run bandit -r domaining/
+          poetry run bandit -r flask-boilerplate/
 
   build:
     name: Build Package

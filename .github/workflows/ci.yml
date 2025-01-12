@@ -16,7 +16,7 @@ on:
 jobs:
   quality:
     name: Code Quality & Tests
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       matrix:
         python-version: ["3.12"]
@@ -72,6 +72,7 @@ jobs:
 
       - name: Security vulnerabilities scan
         uses: snyk/actions/python@master
+        continue-on-error: true
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 

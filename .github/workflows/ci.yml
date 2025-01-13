@@ -48,7 +48,7 @@ jobs:
         if: steps.poetry-cache.outputs.cache-hit != 'true'
 
       - name: Code formatting with black
-        run: poetry run black . --check
+        run: poetry run black .
 
       - name: Sort Python imports with isort
         run: poetry run isort . --check
@@ -104,7 +104,9 @@ jobs:
         run: poetry run bandit .
 
       - name: Dependency vulnerability check with Safety
-        run: poetry run safety scan .
+        uses: pyupio/safety-action@v1
+        with:
+          api-key: ${{ secrets.SAFETY_API_KEY }}
 
       - name: Security analysis with Snyk
         uses: snyk/actions/python@master

@@ -57,8 +57,10 @@ jobs:
       - name: Sort Python imports with isort
         uses: isort/isort-action@v1
 
-      - name: Run flake8
-        run: poetry run flake8 .
+      - name: Code quality with ruff
+        uses: astral-sh/ruff-action@v3
+        with:
+          src: "./src"
 
       - name: Run mypy
         run: poetry run mypy .

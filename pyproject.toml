@@ -37,3 +37,8 @@ line-length = 120
 
 [tool.isort]
 profile = "black"
+
+[tool.ruff]
+# Enable Pyflakes and pycodestyle rules.
+select = ["E", "F"]
+line-length=120

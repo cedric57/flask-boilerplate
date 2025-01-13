@@ -47,11 +47,11 @@ jobs:
           poetry install --no-interaction --no-root
         if: steps.poetry-cache.outputs.cache-hit != 'true'
 
-      - name: Run black
+      - name: Code formatting with black
         run: poetry run black . --check
 
-      - name: Run isort
-        run: poetry run isort . --check-only
+      - name: Sort Python imports with isort
+        run: poetry run isort . --check
 
       - name: Run flake8
         run: poetry run flake8 .
@@ -96,7 +96,13 @@ jobs:
           poetry install --no-interaction --no-root
         if: steps.poetry-cache.outputs.cache-hit != 'true'
 
-      - name: Run Snyk to check for vulnerabilities
+      - name: Security analysis with Bandit
+        run: poetry run bandit .
+
+      - name: Dependency vulnerability check with Safety
+        run: poetry run safety .
+
+      - name: Security analysis with Snyk
         uses: snyk/actions/python@master
         continue-on-error: true
         env:
@@ -107,9 +113,6 @@ jobs:
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: snyk.sarif
-
-      - name: Run bandit
-        run: poetry run bandit .
 
   build:
     name: Build Package

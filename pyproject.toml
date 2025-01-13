@@ -23,6 +23,7 @@ isort = "^5.13.2"
 flake8 = "^7.1.1"
 mypy = "^1.14.1"
 bandit = "^1.8.2"
+safety = "^3.2.14"
 
 [build-system]
 requires = ["poetry-core"]
@@ -30,3 +31,6 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.extras]
 docs = ["sphinx"]
+
+[tool.black]
+line-length = 120

@@ -33,6 +33,7 @@ build-backend = "poetry.core.masonry.api"
 docs = ["sphinx"]
 
 [tool.black]
+required-version = '23.3.0'
 line-length = 120
 
 [tool.isort]

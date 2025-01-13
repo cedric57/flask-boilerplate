@@ -70,6 +70,10 @@ jobs:
   security:
     name: Security Checks
     runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        python-version: ["3.12"]
+
     steps:
       - uses: actions/checkout@v4
 
@@ -100,7 +104,7 @@ jobs:
         run: poetry run bandit .
 
       - name: Dependency vulnerability check with Safety
-        run: poetry run safety .
+        run: poetry run safety scan .
 
       - name: Security analysis with Snyk
         uses: snyk/actions/python@master

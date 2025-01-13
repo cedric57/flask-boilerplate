@@ -48,10 +48,14 @@ jobs:
         if: steps.poetry-cache.outputs.cache-hit != 'true'
 
       - name: Code formatting with black
-        run: poetry run black .
+        uses: psf/black@stable
+        with:
+          options: "--check --verbose"
+          src: "./src"
+          use_pyproject: true
 
       - name: Sort Python imports with isort
-        run: poetry run isort . --check
+        uses: isort/isort-action@v1
 
       - name: Run flake8
         run: poetry run flake8 .

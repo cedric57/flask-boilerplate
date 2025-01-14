@@ -53,6 +53,8 @@ jobs:
         uses: astral-sh/ruff-action@v3
         with:
           src: "./src"
+      - run: ruff check --fix
+      - run: ruff format
 
       - name: Run mypy
         run: poetry run mypy --install-types --check-untyped-defs --non-interactive .

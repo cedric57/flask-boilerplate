@@ -49,23 +49,13 @@ jobs:
           poetry install --no-interaction --no-root
         if: steps.poetry-cache.outputs.cache-hit != 'true'
 
-      - name: Code formatting with black
-        uses: psf/black@stable
-        with:
-          options: "--check --verbose"
-          src: "./src"
-          use_pyproject: true
-
-      - name: Sort Python imports with isort
-        uses: isort/isort-action@v1
-
-      - name: Code quality with ruff
+      - name: Lint code with ruff
         uses: astral-sh/ruff-action@v3
         with:
           src: "./src"
 
       - name: Run mypy
-        run: poetry run mypy .
+        run: poetry run mypy --install-types --check-untyped-defs --non-interactive .
 
       - name: Run tests with coverage
         run: poetry run pytest --cov=flask-boilerplate --cov-report=xml

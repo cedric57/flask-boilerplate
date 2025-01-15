@@ -52,9 +52,14 @@ jobs:
       - name: Lint code with ruff
         uses: astral-sh/ruff-action@v3
         with:
+          args: check --fix
           src: "./src"
-      - run: ruff check --fix
-      - run: ruff format
+
+      - name: Lint code with ruff
+        uses: astral-sh/ruff-action@v3
+        with:
+          args: format
+          src: "./src"
 
       - name: Run mypy
         run: poetry run mypy --install-types --check-untyped-defs --non-interactive .

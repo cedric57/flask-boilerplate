@@ -55,7 +55,7 @@ jobs:
           args: check --fix
           src: "./src"
 
-      - name: Lint code with ruff
+      - name: Format code with ruff
         uses: astral-sh/ruff-action@v3
         with:
           args: format

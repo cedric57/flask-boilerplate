@@ -65,7 +65,7 @@ jobs:
         run: poetry run mypy --install-types --check-untyped-defs --non-interactive .
 
       - name: Run tests with coverage
-        run: poetry run pytest --cov=flask-boilerplate --cov-report=xml
+        run: poetry run pytest --doctest-modules --junitxml=junit/test-results.xml --cov=src test --cov-report=xml --cov-report=html
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v5

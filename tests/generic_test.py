@@ -3,6 +3,3 @@ def test_example():
 
 def test_another_example():
     assert 'hello'.upper() == 'HELLO'
-
-def test_failure():
-    assert 5 > 10

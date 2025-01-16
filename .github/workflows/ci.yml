@@ -61,7 +61,7 @@ jobs:
           args: format
           src: "./src"
 
-      - name: Run mypy
+      - name: Code quality with mypy
         run: poetry run mypy --install-types --check-untyped-defs --non-interactive .
 
       - name: Run tests with coverage

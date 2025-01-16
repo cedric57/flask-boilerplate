@@ -144,6 +144,7 @@ jobs:
       run: |  # Commandes à exécuter
         python -m pip install --upgrade pip  # Mettre à jour pip
         pip install poetry  # Installer Poetry
+        poetry lock
         poetry install  # Installer les dépendances définies dans pyproject.toml
 
     - name: Run tests  # Étape pour exécuter les tests

@@ -62,6 +62,13 @@ This boilerplate is a robust starting point for creating production-ready Flask 
 
 ## <a name="start"></a>✨ Getting Started
 
+Configure a Poetry environment : https://www.jetbrains.com/help/pycharm/poetry.html
+```powershell
+(Invoke-WebRequest -Uri https://install.python-poetry.org -UseBasicParsing).Content | python -
+
+[Environment]::SetEnvironmentVariable("Path", [Environment]::GetEnvironmentVariable("Path", "User") + ";%APPDATA%\Python\Scripts", "User")
+```
+
 ```bash
 git clone https://github.com/cedric57/flask-boilerplate.git my-app
 cd my-app

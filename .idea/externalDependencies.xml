@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ExternalDependencies">
+    <plugin id="com.github.continuedev.continueintellijextension" />
+    <plugin id="com.koxudaxi.ruff" />
+    <plugin id="mobi.hsz.idea.gitignore" />
     <plugin id="org.intellij.plugins.markdown" />
+    <plugin id="org.jetbrains.plugins.github" />
+    <plugin id="ru.adelf.idea.dotenv" />
   </component>
 </project>

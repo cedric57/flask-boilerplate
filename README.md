@@ -77,8 +77,7 @@ poetry install #Install dependencies.
 - `poetry install --with dev` - Installation for development
 - `poetry install --with docs` - Installation for documentation
 - `poetry run pytest` - Run tests
-- `poetry run black .` - Format the code
-- `poetry run isort .` - Format the code
+- `poetry run ruff .` - Format the code
 - `poetry run mypy .` - Check types
 - `poetry run flask-boilerplate` - Start application
 - `poetry add requests` - Add a dependency

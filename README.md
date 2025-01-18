@@ -47,7 +47,7 @@ This boilerplate is a robust starting point for creating production-ready Flask 
 - Hooks: [Pre-commit](https://github.com/pre-commit/pre-commit-hooks)
 - Framework: [Flask](https://flask.palletsprojects.com/en/stable/)
 - ORM: [SQLAlchemy](https://www.sqlalchemy.org/)
-- Format and Style: [Black](https://github.com/psf/black) + [ISort](https://pycqa.github.io/isort/) + [Flake8](https://github.com/PyCQA/flake8) + [MyPy](https://github.com/python/mypy)
+- Format and Style: [Ruff](https://github.com/astral-sh/ruff) + [MyPy](https://github.com/python/mypy)
 - Tests: [Pytest](https://docs.pytest.org/en/stable/)
 - Security: [Snyk](https://snyk.io/product/open-source-security-management/) + [Bandit](https://github.com/PyCQA/bandit)
 - Documentation: [Sphinx](https://www.sphinx-doc.org/en/master/)

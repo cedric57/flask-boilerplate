@@ -25,6 +25,7 @@ flake8 = "^7.1.1"
 mypy = "^1.14.1"
 bandit = "^1.8.2"
 safety = "^3.2.14"
+ruff = "^0.9.2"
 
 [build-system]
 requires = ["poetry-core"]
@@ -111,3 +112,6 @@ relative-imports-order = "closest-to-furthest"
 extra-standard-library = ["typing"]
 section-order = ["future", "standard-library", "third-party", "first-party", "local-folder"]
 known-first-party = []
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"

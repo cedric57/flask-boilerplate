@@ -89,6 +89,7 @@ poetry install #Install dependencies.
 - `poetry run flask-boilerplate` - Start application
 - `poetry add requests` - Add a dependency
 - `poetry add --group dev pytest` - Add a dev dependency
+- `poetry remove requests` - Remove a dependency
 
 ## <a name="principles"></a>🧱 Principles
 

@@ -3,4 +3,4 @@ def test_example():
 
 
 def test_another_example():
-    assert 'hello'.upper() == 'HELLO'
+    assert "hello".upper() == "HELLO"

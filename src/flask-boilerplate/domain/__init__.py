@@ -6,12 +6,13 @@ It includes entities, value objects, domain services, repositories, and domain e
 """
 
 # Import necessary modules and packages for the domain layer
-from .enums import *
-from .entities import *
-from .value_objects import *
-from .domain_services import *
-from .repositories import *
-from .domain_events import *
-from .exceptions import *
-from .errors import *
-from .shared import *
+# from .domain_events import *
+# from .domain_services import *
+# from .entities import *
+# from .enums import *
+# from .errors import *
+# from .exceptions import *
+# from .primitives import *
+# from .repositories import *
+# from .shared import *
+# from .value_objects import *

@@ -1,5 +1,3 @@
-# src/flask-boilerplate/domain/__init__.py
-
 """
 This package contains the core domain logic of the application.
 
@@ -8,6 +6,7 @@ It includes entities, value objects, domain services, repositories, and domain e
 """
 
 # Import necessary modules and packages for the domain layer
+from .enums import *
 from .entities import *
 from .value_objects import *
 from .domain_services import *

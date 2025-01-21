@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 import uuid
-from typing import Any
+from typing import Any, Optional
 
 
 class Entity(ABC):
@@ -14,12 +14,12 @@ class Entity(ABC):
         id (uuid.UUID): The unique identifier of the entity.
     """
 
-    def __init__(self, id: uuid.UUID = None) -> None:
+    def __init__(self, id: Optional[uuid.UUID] = None) -> None:
         """
         Initialize a new entity with a unique identifier.
 
         Args:
-            id (uuid.UUID, optional): The unique identifier of the entity. If not provided, a new UUID is generated.
+            id (Optional[uuid.UUID]): The unique identifier of the entity. If not provided, a new UUID is generated.
         """
         self.id: uuid.UUID = id or uuid.uuid4()
 

@@ -17,18 +17,18 @@ def create_app():
     app.config.from_object("config.Config")
 
     # Register blueprints for modular application structure
-    from .blueprints import register_blueprints
+    # from .blueprints import register_blueprints
 
-    register_blueprints(app)
+    # register_blueprints(app)
 
     # Initialize extensions like database, authentication, etc.
-    from .extensions import init_extensions
+    # from .extensions import init_extensions
 
-    init_extensions(app)
+    # init_extensions(app)
 
     # Register error handlers for custom error pages and logging
-    from .error_handlers import register_error_handlers
+    # from .error_handlers import register_error_handlers
 
-    register_error_handlers(app)
+    # register_error_handlers(app)
 
     return app

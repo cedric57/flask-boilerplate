@@ -1,5 +1,6 @@
-import uuid
 from abc import ABC, abstractmethod
+import uuid
+from typing import Any
 
 
 class Entity(ABC):
@@ -13,17 +14,17 @@ class Entity(ABC):
         id (uuid.UUID): The unique identifier of the entity.
     """
 
-    def __init__(self, id: uuid.UUID = None):
+    def __init__(self, id: uuid.UUID = None) -> None:
         """
         Initialize a new entity with a unique identifier.
 
         Args:
             id (uuid.UUID, optional): The unique identifier of the entity. If not provided, a new UUID is generated.
         """
-        self.id = id or uuid.uuid4()
+        self.id: uuid.UUID = id or uuid.uuid4()
 
     @abstractmethod
-    def __eq__(self, other):
+    def __eq__(self, other: Any) -> bool:
         """
         Compare two entities based on their unique identifier.
 
@@ -37,7 +38,7 @@ class Entity(ABC):
             return False
         return self.id == other.id
 
-    def __hash__(self):
+    def __hash__(self) -> int:
         """
         Generate a hash value for the entity based on its unique identifier.
 

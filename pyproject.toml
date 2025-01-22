@@ -23,6 +23,8 @@ mypy = "^1.14.1"
 bandit = "^1.8.2"
 safety = "^3.2.14"
 ruff = "^0.9.2"
+pre-commit = "^4.1.0"
+conventional-pre-commit = "^4.0.0"
 
 [build-system]
 requires = ["poetry-core"]
@@ -74,6 +76,7 @@ select = [
     "I",    # isort
 ]
 ignore = []
+fixable = ["ALL"]           # Allow automatic fixes for all fixable issues
 
 [tool.ruff.format]
 preview = true
@@ -112,3 +115,16 @@ known-first-party = []
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
+
+[tool.mypy]
+python_version = "3.12"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+check_untyped_defs = true
+ignore_missing_imports = false   # Display error for all missing imports
+strict = true                    # Enable more checks
+mypy_path = "src"
+
+[tool.bandit.assert_used]
+skips = ['*_test.py', '*/test_*.py']

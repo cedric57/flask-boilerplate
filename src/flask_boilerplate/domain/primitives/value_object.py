@@ -1,46 +1,101 @@
-from abc import ABC, abstractmethod
+"""Module defining the base class for value objects in the domain layer.
+
+Value objects are immutable objects that are defined by their attributes rather than
+a unique identity. They encapsulate domain-specific logic and ensure consistency
+and validity of data within the domain.
+
+This module provides a base class `ValueObject` that can be inherited to create
+custom value objects. Value objects are compared based on their attributes rather
+than their identity.
+"""
+
+from dataclasses import dataclass, fields
+from typing import Any
 
 
-class ValueObject(ABC):
+@dataclass(frozen=True)
+class ValueObject:
+    """Base class for value objects in the domain layer.
+
+    A value object is an immutable object that is defined by its attributes.
+    It does not have a unique identity and is compared based on its attribute values.
+
+    Subclasses should define their attributes using dataclass fields. The `frozen=True`
+    parameter ensures immutability.
+
+    Example:
+        >>> @dataclass(frozen=True)
+        >>> class Money(ValueObject):
+        ...     amount: float
+        ...     currency: str
+        ...
+        >>> money1 = Money(amount=100.0, currency="USD")
+        >>> money2 = Money(amount=100.0, currency="USD")
+        >>> money1 == money2
+        True
     """
-    Base class for all value objects in the domain layer.
 
-    A value object is an immutable type that is distinguishable only by the state of its properties.
-    Value objects do not have an identity and are compared based on their properties.
-    """
+    def __eq__(self, other: Any) -> bool:
+        """Compare two value objects for equality.
 
-    @abstractmethod
-    def __eq__(self, other):
-        """
-        Compare two value objects based on their properties.
+        Two value objects are considered equal if they are of the same type and
+        all their attributes have the same values.
 
         Args:
-            other (ValueObject): The other value object to compare with.
+            other (Any): The object to compare with.
 
         Returns:
-            bool: True if the value objects have the same properties, False otherwise.
+            bool: True if the objects are equal, False otherwise.
         """
         if not isinstance(other, self.__class__):
             return False
-        return self.__dict__ == other.__dict__
+        return self._get_attributes() == other._get_attributes()
 
-    def __ne__(self, other):
+    def __hash__(self) -> int:
+        """Compute the hash value of the value object.
+
+        The hash value is computed based on the values of the object's attributes.
+
+        Returns:
+            int: The hash value of the object.
         """
-        Compare two value objects to determine if they are not equal.
+        return hash(self._get_attributes())
+
+    def _get_attributes(self) -> tuple[Any, ...]:
+        """Get the values of all attributes of the value object.
+
+        Returns:
+            tuple[Any, ...]: A tuple containing the values of all attributes.
+        """
+        return tuple(getattr(self, field.name) for field in fields(self))
+
+    def to_dict(self) -> dict[str, Any]:
+        """Convert the value object to a dictionary.
+
+        Returns:
+            dict[str, Any]: A dictionary representation of the value object.
+        """
+        return {field.name: getattr(self, field.name) for field in fields(self)}
+
+    @classmethod
+    def from_dict(cls, data: dict[str, Any]) -> "ValueObject":
+        """Create a value object from a dictionary.
 
         Args:
-            other (ValueObject): The other value object to compare with.
+            data (dict[str, Any]): A dictionary containing the attribute values.
 
         Returns:
-            bool: True if the value objects do not have the same properties, False otherwise.
-        """
-        return not self.__eq__(other)
+            ValueObject: A new instance of the value object.
 
-    def __hash__(self):
+        Raises:
+            ValueError: If the dictionary contains invalid or missing attributes.
         """
-        Generate a hash value for the value object based on its properties.
+        field_names = {field.name for field in fields(cls)}
+        invalid_keys = set(data.keys()) - field_names
+        if invalid_keys:
+            raise ValueError(f"Invalid keys for {cls.__name__}: {invalid_keys}")
+        return cls(**{key: data[key] for key in field_names if key in data})
 
-        Returns:
-            int: The hash value of the value object.
-        """
-        return hash(tuple(sorted(self.__dict__.items())))
+
+# Add the class to __all__ for re-export in the parent module.
+__all__ = ["ValueObject"]

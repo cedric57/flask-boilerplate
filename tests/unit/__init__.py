@@ -6,6 +6,6 @@ They help ensure that each component of the application behaves as expected.
 """
 
 # Import necessary unit test modules and packages
-from .domain import *
-from .application import *
-from .infrastructure import *
+# from .application import *
+# from .domain import *
+# from .infrastructure import *

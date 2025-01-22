@@ -1,55 +1,112 @@
+"""Unit tests for domain entities.
+
+This module contains unit tests for the entities in the domain layer. Entities are
+domain objects that have a unique identity and lifecycle. They encapsulate business
+logic related to their identity and state.
+
+Tests in this module ensure that entities behave as expected and enforce their
+invariants.
 """
-Unit tests for the domain entities.
 
-These tests ensure that the domain entities behave as expected and that their
-business logic is correctly implemented.
-"""
+from uuid import UUID
 
-import unittest
-import uuid
-from src.flask_boilerplate.domain.entities.example_entity import ExampleEntity
+from flask_boilerplate.domain.entities import ExampleEntity
 
 
-class TestExampleEntity(unittest.TestCase):
+def test_example_entity_creation() -> None:
+    """Test the creation of an ExampleEntity.
+
+    This test ensures that an ExampleEntity can be created with the correct attributes
+    and that the attributes are properly initialized.
     """
-    Test suite for the ExampleEntity class.
+    entity_id = UUID("12345678-1234-5678-1234-567812345678")
+    name = "Test Entity"
+    description = "This is a test entity."
+
+    entity = ExampleEntity(id=entity_id, name=name, description=description)
+
+    assert entity.id == entity_id
+    assert entity.name == name
+    assert entity.description == description
+
+
+def test_example_entity_update_name() -> None:
+    """Test updating the name of an ExampleEntity.
+
+    This test ensures that the `update_name` method correctly updates the name of the
+    entity.
     """
+    entity_id = UUID("12345678-1234-5678-1234-567812345678")
+    name = "Test Entity"
+    description = "This is a test entity."
+    new_name = "Updated Entity"
 
-    def setUp(self) -> None:
-        """
-        Set up test fixtures, if any.
-        """
-        self.entity_id = uuid.uuid4()
-        self.entity = ExampleEntity(id=self.entity_id, name="Test Entity", value=42)
+    entity = ExampleEntity(id=entity_id, name=name, description=description)
+    entity.update_name(new_name)
 
-    def test_entity_initialization(self) -> None:
-        """
-        Test that an ExampleEntity is correctly initialized.
-        """
-        self.assertEqual(self.entity.id, self.entity_id)
-        self.assertEqual(self.entity.name, "Test Entity")
-        self.assertEqual(self.entity.value, 42)
-
-    def test_entity_equality(self) -> None:
-        """
-        Test that two entities with the same ID and attributes are considered equal.
-        """
-        another_entity = ExampleEntity(id=self.entity_id, name="Test Entity", value=42)
-        self.assertEqual(self.entity, another_entity)
-
-    def test_entity_inequality(self) -> None:
-        """
-        Test that two entities with different IDs or attributes are not considered equal.
-        """
-        different_entity = ExampleEntity(id=uuid.uuid4(), name="Different Entity", value=99)
-        self.assertNotEqual(self.entity, different_entity)
-
-    def test_entity_hash(self) -> None:
-        """
-        Test that the hash of an entity is based on its ID and attributes.
-        """
-        self.assertEqual(hash(self.entity), hash((self.entity.id, self.entity.name, self.entity.value)))
+    assert entity.name == new_name
 
 
-if __name__ == '__main__':
-    unittest.main()
+def test_example_entity_update_description() -> None:
+    """Test updating the description of an ExampleEntity.
+
+    This test ensures that the `update_description` method correctly updates the
+    description of the entity.
+    """
+    entity_id = UUID("12345678-1234-5678-1234-567812345678")
+    name = "Test Entity"
+    description = "This is a test entity."
+    new_description = "This is an updated description."
+
+    entity = ExampleEntity(id=entity_id, name=name, description=description)
+    entity.update_description(new_description)
+
+    assert entity.description == new_description
+
+
+def test_example_entity_equality() -> None:
+    """Test the equality of two ExampleEntity instances.
+
+    This test ensures that two ExampleEntity instances are considered equal if they
+    have the same unique identifier.
+    """
+    entity_id = UUID("12345678-1234-5678-1234-567812345678")
+    name = "Test Entity"
+    description = "This is a test entity."
+
+    entity1 = ExampleEntity(id=entity_id, name=name, description=description)
+    entity2 = ExampleEntity(id=entity_id, name=name, description=description)
+
+    assert entity1 == entity2
+
+
+def test_example_entity_inequality() -> None:
+    """Test the inequality of two ExampleEntity instances.
+
+    This test ensures that two ExampleEntity instances are considered unequal if they
+    have different unique identifiers.
+    """
+    entity_id1 = UUID("12345678-1234-5678-1234-567812345678")
+    entity_id2 = UUID("87654321-4321-8765-4321-876543218765")
+    name = "Test Entity"
+    description = "This is a test entity."
+
+    entity1 = ExampleEntity(id=entity_id1, name=name, description=description)
+    entity2 = ExampleEntity(id=entity_id2, name=name, description=description)
+
+    assert entity1 != entity2
+
+
+def test_example_entity_hash() -> None:
+    """Test the hash value of an ExampleEntity.
+
+    This test ensures that the hash value of an ExampleEntity is based on its unique
+    identifier.
+    """
+    entity_id = UUID("12345678-1234-5678-1234-567812345678")
+    name = "Test Entity"
+    description = "This is a test entity."
+
+    entity = ExampleEntity(id=entity_id, name=name, description=description)
+
+    assert hash(entity) == hash(entity_id)

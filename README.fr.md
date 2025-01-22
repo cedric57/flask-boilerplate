@@ -51,7 +51,7 @@ Ce modèle de base est un point de départ solide pour créer des applications F
 - Documentation: [Sphinx](https://www.sphinx-doc.org/en/master/)
 
 ## 👉 Table des matières
- 
+
 - [Pour commencer](#start)
 - [Principes](#principles)
 - [Structure des répertoires et organisation du code](#folder)

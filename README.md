@@ -51,7 +51,7 @@ This boilerplate is a robust starting point for creating production-ready Flask 
 - Tests: [Pytest](https://docs.pytest.org/en/stable/)
 - Security: [Snyk](https://snyk.io/product/open-source-security-management/) + [Bandit](https://github.com/PyCQA/bandit)
 - Documentation: [Sphinx](https://www.sphinx-doc.org/en/master/)
- 
+
 ## 👉 Table of Contents
 
 - [Getting Started](#start)

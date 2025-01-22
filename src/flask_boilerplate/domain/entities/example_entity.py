@@ -1,53 +1,51 @@
-from src.flask_boilerplate.domain.primitives.entity import Entity
-from typing import Any
-import uuid
+"""Module defining an example entity in the domain layer.
+
+Entities are domain objects that have a unique identity and lifecycle. They are defined
+by their attributes and behavior, and they encapsulate business logic related to their
+identity and state.
+
+This module provides an example entity `ExampleEntity` that demonstrates how to define
+entities in the domain layer. Entities typically have a unique identifier and attributes
+that represent their state.
+"""
+
+from dataclasses import dataclass
+from uuid import UUID
 
 
-class ExampleEntity(Entity):
-    """
-    ExampleEntity represents a sample entity in the domain layer.
+@dataclass
+class ExampleEntity:
+    """An example entity in the domain layer.
 
-    This entity is defined by its unique identifier and includes additional attributes
-    that represent its state.
+    This entity represents a domain object with a unique identity and attributes.
+    It encapsulates business logic related to its identity and state.
 
     Attributes:
-        id (uuid.UUID): The unique identifier of the entity.
+        id (UUID): The unique identifier of the entity.
         name (str): The name of the entity.
-        value (int): A sample value associated with the entity.
+        description (str): A description of the entity.
     """
 
-    def __init__(self, id: uuid.UUID = None, name: str = "", value: int = 0) -> None:
-        """
-        Initialize a new ExampleEntity with a unique identifier, name, and value.
+    id: UUID
+    name: str
+    description: str
+
+    def update_name(self, new_name: str) -> None:
+        """Update the name of the entity.
 
         Args:
-            id (Optional[uuid.UUID]): The unique identifier of the entity. If not provided, a new UUID is generated.
-            name (str): The name of the entity.
-            value (int): A sample value associated with the entity.
+            new_name (str): The new name for the entity.
         """
-        super().__init__(id)
-        self.name: str = name
-        self.value: int = value
+        self.name = new_name
 
-    def __eq__(self, other: Any) -> bool:
-        """
-        Compare two entities based on their unique identifier and attributes.
+    def update_description(self, new_description: str) -> None:
+        """Update the description of the entity.
 
         Args:
-            other (Any): The other entity to compare with.
-
-        Returns:
-            bool: True if the entities have the same identifier and attributes, False otherwise.
+            new_description (str): The new description for the entity.
         """
-        if not isinstance(other, ExampleEntity):
-            return False
-        return self.id == other.id and self.name == other.name and self.value == other.value
+        self.description = new_description
 
-    def __hash__(self) -> int:
-        """
-        Generate a hash value for the entity based on its unique identifier and attributes.
 
-        Returns:
-            int: The hash value of the entity.
-        """
-        return hash((self.id, self.name, self.value))
+# Add the class to __all__ for re-export in the parent module.
+__all__ = ["ExampleEntity"]

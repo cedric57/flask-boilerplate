@@ -1,43 +1,68 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.5.0
+    rev: v5.0.0
     hooks:
-      - id: trailing-whitespace
-      - id: end-of-file-fixer
-      - id: check-yaml # checks yaml files for parseable syntax.
-      - id: check-added-large-files # prevents giant files from being committed.
-      - id: debug-statements
+      # Guard rails
+      - id: check-ast # Checks the syntax and structure of Python code using the Abstract Syntax Tree (AST)
+      - id: check-added-large-files # Ensures that large files are not accidentally added to the repository
+      - id: check-json # Validates JSON files for syntax errors
+      - id: check-toml # Validates TOML files for syntax errors
+      - id: check-yaml # Validates YAML files for syntax errors
+      - id: check-shebang-scripts-are-executable # Verifies that shebang scripts (starting with #!/) are executable
+      # Formatters
+      - id: end-of-file-fixer # Adds an end-of-file marker at the end of files if missing
+      - id: mixed-line-ending # Corrects inconsistent line endings in files
+      - id: trailing-whitespace # Removes trailing whitespace at the end of lines
+      # Code Checkers
+      - id: check-docstring-first # Checks if module-level docstring is present and located at the beginning of the file
+      - id: debug-statements # Identifies the usage of debugging statements like print, pdb, etc.
       - id: check-case-conflict # checks for files that would conflict in case-insensitive filesystems.
       - id: check-merge-conflict # checks for files that contain merge conflict strings.
       - id: detect-private-key # detects the presence of private keys.
       - id: fix-byte-order-marker # removes utf-8 byte order marker.
-      - id: mixed-line-ending # replaces or checks mixed line ending.
 
+  # Guard rails hooks focus on enforcing certain rules and safeguards to ensure code quality, security, and
+  # adherence to best practices. They include checks such as verifying file formats, syntax validation, and
+  # executable script validations. These hooks help catch potential issues early on and provide safeguarding to
+  # prevent common mistakes or vulnerabilities.
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.8.2
+    hooks:
+      - id: bandit
+        args: ["-c", "pyproject.toml", "-r", "."]
+        additional_dependencies: ["bandit[toml]"]
+
+  # Formatters are hooks that automatically format code according to specific style guidelines. They help maintain
+  # consistent code formatting within a project, ensuring readability and adherence to the chosen coding conventions
+  # These hooks can fix issues such as trailing whitespace, mixed line endings, and missing end-of-file markers.
+  # Code Correctors hooks aim to automatically correct or upgrade code to improve code quality, maintainability, and
+  # compatibility. These hooks can perform automated refactoring, apply modern syntax improvements, and fix common
+  # code issues. They help streamline the codebase by automatically applying changes that would otherwise require
+  # manual intervention.
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    # Ruff version.
     rev: v0.9.2
     hooks:
       # Run the linter.
       - id: ruff
-        args: [ --fix ]
+        args: [ --fix, --exit-zero, --show-fixes ]
+        exclude: ^(.idea)/
       # Run the formatter.
-      - id: ruff-formatter
+      - id: ruff-format
+        exclude: ^(.idea)/
 
+  # Code Checkers hooks are focused on analyzing code for potential issues, such as code smells, anti-patterns, and
+  # common mistakes. They perform static analysis on the codebase to catch problems like missing docstrings, debug
+  # statements, or violations of code style guidelines.
   - repo: https://github.com/pre-commit/mirrors-mypy
     rev: v1.14.1
     hooks:
       - id: mypy
+        args: ["--explicit-package-bases"]
         additional_dependencies: [
           'types-setuptools',
           'types-requests',
           'types-python-dateutil',
           'types-PyYAML',
-          'dnspython'
+          'dnspython',
+          'pydantic'
         ]
-
-  - repo: https://github.com/PyCQA/bandit
-    rev: 1.7.7
-    hooks:
-      - id: bandit
-        args: ["-c", "pyproject.toml", "-r", "."]
-        additional_dependencies: ["bandit[toml]"]

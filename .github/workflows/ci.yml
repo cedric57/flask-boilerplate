@@ -16,53 +16,12 @@ on:
 jobs:
   quality:
     name: Code Quality & Tests
-    runs-on: ubuntu-24.04
-    strategy:
-      matrix:
-        python-version: ["3.12"]
-
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python-version }}
-
-      - name: Install Poetry
-        uses: snok/install-poetry@v1
-        with:
-          version: 1.8.3
-          virtualenvs-create: true
-          virtualenvs-in-project: true
-          installer-parallel: true
-
-      - name: Cache Poetry dependencies
-        uses: actions/cache@v4
-        with:
-          path: .venv
-          key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
-
-      - name: Install dependencies
-        run: |
-          poetry lock
-          poetry install --no-interaction --no-root
-        if: steps.poetry-cache.outputs.cache-hit != 'true'
-
-      - name: Lint code with ruff
-        uses: astral-sh/ruff-action@v3
-        with:
-          args: check --fix
-          src: "./src"
-
-      - name: Format code with ruff
-        uses: astral-sh/ruff-action@v3
-        with:
-          args: format
-          src: "./src"
-
-      - name: Code quality with mypy
-        run: poetry run mypy --install-types --check-untyped-defs --non-interactive .
+      - uses: ./.github/actions/install-env
+      - name: Run pre-commit on all files
+        run: poetry run pre-commit run --all-files
 
       - name: Run tests with coverage
         run: poetry run pytest --doctest-modules --junitxml=junit.xml -o junit_family=legacy --cov=src tests --cov-report=xml --cov-report=html
@@ -80,36 +39,10 @@ jobs:
 
   security:
     name: Security Checks
-    runs-on: ubuntu-24.04
-    strategy:
-      matrix:
-        python-version: ["3.12"]
-
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python-version }}
-
-      - name: Install Poetry
-        run: |
-          curl -sSL https://install.python-poetry.org | python3 -
-          poetry config virtualenvs.create true
-          poetry config virtualenvs.in-project true
-
-      - name: Cache Poetry dependencies
-        uses: actions/cache@v4
-        with:
-          path: .venv
-          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
-
-      - name: Install dependencies
-        run: |
-          poetry lock
-          poetry install --no-interaction --no-root
-        if: steps.poetry-cache.outputs.cache-hit != 'true'
+      - uses: ./.github/actions/install-env
 
       - name: Security analysis with Bandit
         run: poetry run bandit .

@@ -12,13 +12,12 @@ on:
 
 # Définition des jobs
 jobs:
-  setup:
-    uses: ./.github/workflows/poetry-setup.yml
-
   security:
     runs-on: ubuntu-latest
-    needs: setup
     steps:
+      - name: Set up Python and Poetry
+        uses: ./.github/actions/install-env
+
       - name: Security analysis with Bandit
         run: poetry run bandit .
 
@@ -38,4 +37,3 @@ jobs:
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: snyk.sarif
-

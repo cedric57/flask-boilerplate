@@ -3,11 +3,6 @@ name: Install Poetry and configure cache
 on:
   workflow_call:
 
-inputs:
-  python-version:
-    required: true
-    description: "Python version"
-
 jobs:
   setup:
     runs-on: ubuntu-latest

@@ -16,15 +16,9 @@ on:
 jobs:
   quality:
     name: Code Quality & Tests
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: [ "3.12" ]
+    uses: ./.github/workflows/poetry-setup.yml
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: ./.github/actions/install-env
-        with:
-          python-version: ${{ matrix.python-version }}
       - name: Run pre-commit on all files
         run: poetry run pre-commit run --all-files
 

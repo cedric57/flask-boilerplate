@@ -1,4 +1,5 @@
-name: Install Python env
+name: Install Poetry and configure cache
+description: Install Poetry and configure cache for dependencies
 
 inputs:
   python-version:

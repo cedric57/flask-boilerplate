@@ -14,10 +14,13 @@ on:
 
 # Définition des jobs
 jobs:
-  quality:
-    name: Code Quality & Tests
+  setup:
     uses: ./.github/workflows/poetry-setup.yml
 
+  quality:
+    name: Code Quality & Tests
+    runs-on: ubuntu-latest
+    needs: setup
     steps:
       - name: Run pre-commit on all files
         run: poetry run pre-commit run --all-files

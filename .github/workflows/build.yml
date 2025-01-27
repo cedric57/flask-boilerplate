@@ -114,6 +114,15 @@ jobs:
           path: .venv
           key: venv-${{ runner.os }}-${{ hashFiles('poetry.lock') }}-${{ matrix.python-version }}
 
+      - name: Check if .venv exists
+        run: |
+          if [ -d ".venv" ]; then
+            echo ".venv exists"
+          else
+            echo ".venv does not exist"
+            exit 1
+          fi
+
       - name: Activate environment
         shell: bash
         run: source .venv/bin/activate

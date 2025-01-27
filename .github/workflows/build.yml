@@ -59,6 +59,12 @@ jobs:
           poetry lock
           poetry install --no-interaction --no-root
 
+      - name: Save .venv to cache
+        uses: actions/cache@v4
+        with:
+          path: .venv
+          key: venv-${{ runner.os }}-${{ hashFiles('poetry.lock') }}-${{ steps.setup-python.outputs.python-version }}
+
   quality:
     name: "Code Quality & Tests"
     runs-on: ubuntu-latest
@@ -67,8 +73,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Python and Poetry
-        uses: ./.github/actions/install-env
+      - name: Restore .venv from cache
+        uses: actions/cache@v4
+        with:
+          path: .venv
+          key: venv-${{ runner.os }}-${{ hashFiles('poetry.lock') }}-${{ matrix.python-version }}
+
+      - name: Activate environment
+        shell: bash
+        run: source .venv/bin/activate
 
       - name: Run pre-commit on all files
         run: poetry run pre-commit run --all-files

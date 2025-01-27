@@ -59,6 +59,9 @@ jobs:
           poetry lock
           poetry install --no-interaction --no-root
 
+      - name: Verify Poetry installation
+        run: .venv/bin/poetry --version
+
   quality:
     name: "Code Quality & Tests"
     runs-on: ubuntu-latest
@@ -117,8 +120,21 @@ jobs:
             exit 1
           fi
 
+      - name: Determine Poetry path
+        id: poetry-path
+        shell: bash
+        run: |
+          if [ -f ".venv/bin/poetry" ]; then
+            echo "POETRY_PATH=.venv/bin/poetry" >> $GITHUB_ENV
+          elif [ -f ".venv/Scripts/poetry.exe" ]; then
+            echo "POETRY_PATH=.venv/Scripts/poetry.exe" >> $GITHUB_ENV
+          else
+            echo "Poetry not found in .venv"
+            exit 1
+          fi
+
       - name: Security analysis with Bandit
-        run: .venv/bin/poetry run bandit .
+        run: ${{ env.POETRY_PATH }} run bandit .
 
       - name: Dependency vulnerability check with Safety
         uses: pyupio/safety-action@v1

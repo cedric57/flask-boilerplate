@@ -70,13 +70,21 @@ jobs:
             echo "POETRY_PATH=.venv/bin/poetry" >> $GITHUB_ENV
           elif [ -f ".venv/Scripts/poetry.exe" ]; then
             echo "POETRY_PATH=.venv/Scripts/poetry.exe" >> $GITHUB_ENV
+          elif [ -f "/home/runner/.local/bin/poetry" ]; then
+            echo "POETRY_PATH=/home/runner/.local/bin/poetry" >> $GITHUB_ENV
           else
             echo "Poetry not found in .venv"
-            exit 1
           fi
 
       - name: Verify Poetry installation
         run: ${{ env.POETRY_PATH }} --version
+
+      - name: Activate virtual environment
+        shell: bash
+        run: source .venv/bin/activate
+
+      - name: Verify Poetry installation
+        run: poetry --version
 
   quality:
     name: "Code Quality & Tests"

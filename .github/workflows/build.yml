@@ -20,36 +20,43 @@ jobs:
         python-version: [ "3.12" ]
 
     steps:
+      #----------------------------------------------
+      #       check-out repo and set-up python
+      #----------------------------------------------
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Set up Python
+      - name: Set up Python ${{ matrix.python-version }}
         id: setup-python
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Cache Poetry dependencies
-        id: cached-poetry-dependencies
-        uses: actions/cache@v4
-        with:
-          path: .venv
-          key: venv-${{ runner.os }}-${{ hashFiles('poetry.lock') }}-${{ matrix.python-version }}
-
-      - name: Activate virtual environment
-        shell: bash
-        run: source .venv/bin/activate
-        if: steps.cached-poetry-dependencies.outputs.cache-hit == 'true'
-
+      #----------------------------------------------
+      #  -----  install & configure poetry  -----
+      #----------------------------------------------
       - name: Install Python poetry
         uses: snok/install-poetry@v1
         with:
           virtualenvs-create: true
           virtualenvs-in-project: true
-          installer-parallel: true
           virtualenvs-path: .venv
-        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+          installer-parallel: true
 
+      #----------------------------------------------
+      #       load cached venv if cache exists
+      #----------------------------------------------
+      # Poetry cache depends on OS, Python version and Poetry version.
+      - name: Cache Poetry dependencies
+        id: cached-poetry-dependencies
+        uses: actions/cache@v4
+        with:
+          path: .venv
+          key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
+
+      #----------------------------------------------
+      # install dependencies if cache does not exist
+      #----------------------------------------------
       - name: Install dependencies
         shell: bash
         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'

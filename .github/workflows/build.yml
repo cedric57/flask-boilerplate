@@ -34,7 +34,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: .venv
-          key: venv-${{ runner.os }}-${{ hashFiles('poetry.lock') }}-${{ steps.setup-python.outputs.python-version }}
+          key: venv-${{ runner.os }}-${{ hashFiles('poetry.lock') }}-${{ matrix.python-version }}
 
       - name: Install Python poetry
         uses: snok/install-poetry@v1
@@ -43,7 +43,6 @@ jobs:
           virtualenvs-in-project: true
           installer-parallel: true
           virtualenvs-path: .venv
-          install-poetry: true
         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
 
       - name: Install dependencies
@@ -135,15 +134,6 @@ jobs:
           path: .venv
           key: venv-${{ runner.os }}-${{ hashFiles('poetry.lock') }}-${{ matrix.python-version }}
 
-      - name: Check if .venv exists
-        run: |
-          if [ -d ".venv" ]; then
-            echo ".venv exists"
-          else
-            echo ".venv does not exist"
-            exit 1
-          fi
-
       - name: Determine Poetry path
         id: poetry-path
         shell: bash
@@ -152,10 +142,15 @@ jobs:
             echo "POETRY_PATH=.venv/bin/poetry" >> $GITHUB_ENV
           elif [ -f ".venv/Scripts/poetry.exe" ]; then
             echo "POETRY_PATH=.venv/Scripts/poetry.exe" >> $GITHUB_ENV
+          elif [ -f "/home/runner/.local/bin/poetry" ]; then
+            echo "POETRY_PATH=/home/runner/.local/bin/poetry" >> $GITHUB_ENV
           else
             echo "Poetry not found in .venv"
-            exit 1
           fi
+
+      - name: Activate environment
+        shell: bash
+        run: source .venv/bin/activate
 
       - name: Security analysis with Bandit
         run: ${{ env.POETRY_PATH }} run bandit .

@@ -36,13 +36,6 @@ jobs:
           path: .venv
           key: venv-${{ runner.os }}-${{ hashFiles('poetry.lock') }}-${{ steps.setup-python.outputs.python-version }}
 
-      - name: Load cached .local
-        id: cached-dotlocal
-        uses: actions/cache@v4
-        with:
-          path: ~/.local
-          key: dotlocal-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}
-
       - name: Install Python poetry
         uses: snok/install-poetry@v1
         with:
@@ -59,8 +52,30 @@ jobs:
           poetry lock
           poetry install --no-interaction --no-root
 
+      - name: Check if .venv exists
+        run: |
+          if [ -d ".venv" ]; then
+            echo ".venv exists"
+          else
+            echo ".venv does not exist"
+            exit 1
+          fi
+
+      - name: Determine Poetry path
+        id: poetry-path
+        shell: bash
+        run: |
+          if [ -f ".venv/bin/poetry" ]; then
+            echo "POETRY_PATH=.venv/bin/poetry" >> $GITHUB_ENV
+          elif [ -f ".venv/Scripts/poetry.exe" ]; then
+            echo "POETRY_PATH=.venv/Scripts/poetry.exe" >> $GITHUB_ENV
+          else
+            echo "Poetry not found in .venv"
+            exit 1
+          fi
+
       - name: Verify Poetry installation
-        run: .venv/bin/poetry --version
+        run: ${{ env.POETRY_PATH }} --version
 
   quality:
     name: "Code Quality & Tests"

@@ -39,7 +39,7 @@ jobs:
       - name: Activate virtual environment
         shell: bash
         run: source .venv/bin/activate
-        if: steps.cached-poetry-dependencies.outputs.cache-hit = 'true'
+        if: steps.cached-poetry-dependencies.outputs.cache-hit == 'true'
 
       - name: Install Python poetry
         uses: snok/install-poetry@v1

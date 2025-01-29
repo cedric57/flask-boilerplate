@@ -51,7 +51,9 @@ jobs:
         id: cached-poetry-dependencies
         uses: actions/cache@v4
         with:
-          path: .venv
+          path: |
+            .venv
+            ~/.local
           key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
 
       #----------------------------------------------
@@ -86,6 +88,7 @@ jobs:
           else
             echo "Poetry not found in .venv"
           fi
+          pwd ~/.local
 
       - name: Verify Poetry installation
         run: ${{ env.POETRY_PATH }} --version
@@ -143,6 +146,16 @@ jobs:
             .venv
             ~/.local
           key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
+
+      - name: Check if .venv exists
+        run: |
+          if [ -d ".venv" ]; then
+            echo ".venv exists"
+          else
+            echo ".venv does not exist"
+            exit 1
+          fi
+          ls ~/.local
 
       - name: Determine Poetry path
         id: poetry-path

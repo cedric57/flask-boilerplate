@@ -141,7 +141,7 @@ jobs:
         with:
           path: |
             .venv
-            ~/.cache
+            ~/.local
           key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
 
       - name: Determine Poetry path

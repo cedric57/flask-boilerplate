@@ -139,7 +139,9 @@ jobs:
       - name: Restore .venv from cache
         uses: actions/cache@v4
         with:
-          path: .venv
+          path: |
+            .venv
+            ~/.cache
           key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
 
       - name: Determine Poetry path

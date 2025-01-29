@@ -11,7 +11,9 @@ repos:
       - id: check-shebang-scripts-are-executable # Verifies that shebang scripts (starting with #!/) are executable
       # Formatters
       - id: end-of-file-fixer # Adds an end-of-file marker at the end of files if missing
+        exclude: ^(.idea)/
       - id: mixed-line-ending # Corrects inconsistent line endings in files
+        exclude: ^(.idea)/
       - id: trailing-whitespace # Removes trailing whitespace at the end of lines
       # Code Checkers
       - id: check-docstring-first # Checks if module-level docstring is present and located at the beginning of the file

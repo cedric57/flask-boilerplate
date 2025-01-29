@@ -13,7 +13,6 @@ on:
 jobs:
   setup:
     name: "Install Poetry and configure cache"
-    #uses: ./.github/workflows/poetry-setup.yml
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -43,6 +42,9 @@ jobs:
           virtualenvs-path: .venv
           installer-parallel: true
 
+      - name: Verify Poetry installation
+        run: poetry --version
+
       #----------------------------------------------
       #       load cached venv if cache exists
       #----------------------------------------------
@@ -66,36 +68,6 @@ jobs:
           poetry lock
           poetry install --no-interaction --no-root
 
-      - name: Check if .venv exists
-        run: |
-          if [ -d ".venv" ]; then
-            echo ".venv exists"
-          else
-            echo ".venv does not exist"
-            exit 1
-          fi
-
-      - name: Determine Poetry path
-        id: poetry-path
-        shell: bash
-        run: |
-          if [ -f ".venv/bin/poetry" ]; then
-            echo "POETRY_PATH=.venv/bin/poetry" >> $GITHUB_ENV
-          elif [ -f ".venv/Scripts/poetry.exe" ]; then
-            echo "POETRY_PATH=.venv/Scripts/poetry.exe" >> $GITHUB_ENV
-          elif [ -f "/home/runner/.local/bin/poetry" ]; then
-            echo "POETRY_PATH=/home/runner/.local/bin/poetry" >> $GITHUB_ENV
-          else
-            echo "Poetry not found in .venv"
-          fi
-          pwd ~/.local
-
-      - name: Verify Poetry installation
-        run: ${{ env.POETRY_PATH }} --version
-
-      - name: Verify Poetry installation
-        run: poetry --version
-
   quality:
     name: "Code Quality & Tests"
     runs-on: ubuntu-latest
@@ -107,7 +79,9 @@ jobs:
       - name: Restore .venv from cache
         uses: actions/cache@v4
         with:
-          path: .venv
+          path: |
+            .venv
+            ~/.local
           key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
 
       - name: Activate environment
@@ -146,30 +120,6 @@ jobs:
             .venv
             ~/.local
           key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
-
-      - name: Check if .venv exists
-        run: |
-          if [ -d ".venv" ]; then
-            echo ".venv exists"
-          else
-            echo ".venv does not exist"
-            exit 1
-          fi
-          ls ~/.local
-
-      - name: Determine Poetry path
-        id: poetry-path
-        shell: bash
-        run: |
-          if [ -f ".venv/bin/poetry" ]; then
-            echo "POETRY_PATH=.venv/bin/poetry" >> $GITHUB_ENV
-          elif [ -f ".venv/Scripts/poetry.exe" ]; then
-            echo "POETRY_PATH=.venv/Scripts/poetry.exe" >> $GITHUB_ENV
-          elif [ -f "/home/runner/.local/bin/poetry" ]; then
-            echo "POETRY_PATH=/home/runner/.local/bin/poetry" >> $GITHUB_ENV
-          else
-            echo "Poetry not found in .venv"
-          fi
 
       - name: Activate environment
         shell: bash

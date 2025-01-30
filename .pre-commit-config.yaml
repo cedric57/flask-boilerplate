@@ -22,6 +22,7 @@ repos:
       - id: check-merge-conflict # checks for files that contain merge conflict strings.
       - id: detect-private-key # detects the presence of private keys.
       - id: fix-byte-order-marker # removes utf-8 byte order marker.
+        stages: [format]
 
   # Guard rails hooks focus on enforcing certain rules and safeguards to ensure code quality, security, and
   # adherence to best practices. They include checks such as verifying file formats, syntax validation, and
@@ -33,6 +34,8 @@ repos:
       - id: bandit
         args: ["-c", "pyproject.toml", "-r", "."]
         additional_dependencies: ["bandit[toml]"]
+        exclude: ^(.venv)/
+        stages: [security]
 
   # Formatters are hooks that automatically format code according to specific style guidelines. They help maintain
   # consistent code formatting within a project, ensuring readability and adherence to the chosen coding conventions
@@ -51,6 +54,7 @@ repos:
       # Run the formatter.
       - id: ruff-format
         exclude: ^(.idea)/
+        stages: [format]
 
   # Code Checkers hooks are focused on analyzing code for potential issues, such as code smells, anti-patterns, and
   # common mistakes. They perform static analysis on the codebase to catch problems like missing docstrings, debug
@@ -68,3 +72,4 @@ repos:
           'dnspython',
           'pydantic'
         ]
+        stages: [format]

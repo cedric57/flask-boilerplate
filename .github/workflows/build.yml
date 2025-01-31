@@ -89,7 +89,7 @@ jobs:
         run: source .venv/bin/activate
 
       - name: Run pre-commit on all files
-        run: poetry run pre-commit run --hook-stage format --all-files
+        run: poetry run pre-commit run --all-files
 
       - name: Run tests with coverage
         run: poetry run pytest --doctest-modules --junitxml=junit.xml -o junit_family=legacy --cov=src tests --cov-report=xml --cov-report=html
@@ -113,20 +113,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Restore .venv from cache
-        uses: actions/cache@v4
-        with:
-          path: |
-            .venv
-            ~/.local
-          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
+      #- name: Restore .venv from cache
+      #  uses: actions/cache@v4
+      #  with:
+      #    path: |
+      #      .venv
+      #      ~/.local
+      #    key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
 
-      - name: Activate environment
-        shell: bash
-        run: source .venv/bin/activate
+      #- name: Activate environment
+      #  shell: bash
+      #  run: source .venv/bin/activate
 
-      - name: Security analysis with Bandit
-        run: poetry run bandit .
+      #- name: Security analysis with Bandit
+      #  run: poetry run bandit .
 
       - name: Dependency vulnerability check with Safety
         uses: pyupio/safety-action@v1

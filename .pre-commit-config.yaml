@@ -1,68 +1,82 @@
+exclude: |
+  (?x)^(
+      .*\{\{.*\}\}.*|     # Exclude any files with cookiecutter variables
+      docs/site/.*|       # Exclude mkdocs compiled files
+      \.history/.*|       # Exclude history files
+      .*cache.*/.*|       # Exclude cache directories
+      .*venv.*/.*|        # Exclude virtual environment directories
+      .*idea.*/.*|        # Exclude PyCharm directories
+  )$
+fail_fast: true
+default_language_version:
+  python: python3.12
+default_install_hook_types:
+  - pre-commit
+  - commit-msg
+
 repos:
+  # ---------------------------------------------------------------------------- #
+  #                              🔄 Pre-Commit Hooks                             #
+  # ---------------------------------------------------------------------------- #
+
+  # ----------------------------- 🔒 Security Tools ---------------------------- #
+  # GitLeaks is a fast, lightweight scanner that prevents secrets (passwords, API keys, tokens) from being committed
+  # to your repository.
+  # Note: TruffleHog is a more comprehensive but complex alternative to GitLeaks.
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.22.1
+    hooks:
+      - id: gitleaks
+        name: "🔒 security · Detect hardcoded secrets"
+
+  # Bandit is a security tool for analyzing Python code to detect potential vulnerabilities. It performs static
+  # analysis, scanning the code without executing it, to identify unsafe practices like the use of dangerous
+  # functions (eval()), improper handling of user input (e.g., injection risks), or weak cryptographic configurations.
+  # Bandit generates a detailed report ranking issues by severity (low, medium, high), helping developers fix security
+  # flaws early in the development process. It's ideal for promoting secure coding practices.
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.8.2
+    hooks:
+      - id: bandit
+        name: "🔒 security · Python security vulnerability scanner"
+        args: ["-c", "pyproject.toml", "-r", "."]
+        additional_dependencies: ["bandit[toml]"]
+
+  # --------------------------- 🔍 Code Quality Tools -------------------------- #
+
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0
     hooks:
       # Guard rails
       - id: check-ast # Checks the syntax and structure of Python code using the Abstract Syntax Tree (AST)
-      - id: check-added-large-files # Ensures that large files are not accidentally added to the repository
       - id: check-json # Validates JSON files for syntax errors
       - id: check-toml # Validates TOML files for syntax errors
       - id: check-yaml # Validates YAML files for syntax errors
-      - id: check-shebang-scripts-are-executable # Verifies that shebang scripts (starting with #!/) are executable
       # Formatters
       - id: end-of-file-fixer # Adds an end-of-file marker at the end of files if missing
-        exclude: ^(.idea)/
       - id: mixed-line-ending # Corrects inconsistent line endings in files
-        exclude: ^(.idea)/
       - id: trailing-whitespace # Removes trailing whitespace at the end of lines
       # Code Checkers
       - id: check-docstring-first # Checks if module-level docstring is present and located at the beginning of the file
       - id: debug-statements # Identifies the usage of debugging statements like print, pdb, etc.
-      - id: check-case-conflict # checks for files that would conflict in case-insensitive filesystems.
-      - id: check-merge-conflict # checks for files that contain merge conflict strings.
       - id: detect-private-key # detects the presence of private keys.
       - id: fix-byte-order-marker # removes utf-8 byte order marker.
-        stages: [format]
 
-  # Guard rails hooks focus on enforcing certain rules and safeguards to ensure code quality, security, and
-  # adherence to best practices. They include checks such as verifying file formats, syntax validation, and
-  # executable script validations. These hooks help catch potential issues early on and provide safeguarding to
-  # prevent common mistakes or vulnerabilities.
-  - repo: https://github.com/PyCQA/bandit
-    rev: 1.8.2
-    hooks:
-      - id: bandit
-        args: ["-c", "pyproject.toml", "-r", "."]
-        additional_dependencies: ["bandit[toml]"]
-        exclude: ^(.venv)/
-        stages: [security]
-
-  # Formatters are hooks that automatically format code according to specific style guidelines. They help maintain
-  # consistent code formatting within a project, ensuring readability and adherence to the chosen coding conventions
-  # These hooks can fix issues such as trailing whitespace, mixed line endings, and missing end-of-file markers.
-  # Code Correctors hooks aim to automatically correct or upgrade code to improve code quality, maintainability, and
-  # compatibility. These hooks can perform automated refactoring, apply modern syntax improvements, and fix common
-  # code issues. They help streamline the codebase by automatically applying changes that would otherwise require
-  # manual intervention.
+  ### Python Tools ###
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.9.2
     hooks:
-      # Run the linter.
-      - id: ruff
-        args: [ --fix, --exit-zero, --show-fixes ]
-        exclude: ^(.idea)/
-      # Run the formatter.
       - id: ruff-format
-        exclude: ^(.idea)/
-        stages: [format]
+        name: "🐍 python · Format with Ruff"
+      - id: ruff
+        name: "🐍 python · Lint and perform safe auto-fixes with Ruff"
+        args: [ --fix, --exit-zero, --show-fixes ]
 
-  # Code Checkers hooks are focused on analyzing code for potential issues, such as code smells, anti-patterns, and
-  # common mistakes. They perform static analysis on the codebase to catch problems like missing docstrings, debug
-  # statements, or violations of code style guidelines.
   - repo: https://github.com/pre-commit/mirrors-mypy
     rev: v1.14.1
     hooks:
       - id: mypy
+        name: "🐍 python · Check types"
         args: ["--explicit-package-bases"]
         additional_dependencies: [
           'types-setuptools',
@@ -72,4 +86,183 @@ repos:
           'dnspython',
           'pydantic'
         ]
-        stages: [format]
+
+  - repo: https://github.com/abravalheri/validate-pyproject
+    rev: v0.23
+    hooks:
+      - id: validate-pyproject
+        name: "🐍 python · Validate pyproject.toml"
+        additional_dependencies: ["validate-pyproject-schema-store[all]"]
+
+  ### Javascript & Web Tools ###
+  - repo: https://github.com/biomejs/pre-commit
+    rev: "v0.6.1"
+    hooks:
+      - id: biome-check
+        name: "🟨 javascript · Lint, format, and safe fixes with Biome"
+        additional_dependencies: ["@biomejs/biome@1.9.4"]
+
+  ### Data & Config Validation ###
+  - repo: https://github.com/python-jsonschema/check-jsonschema
+    rev: 0.31.0
+    hooks:
+      - id: check-github-workflows
+        name: "🐙 github-actions · Validate gh workflow files"
+        args: ["--verbose"]
+      - id: check-taskfile
+        name: "✅ taskfile · Validate Task configuration"
+
+  ### Markdown ###
+  - repo: https://github.com/hukkin/mdformat
+    rev: 0.7.21
+    hooks:
+      - id: mdformat
+        name: "📝 markdown · Format markdown"
+        additional_dependencies:
+          - mdformat-gfm
+          - mdformat-ruff
+          - mdformat-frontmatter
+          - ruff
+
+  - repo: https://github.com/markdownlint/markdownlint
+    rev: v0.12.0
+    hooks:
+      - id: markdownlint
+        name: "📝 markdown · Lint markdown"
+
+  ### Shell ###
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.10.0.1
+    hooks:
+      - id: shellcheck
+        name: "🐚 shell · Lint shell scripts"
+
+  - repo: https://github.com/openstack/bashate
+    rev: 2.1.1
+    hooks:
+      - id: bashate
+        name: "🐚 shell · Check shell script code style"
+
+  ### Makefile ###
+  - repo: https://github.com/mrtazz/checkmake.git
+    rev: 0.2.2
+    hooks:
+      - id: checkmake
+        name: "🐮 Makefile · Lint Makefile"
+
+  ### SQL ###
+  - repo: https://github.com/sqlfluff/sqlfluff
+    rev: 3.3.0
+    hooks:
+      - id: sqlfluff-fix
+        name: "📊 SQL · Attempts to fix rule violations."
+      # STRICT
+      # - id: sqlfluff-lint
+      #   name: "📊 SQL · Lint SQL code files"
+
+  ### Notebooks ###
+  - repo: https://github.com/nbQA-dev/nbQA
+    rev: 1.9.1
+    hooks:
+      - id: nbqa
+        entry: nbqa mdformat
+        name: "📓 notebook · Format markdown cells"
+        args: ["--nbqa-md"]
+        types: [jupyter]
+        additional_dependencies:
+          - mdformat
+          - mdformat-gfm
+          - mdformat-ruff
+          - mdformat-frontmatter
+          - ruff
+      # STRICT
+      # TODO: Convert to pyright
+      - id: nbqa-mypy
+        name: "📓 notebook · Type-check cells"
+
+  ### PNG Images ###
+  - repo: https://github.com/shssoichiro/oxipng
+    rev: v9.1.3
+    hooks:
+      - id: oxipng
+        name: "🖼️ images · Optimize PNG files"
+        args: ["-o", "4", "--strip", "safe", "--alpha"]
+
+  ### Additional File Types ###
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v4.0.0-alpha.8
+    hooks:
+      - id: prettier
+        name: "✨ misc-files · Format misc web files"
+        types_or: [yaml, html, scss]
+        additional_dependencies:
+          - prettier@3.4.2
+
+  # ---------------------------- 📁 Filesystem Tools --------------------------- #
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      # Filesystem Checks
+      - id: check-executables-have-shebangs
+        name: "📁 filesystem/⚙️ exec · Verify shebang presence"
+      - id: check-shebang-scripts-are-executable # Verifies that shebang scripts (starting with #!/) are executable
+        name: "📁 filesystem/⚙️ exec · Verify script permissions"
+      - id: check-case-conflict # checks for files that would conflict in case-insensitive filesystems.
+        name: "📁 filesystem/📝 names · Check case sensitivity"
+      - id: check-illegal-windows-names
+        name: "📁 filesystem/📝 names · Validate Windows filenames"
+      - id: check-symlinks
+        name: "📁 filesystem/🔗 symlink · Check symlink validity"
+      - id: destroyed-symlinks
+        name: "📁 filesystem/🔗 symlink · Detect broken symlinks"
+      # ------------------------------- 🌳 Git Tools ------------------------------- #
+      - id: check-merge-conflict # checks for files that contain merge conflict strings.
+        name: "🌳 git · Detect conflict markers"
+      - id: forbid-new-submodules
+        name: "🌳 git · Prevent submodule creation"
+      - id: no-commit-to-branch
+        name: "🌳 git · Protect main branches"
+        args: ["--branch", "main", "--branch", "master"]
+      - id: check-added-large-files # Ensures that large files are not accidentally added to the repository
+        name: "🌳 git · Block large file commits"
+        args: ["--maxkb=5000"]
+
+  # ---------------------------------------------------------------------------- #
+  #                            📝 Commit Message Hooks                           #
+  # ---------------------------------------------------------------------------- #
+  #
+  # --------------------------- ✍️ Git Commit Quality -------------------------- #
+
+  ### Commit Message Standards ###
+  - repo: https://github.com/commitizen-tools/commitizen
+    rev: v4.1.0
+    hooks:
+      - id: commitizen
+        name: "🌳 git · Validate commit message"
+        stages: [commit-msg]
+        additional_dependencies: [cz-conventional-gitmoji]
+
+  # ---------------------------------------------------------------------------- #
+  #                             🧪 Fast Tests (Local)                            #
+  # ---------------------------------------------------------------------------- #
+
+  - repo: local
+    hooks:
+      - id: pytest-collect
+        name: 🧪 test · Validate test formatting
+        entry: ./.venv/bin/pytest tests
+        language: system
+        types: [python]
+        args: ["--collect-only"]
+        pass_filenames: false
+        always_run: true
+      # STRICT
+      - id: pytest-fast
+        name: 🧪 test · Run fast tests
+        entry: ./.venv/bin/pytest tests
+        language: system
+        types: [python]
+        args: ["--max-timeout=3"]
+        pass_filenames: false
+        always_run: true

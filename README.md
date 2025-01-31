@@ -17,6 +17,7 @@ This boilerplate is a robust starting point for creating production-ready Flask 
 ### Used Languages
 
 [![Python](https://img.shields.io/badge/Python-3.12-3776AB.svg?style=flat&logo=python&logoColor=white)](https://www.python.org)
+[![Flask](https://img.shields.io/badge/Flask-enable-blue.svg?style=flat&logo=flask&logoColor=white)](#)
 
 ### Code Quality
 
@@ -28,18 +29,23 @@ This boilerplate is a robust starting point for creating production-ready Flask 
 
 ![Dependabot](https://img.shields.io/badge/dependabot-enabled-blue?logo=dependabot&logoColor=white)
 [![security: bandit](https://img.shields.io/badge/security-bandit-yellow.svg)](https://github.com/PyCQA/bandit)
+[![Snyk](https://img.shields.io/badge/Snyk-enabled-4C4A73?logo=snyk&logoColor=fff)](#)
 
 ### Documentation
 
 [![Documentation Status](https://readthedocs.org/projects/flask-boilerplate/badge/?version=latest)](https://flask-boilerplate.readthedocs.io)
 [![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/cedric57/flask-boilerplate/blob/main/README.md)
 [![fr](https://img.shields.io/badge/lang-fr-green.svg)](https://github.com/cedric57/flask-boilerplate/blob/main/README.fr.md)
+[![Sphinx](https://img.shields.io/badge/Sphinx-000?logo=sphinx&logoColor=fff)](#)
+[![PyCharm](https://img.shields.io/badge/PyCharm-000?logo=pycharm&logoColor=fff)](#)
 
 ### Contributions
 
 [![cedric57 github](https://img.shields.io/badge/GitHub-cedric57-181717.svg?style=flat&logo=github)](https://github.com/cedric57)
 ![Contributors](https://img.shields.io/github/contributors/cedric57/flask-boilerplate)
 ![Last Commit](https://img.shields.io/github/last-commit/cedric57/flask-boilerplate)
+[![Paypal](https://img.shields.io/badge/Donate-PayPal-ff3f59.svg)](https://paypal.me/CedricGRUN)
+
 
 ## ⚡ Features
 

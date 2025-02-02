@@ -1,13 +1,20 @@
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
 [tool.poetry]
 name = "flask-boilerplate"
 version = "0.1.0"
-description = ""
+description = "A Flask boilerplate project"
 authors = ["Cedric Grun <cedric.grun@gmail.com>"]
 license = "MIT"
 readme = "README.md"
 homepage = "https://github.com/cedric57/flask-boilerplate"
 repository = "https://github.com/cedric57/flask-boilerplate"
 documentation = "https://flask-boilerplate.readthedocs.io"
+packages = [
+    { include = "flask_boilerplate", from = "src" }
+]
 
 [tool.poetry.dependencies]
 python = "^3.12"
@@ -25,10 +32,6 @@ safety = "^3.2.14"
 ruff = "^0.9.4"
 pre-commit = "^4.1.0"
 conventional-pre-commit = "^4.0.0"
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.extras]
 docs = ["sphinx"]
@@ -128,3 +131,6 @@ mypy_path = "src"
 
 [tool.bandit.assert_used]
 skips = ['*_test.py', '*/test_*.py']
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

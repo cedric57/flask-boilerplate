@@ -46,7 +46,6 @@ This boilerplate is a robust starting point for creating production-ready Flask 
 ![Last Commit](https://img.shields.io/github/last-commit/cedric57/flask-boilerplate)
 [![Paypal](https://img.shields.io/badge/Donate-PayPal-ff3f59.svg)](https://paypal.me/CedricGRUN)
 
-
 ## ⚡ Features
 
 - Dependency and package management: [Poetry](https://python-poetry.org/)
@@ -68,7 +67,15 @@ This boilerplate is a robust starting point for creating production-ready Flask 
 
 ## <a name="start"></a>✨ Getting Started
 
+Set python to UTF8 encoding in Windows shells (cp1252) to avoid conflicts with Git.
+In administrator powershell :
+
+```powershell
+[Environment]::SetEnvironmentVariable("PYTHONUTF8", "1", "Machine")
+```
+
 Configure a Poetry environment : https://www.jetbrains.com/help/pycharm/poetry.html
+
 ```powershell
 (Invoke-WebRequest -Uri https://install.python-poetry.org -UseBasicParsing).Content | python -
 
@@ -110,10 +117,10 @@ poetry install #Install dependencies.
 Contributions are always welcome! If you have any ideas, suggestions, fixes, feel free to contribute. You can do that by going through the following steps:
 
 1. Clone this repo
-2. Create a branch: `git checkout -b your-feature`
-3. Make some changes
-4. Test your changes
-5. Push your branch and open a Pull Request
+1. Create a branch: `git checkout -b your-feature`
+1. Make some changes
+1. Test your changes
+1. Push your branch and open a Pull Request
 
 ## License
 

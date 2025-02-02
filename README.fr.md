@@ -89,10 +89,10 @@ poetry install #Installer les dépendances.
 Les contributions sont toujours les bienvenues ! Si vous avez des idées, des suggestions, des corrections, n'hésitez pas à contribuer. Vous pouvez le faire en suivant les étapes suivantes :
 
 1. Cloner ce repo
-2. Créer une branche : `git checkout -b votre-fonctionnalité`
-3. Faites quelques changements
-4. Testez vos changements
-5. Poussez votre branche et ouvrez une Pull Request
+1. Créer une branche : `git checkout -b votre-fonctionnalité`
+1. Faites quelques changements
+1. Testez vos changements
+1. Poussez votre branche et ouvrez une Pull Request
 
 ## Licence
 

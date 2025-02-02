@@ -11,7 +11,7 @@ formats: all
 build:
   os: ubuntu-22.04
   tools:
-    python: "3.12"                      # Version de python utilisée
+    python: "3.12" # Version de python utilisée
   jobs:
     post_create_environment:
       # Install poetry
@@ -27,5 +27,5 @@ build:
 
 # Commandes pour construire la documentation
 sphinx:
-  configuration: docs/source/conf.py    # Fichier de configuration Sphinx
+  configuration: docs/source/conf.py # Fichier de configuration Sphinx
   fail_on_warning: true

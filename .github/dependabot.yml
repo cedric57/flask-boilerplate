@@ -6,11 +6,11 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-  - package-ecosystem: 'pip'          # Utilise 'pip' pour gérer les mises à jour de Poetry
-    directory: '/'                    # Répertoire du fichier pyproject.toml
+  - package-ecosystem: "pip" # Utilise 'pip' pour gérer les mises à jour de Poetry
+    directory: "/" # Répertoire du fichier pyproject.toml
     schedule:
-      interval: 'daily'               # Interval de vérification des mises à jour (daily, weekly, monthly)
+      interval: "daily" # Interval de vérification des mises à jour (daily, weekly, monthly)
     commit-message:
-      prefix: "deps"                  # Préfixe des messages de commit pour les mises à jour
-    open-pull-requests-limit: 10      # Limite du nombre de PRs ouvertes par Dependabot
-    rebase-strategy: "auto"           # Stratégie de rebase automatique des PRs
+      prefix: "deps" # Préfixe des messages de commit pour les mises à jour
+    open-pull-requests-limit: 10 # Limite du nombre de PRs ouvertes par Dependabot
+    rebase-strategy: "auto" # Stratégie de rebase automatique des PRs

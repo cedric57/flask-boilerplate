@@ -30,6 +30,14 @@ class ExampleEntity:
     name: str
     description: str
 
+    def __hash__(self) -> int:
+        return hash(self.id)
+
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, ExampleEntity):
+            return NotImplemented
+        return self.id == other.id  # L'égalité se base aussi sur l'UUID
+
     def update_name(self, new_name: str) -> None:
         """Update the name of the entity.
 

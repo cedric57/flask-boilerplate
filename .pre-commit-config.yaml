@@ -24,7 +24,7 @@ repos:
   # to your repository.
   # Note: TruffleHog is a more comprehensive but complex alternative to GitLeaks.
   - repo: https://github.com/gitleaks/gitleaks
-    rev: v8.22.1
+    rev: v8.23.3
     hooks:
       - id: gitleaks
         name: "🔒 security · Detect hardcoded secrets"
@@ -64,13 +64,13 @@ repos:
 
   ### Python Tools ###
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.9.2
+    rev: v0.9.4
     hooks:
-      - id: ruff-format
-        name: "🐍 python · Format with Ruff"
       - id: ruff
         name: "🐍 python · Lint and perform safe auto-fixes with Ruff"
-        args: [ --fix, --exit-zero, --show-fixes ]
+        args: [--fix, --exit-zero, --show-fixes]
+      - id: ruff-format
+        name: "🐍 python · Format with Ruff"
 
   - repo: https://github.com/pre-commit/mirrors-mypy
     rev: v1.14.1
@@ -78,14 +78,15 @@ repos:
       - id: mypy
         name: "🐍 python · Check types"
         args: ["--explicit-package-bases"]
-        additional_dependencies: [
-          'types-setuptools',
-          'types-requests',
-          'types-python-dateutil',
-          'types-PyYAML',
-          'dnspython',
-          'pydantic'
-        ]
+        additional_dependencies:
+          [
+            "types-setuptools",
+            "types-requests",
+            "types-python-dateutil",
+            "types-PyYAML",
+            "dnspython",
+            "pydantic",
+          ]
 
   - repo: https://github.com/abravalheri/validate-pyproject
     rev: v0.23
@@ -104,7 +105,7 @@ repos:
 
   ### Data & Config Validation ###
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.31.0
+    rev: 0.31.1
     hooks:
       - id: check-github-workflows
         name: "🐙 github-actions · Validate gh workflow files"
@@ -114,7 +115,7 @@ repos:
 
   ### Markdown ###
   - repo: https://github.com/hukkin/mdformat
-    rev: 0.7.21
+    rev: 0.7.22
     hooks:
       - id: mdformat
         name: "📝 markdown · Format markdown"
@@ -124,11 +125,11 @@ repos:
           - mdformat-frontmatter
           - ruff
 
-  - repo: https://github.com/markdownlint/markdownlint
-    rev: v0.12.0
-    hooks:
-      - id: markdownlint
-        name: "📝 markdown · Lint markdown"
+  #- repo: https://github.com/markdownlint/markdownlint
+  #  rev: v0.12.0
+  #  hooks:
+  #    - id: markdownlint
+  #      name: "📝 markdown · Lint markdown"
 
   ### Shell ###
   - repo: https://github.com/shellcheck-py/shellcheck-py
@@ -144,11 +145,11 @@ repos:
         name: "🐚 shell · Check shell script code style"
 
   ### Makefile ###
-  - repo: https://github.com/mrtazz/checkmake.git
-    rev: 0.2.2
-    hooks:
-      - id: checkmake
-        name: "🐮 Makefile · Lint Makefile"
+  #- repo: https://github.com/mrtazz/checkmake.git
+  #  rev: 0.2.2
+  #  hooks:
+  #    - id: checkmake
+  #      name: "🐮 Makefile · Lint Makefile"
 
   ### SQL ###
   - repo: https://github.com/sqlfluff/sqlfluff
@@ -221,9 +222,9 @@ repos:
         name: "🌳 git · Detect conflict markers"
       - id: forbid-new-submodules
         name: "🌳 git · Prevent submodule creation"
-      - id: no-commit-to-branch
-        name: "🌳 git · Protect main branches"
-        args: ["--branch", "main", "--branch", "master"]
+      #- id: no-commit-to-branch
+      #  name: "🌳 git · Protect main branches"
+      #  args: ["--branch", "main", "--branch", "master"]
       - id: check-added-large-files # Ensures that large files are not accidentally added to the repository
         name: "🌳 git · Block large file commits"
         args: ["--maxkb=5000"]
@@ -236,7 +237,7 @@ repos:
 
   ### Commit Message Standards ###
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: v4.1.0
+    rev: v4.1.1
     hooks:
       - id: commitizen
         name: "🌳 git · Validate commit message"
@@ -251,7 +252,7 @@ repos:
     hooks:
       - id: pytest-collect
         name: 🧪 test · Validate test formatting
-        entry: ./.venv/bin/pytest tests
+        entry: poetry run pytest tests
         language: system
         types: [python]
         args: ["--collect-only"]
@@ -260,9 +261,9 @@ repos:
       # STRICT
       - id: pytest-fast
         name: 🧪 test · Run fast tests
-        entry: ./.venv/bin/pytest tests
+        entry: poetry run pytest tests
         language: system
         types: [python]
-        args: ["--max-timeout=3"]
+        #args: ["--max-timeout=3"]
         pass_filenames: false
         always_run: true

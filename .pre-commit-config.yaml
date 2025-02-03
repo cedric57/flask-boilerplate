@@ -43,8 +43,7 @@ repos:
         name: "🔒 security · Python security vulnerability scanner"
         args: [
           "-c", "pyproject.toml",
-          "-r", ".",
-          "--exclude", '.venv'
+          "-r", "."
         ]
         additional_dependencies: ["bandit[toml]"]
 

@@ -91,7 +91,7 @@ jobs:
         run: source .venv/bin/activate
 
       - name: Run pre-commit on all files
-        run: poetry run pre-commit run --all-files --color=always
+        run: poetry run pre-commit run --all-files --color=always --show-diff-on-failure
 
       - name: Run tests with coverage
         run: poetry run pytest --doctest-modules --junitxml=junit.xml -o junit_family=legacy --cov=src tests --cov-report=xml --cov-report=html

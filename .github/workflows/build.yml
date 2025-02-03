@@ -75,6 +75,17 @@ jobs:
       - name: Run pre-commit install-hooks
         run: poetry run pre-commit install --install-hooks
 
+      - name: Save .venv from cache
+        id: cache-save
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            .venv
+            ~/.local
+            ~/.cache/pre-commit
+          key: ${{ steps.cached-poetry-dependencies.outputs.cache-primary-key }}
+
   quality:
     name: "Code Quality & Tests"
     runs-on: ubuntu-latest

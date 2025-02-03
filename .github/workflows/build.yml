@@ -107,6 +107,15 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
+      - name: Save updated cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            .venv
+            ~/.local
+            ~/.cache/pre-commit
+          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock', '.pre-commit-config.yaml', '~/.cache/pre-commit/*') }}
+
   security:
     name: "Security Checks"
     runs-on: ubuntu-latest
@@ -163,7 +172,8 @@ jobs:
           path: |
             .venv
             ~/.local
-          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
+            ~/.cache/pre-commit
+          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock', '.pre-commit-config.yaml', '~/.cache/pre-commit/*') }}
 
       - name: Activate environment
         shell: bash

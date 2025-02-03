@@ -57,7 +57,7 @@ jobs:
             .venv
             ~/.local
             ~/.cache/pre-commit
-          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock', '.pre-commit-config.yaml', '~/.cache/pre-commit/*') }}
+          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock', '.pre-commit-config.yaml') }}
 
       #----------------------------------------------
       # install dependencies if cache does not exist
@@ -84,7 +84,8 @@ jobs:
             .venv
             ~/.local
             ~/.cache/pre-commit
-          key: ${{ steps.cached-poetry-dependencies.outputs.cache-primary-key }}
+          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock', '.pre-commit-config.yaml') }}
+          #key: ${{ steps.cached-poetry-dependencies.outputs.cache-primary-key }}
 
   quality:
     name: "Code Quality & Tests"

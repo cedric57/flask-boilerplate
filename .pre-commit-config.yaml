@@ -1,3 +1,7 @@
+# ---------------------------------------------------------------------------- #
+#                                Configuration Globale                         #
+# ---------------------------------------------------------------------------- #
+
 exclude: |
   (?x)^(
       .*\{\{.*\}\}.*|     # Exclude any files with cookiecutter variables
@@ -9,13 +13,13 @@ exclude: |
       .*venv.*/.*|        # Exclude virtual environment directories
       .*idea.*/.*|        # Exclude PyCharm directories
   )$
-fail_fast: true
+fail_fast: true  # Arrête l'exécution des hooks dès qu'une erreur est détectée
 default_language_version:
-  python: python3.12
+  python: python3.12  # Version de Python utilisée par défaut pour les hooks
 default_install_hook_types:
-  - pre-commit
-  - commit-msg
-
+  - pre-commit  # Active les hooks de type "pre-commit"
+  - commit-msg  # Active les hooks de type "commit-msg"
+  -
 repos:
   # ---------------------------------------------------------------------------- #
   #                              🔄 Pre-Commit Hooks                             #
@@ -46,6 +50,7 @@ repos:
 
   # --------------------------- 🔍 Code Quality Tools -------------------------- #
 
+  # Hooks généraux fournis par Pre-Commit
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0
     hooks:

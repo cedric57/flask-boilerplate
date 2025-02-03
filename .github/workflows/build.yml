@@ -23,27 +23,27 @@ jobs:
       #       check-out repo and set-up python
       #----------------------------------------------
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4 # Récupère le code source du dépôt
 
       - name: Set up Python ${{ matrix.python-version }}
         id: setup-python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v5 # Configure la version de Python spécifiée
         with:
           python-version: ${{ matrix.python-version }}
 
       #----------------------------------------------
-      #  -----  install & configure poetry  -----
+      #       install & configure poetry
       #----------------------------------------------
       - name: Install Python poetry
-        uses: snok/install-poetry@v1
+        uses: snok/install-poetry@v1 # Installe Poetry pour gérer les dépendances
         with:
-          virtualenvs-create: true
-          virtualenvs-in-project: true
-          virtualenvs-path: .venv
-          installer-parallel: true
+          virtualenvs-create: true # Crée un environnement virtuel
+          virtualenvs-in-project: true # Place l'environnement virtuel dans le projet
+          virtualenvs-path: .venv # Chemin de l'environnement virtuel
+          installer-parallel: true # Active l'installation parallèle des dépendances
 
       - name: Verify Poetry installation
-        run: poetry --version
+        run: poetry --version # Vérifie que Poetry est correctement installé
 
       #----------------------------------------------
       #       load cached venv if cache exists
@@ -51,7 +51,40 @@ jobs:
       # Poetry cache depends on OS, Python version and Poetry version.
       - name: Cache Poetry dependencies
         id: cached-poetry-dependencies
-        uses: actions/cache@v4
+        uses: actions/cache@v4 # Cache les dépendances pour accélérer les builds futurs
+        with:
+          path: |
+            .venv # Cache l'environnement virtuel
+            ~/.local # Cache les fichiers locaux
+            ~/.cache/pre-commit # Cache les hooks pre-commit
+          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock', '.pre-commit-config.yaml') }} # Clé unique basée sur le système d'exploitation et les fichiers de configuration
+
+      #----------------------------------------------
+      # install dependencies if cache does not exist
+      #----------------------------------------------
+      - name: Install dependencies
+        shell: bash
+        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'  # Installe les dépendances uniquement si le cache n'existe pas
+        run: |
+          poetry lock # Met à jour le fichier poetry.lock
+          poetry install --no-interaction --no-root # Installe les dépendances sans interaction utilisateur
+
+      #----------------------------------------------
+      # install pre-commit hooks if cache does not exist
+      #----------------------------------------------
+      - name: Run pre-commit install-hooks
+        run: poetry run pre-commit install --install-hooks # Installe les hooks pre-commit pour vérifier le code
+
+  quality:
+    name: "Code Quality & Tests"
+    runs-on: ubuntu-latest
+    needs: setup # Ce job dépend du job "setup"
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4 # Récupère le code source du dépôt
+
+      - name: Restore .venv from cache
+        uses: actions/cache/restore@v4 # Restaure l'environnement virtuel depuis le cache
         with:
           path: |
             .venv
@@ -59,107 +92,75 @@ jobs:
             ~/.cache/pre-commit
           key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock', '.pre-commit-config.yaml') }}
 
-      #----------------------------------------------
-      # install dependencies if cache does not exist
-      #----------------------------------------------
-      - name: Install dependencies
-        shell: bash
-        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
-        run: |
-          poetry lock
-          poetry install --no-interaction --no-root
-
-      #----------------------------------------------
-      # install pre-commit hooks if cache does not exist
-      #----------------------------------------------
-      - name: Run pre-commit install-hooks
-        run: poetry run pre-commit install --install-hooks
-
-  quality:
-    name: "Code Quality & Tests"
-    runs-on: ubuntu-latest
-    needs: setup
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Restore .venv from cache
-        uses: actions/cache/restore@v4
-        with:
-          path: |
-            .venv
-            ~/.local
-            ~/.cache/pre-commit
-          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock', '.pre-commit-config.yaml', '~/.cache/pre-commit/*') }}
-
       - name: Activate environment
         shell: bash
-        run: source .venv/bin/activate
+        run: source .venv/bin/activate # Active l'environnement virtuel
 
       - name: Run pre-commit on all files
-        run: poetry run pre-commit run --all-files --color=always --show-diff-on-failure
+        run: poetry run pre-commit run --all-files --color=always --show-diff-on-failure # Exécute les hooks pre-commit sur tous les fichiers
 
       - name: Run tests with coverage
-        run: poetry run pytest --doctest-modules --junitxml=junit.xml -o junit_family=legacy --cov=src tests --cov-report=xml --cov-report=html
+        run: poetry run pytest --doctest-modules --junitxml=junit.xml -o junit_family=legacy --cov=src tests --cov-report=xml --cov-report=html # Exécute les tests avec Pytest et génère un rapport de couverture
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@v5 # Envoie les résultats de couverture à Codecov
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
       - name: Upload test results to Codecov
-        if: ${{ !cancelled() }}
-        uses: codecov/test-results-action@v1
+        if: ${{ !cancelled() }} # N'exécute cette étape que si le job n'a pas été annulé
+        uses: codecov/test-results-action@v1 # Envoie les résultats des tests à Codecov
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
   security:
     name: "Security Checks"
     runs-on: ubuntu-latest
-    needs: setup
+    needs: setup # Ce job dépend du job "setup"
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4 # Récupère le code source du dépôt
 
       - name: Dependency vulnerability check with Safety
-        uses: pyupio/safety-action@v1
+        uses: pyupio/safety-action@v1 # Vérifie les vulnérabilités des dépendances avec Safety
         with:
           api-key: ${{ secrets.SAFETY_API_KEY }}
 
       - name: Security analysis with Snyk
-        uses: snyk/actions/python@master
-        continue-on-error: true
+        uses: snyk/actions/python@master # Analyse la sécurité du code avec Snyk
+        continue-on-error: true # Continue même en cas d'erreur
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          args: --sarif-file-output=snyk.sarif
+          args: --sarif-file-output=snyk.sarif # Génère un rapport SARIF pour GitHub Code Scanning
+
       - name: Upload result to GitHub Code Scanning
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@v3 # Charge les résultats de l'analyse dans GitHub Code Scanning
         with:
           sarif_file: snyk.sarif
 
   build:
     name: "Build Package"
     runs-on: ubuntu-latest
-    needs: [quality, security]
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [quality, security] # Ce job dépend des jobs "quality" et "security"
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' # N'exécute ce job que lors d'un push sur la branche main
 
     steps: # Liste des étapes à exécuter dans le job
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4 # Récupère le code source du dépôt
 
       - name: Restore .venv from cache
-        uses: actions/cache@v4
+        uses: actions/cache@v4 # Restaure l'environnement virtuel depuis le cache
         with:
           path: |
             .venv
             ~/.local
             ~/.cache/pre-commit
-          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock', '.pre-commit-config.yaml', '~/.cache/pre-commit/*') }}
+          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock', '.pre-commit-config.yaml') }}
 
       - name: Activate environment
         shell: bash
-        run: source .venv/bin/activate
+        run: source .venv/bin/activate # Active l'env ironnement virtuel
 
       - name: Run tests # Étape pour exécuter les tests
         run: poetry run pytest # Exécuter les tests avec Pytest via Poetry

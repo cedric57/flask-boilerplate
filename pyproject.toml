@@ -1,45 +1,57 @@
+# ---------------------------------------------------------------------------- #
+#                                Build System                                  #
+# ---------------------------------------------------------------------------- #
+
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core"]  # Dépendances nécessaires pour construire le projet.
+build-backend = "poetry.core.masonry.api"  # Backend utilisé pour la construction du projet.
+
+# ---------------------------------------------------------------------------- #
+#                              Project Metadata                               #
+# ---------------------------------------------------------------------------- #
 
 [tool.poetry]
-name = "flask-boilerplate"
-version = "0.1.0"
-description = "A Flask boilerplate project"
-authors = ["Cedric Grun <cedric.grun@gmail.com>"]
-license = "MIT"
-readme = "README.md"
-homepage = "https://github.com/cedric57/flask-boilerplate"
-repository = "https://github.com/cedric57/flask-boilerplate"
-documentation = "https://flask-boilerplate.readthedocs.io"
+name = "flask-boilerplate"  # Nom du projet.
+version = "0.1.0"  # Version actuelle du projet (utilisez Semantic Versioning).
+description = "A Flask boilerplate project"  # Description succincte du projet.
+authors = ["Cedric Grun <cedric.grun@gmail.com>"]  # Auteur(s) du projet.
+license = "MIT"  # Licence utilisée pour le projet.
+readme = "README.md"  # Fichier README principal.
+homepage = "https://github.com/cedric57/flask-boilerplate"  # URL de la page d'accueil du projet.
+repository = "https://github.com/cedric57/flask-boilerplate"  # URL du dépôt Git.
+documentation = "https://flask-boilerplate.readthedocs.io"  # URL de la documentation du projet.
 packages = [
-    { include = "flask_boilerplate", from = "src" }
+    { include = "flask_boilerplate", from = "src" }  # Spécifie les packages Python à inclure.
 ]
 
+# ---------------------------------------------------------------------------- #
+#                             Dependencies                                     #
+# ---------------------------------------------------------------------------- #
+
 [tool.poetry.dependencies]
-python = "^3.12"
-flask = "^3.1.0"
-sphinx = "^8.1.3"
-jinja2 = "^3.1.5"
-sqlalchemy = "^2.0.37"
+python = "^3.12"  # Version de Python requise (compatible avec 3.12+).
+flask = "^3.1.0"  # Framework Flask utilisé pour le développement web.
+sphinx = "^8.1.3"  # Outil pour générer la documentation.
+jinja2 = "^3.1.5"  # Moteur de templating utilisé par Flask.
+sqlalchemy = "^2.0.37"  # ORM pour interagir avec la base de données.
+alembic = "^1.14.1"  # Outil pour gérer les migrations de base de données.
 
 [tool.poetry.group.dev.dependencies]
-pytest = "^8.3.4"
-pytest-cov = "^6.0.0"
-mypy = "^1.14.1"
-bandit = "^1.8.2"
-safety = "^3.2.14"
-ruff = "^0.9.4"
-pre-commit = "^4.1.0"
-conventional-pre-commit = "^4.0.0"
+pytest = "^8.3.4"  # Framework de tests unitaires.
+pytest-cov = "^6.0.0"  # Extension pour mesurer la couverture de code.
+mypy = "^1.14.1"  # Vérificateur de typage statique.
+bandit = "^1.8.2"  # Analyseur de sécurité pour détecter les vulnérabilités.
+safety = "^3.2.14"  # Outil pour vérifier les dépendances pour les vulnérabilités connues.
+ruff = "^0.9.4"  # Linter et formateur de code rapide.
+pre-commit = "^4.1.0"  # Gestionnaire de hooks Git pour automatiser les vérifications.
+conventional-pre-commit = "^4.0.0"  # Hook pour valider les messages de commit selon les conventions.
 
 [tool.poetry.extras]
-docs = ["sphinx"]
+docs = ["sphinx"]  # Dépendances optionnelles pour générer la documentation.
 
 # ---------------------------------------------------------------------------- #
 #                             ruff formatter/linter                            #
 # ---------------------------------------------------------------------------- #
-
 
 # ----------------------------- ruff global config ----------------------------- #
 
@@ -72,76 +84,74 @@ exclude = [
     "node_modules",
     "site-packages",
     "venv",
-]
-line-length=120
+]  # Liste des dossiers/fichiers à exclure de l'analyse.
+line-length = 120  # Longueur maximale des lignes de code.
+
+# ----------------------------- Linting Config ------------------------------- #
 
 [tool.ruff.lint]
-preview = true
+preview = true  # Active les règles expérimentales.
 select = [
-    "E", "W",   # pycodestyle
-    "F",    # Pyflakes
-    "UP",   # pyupgrade
-    "B",    # flake8-bugbear
-    "SIM",  # flake8-simplify
-    "I",    # isort
-]
-ignore = []
-fixable = ["ALL"]           # Allow automatic fixes for all fixable issues
+    "E", "W",  # pycodestyle (erreurs de style).
+    "F",       # Pyflakes (erreurs de syntaxe).
+    "UP",      # pyupgrade (modernisation du code).
+    "B",       # flake8-bugbear (erreurs subtiles).
+    "SIM",     # flake8-simplify (simplification du code).
+    "I"        # isort (tri des imports).
+]  # Règles activées pour l'analyse.
+ignore = []  # Règles à ignorer (aucune ici).
+fixable = ["ALL"]  # Autorise la correction automatique de tous les problèmes fixables.
+
+# ----------------------------- Formatting Config ---------------------------- #
 
 [tool.ruff.format]
-preview = true
-# Like Black, use double quotes for strings.
-quote-style = "double"
-
-# Like Black, indent with spaces, rather than tabs.
-indent-style = "space"
-
-# Like Black, respect magic trailing commas.
-skip-magic-trailing-comma = false
-
-# Like Black, automatically detect the appropriate line ending.
-line-ending = "auto"
+preview = true  # Active les fonctionnalités expérimentales de formatage.
+quote-style = "double"  # Comme Black, utilise des guillemets doubles pour les chaînes de caractères
+indent-style = "space"  # Comme Black, indente avec des espaces au lieu de tabulations.
+skip-magic-trailing-comma = false  # Comme Black, respecte les virgules magiques.
+line-ending = "auto"  # Comme Black, détecte automatiquement le type de fin de ligne.
 
 # Enable auto-formatting of code examples in docstrings. Markdown,
 # reStructuredText code/literal blocks and doctests are all supported.
 #
 # This is currently disabled by default, but it is planned for this
 # to be opt-out in the future.
-docstring-code-format = false
+docstring-code-format = false  # Désactive le formatage des exemples de code dans les docstrings.
 
-# Set the line length limit used when formatting code snippets in
-# docstrings.
-#
-# This only has an effect when the `docstring-code-format` setting is
-# enabled.
-docstring-code-line-length = "dynamic"
+# Set the line length limit used when formatting code snippets in docstrings.
+# This only has an effect when the `docstring-code-format` setting is enabled.
+docstring-code-line-length = "dynamic"  # Longueur de ligne dynamique pour les exemples de code.
+
+# ----------------------------- ISort Config --------------------------------- #
 
 [tool.ruff.lint.isort]
-order-by-type = true
-relative-imports-order = "closest-to-furthest"
-extra-standard-library = ["typing"]
+order-by-type = true  # Trie les imports par type (standards, tiers, locaux).
+relative-imports-order = "closest-to-furthest"  # Trie les imports relatifs par proximité.
+extra-standard-library = ["typing"]  # Ajoute des modules standards supplémentaires.
 section-order = ["future", "standard-library", "third-party", "first-party", "local-folder"]
-known-first-party = []
+known-first-party = []  # Modules internes au projet.
+
+# ----------------------------- Pydocstyle Config ---------------------------- #
 
 [tool.ruff.lint.pydocstyle]
-convention = "google"
+convention = "google"  # Convention de style pour les docstrings.
 
 # ---------------------------------------------------------------------------- #
-#                                       mypy                                   #
+#                                   MyPy                                       #
 # ---------------------------------------------------------------------------- #
 
 [tool.mypy]
-python_version = "3.12"
-warn_return_any = true
-warn_unused_configs = true
-disallow_untyped_defs = true
-check_untyped_defs = true
-ignore_missing_imports = false   # Display error for all missing imports
-strict = true                    # Enable more checks
-mypy_path = "src"
+python_version = "3.12"  # Version de Python utilisée pour l'analyse.
+warn_return_any = true  # Avertissements pour les fonctions retournant `Any`.
+warn_unused_configs = true  # Avertissements pour les configurations inutilisées.
+disallow_untyped_defs = true  # Interdit les définitions non typées.
+check_untyped_defs = true  # Vérifie les définitions non typées.
+ignore_missing_imports = false  # Affiche des erreurs pour les imports manquants.
+strict = true  # Active toutes les vérifications strictes.
+mypy_path = "src"  # Chemin vers les sources à analyser.
 
 # ---------------------------------------------------------------------------- #
-#                                    bandit                                    #
+#                                   Bandit                                     #
 # ---------------------------------------------------------------------------- #
 [tool.bandit]
 exclude_dirs = [
@@ -149,10 +159,10 @@ exclude_dirs = [
     "tests",
     ".git",
     "__pycache__",
-]
+]  # Dossiers à exclure de l'analyse de sécurité.
 
 # ---------------------------------------------------------------------------- #
-#                                    pytest                                    #
+#                                   Pytest                                     #
 # ---------------------------------------------------------------------------- #
 
 [tool.pytest.ini_options]
@@ -162,4 +172,4 @@ addopts = """
 --color=yes
 -vv
 """
-testpaths = ["tests"]
+testpaths = ["tests"]  # Chemins où Pytest recherche les tests.

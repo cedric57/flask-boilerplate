@@ -8,8 +8,8 @@ This boilerplate is a robust starting point for creating production-ready Flask 
 
 ### Project Status
 
-![CI Pipeline](https://github.com/cedric57/flask-boilerplate/actions/workflows/ci.yml/badge.svg)
-![CD Pipeline](https://github.com/cedric57/flask-boilerplate/actions/workflows/cd.yml/badge.svg)
+![CI Pipeline](https://github.com/cedric57/flask-boilerplate/actions/workflows/build.yml/badge.svg)
+![CD Pipeline](https://github.com/cedric57/flask-boilerplate/actions/workflows/deploy.yml/badge.svg)
 ![Release](https://img.shields.io/badge/release-v1.0-blue)
 [![License](https://img.shields.io/github/license/cedric57/flask-boilerplate)](https://github.com/cedric57/flask-boilerplate/blob/main/LICENSE)
 [![Pre-commit](https://img.shields.io/badge/pre--commit-enabled-blue?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
@@ -96,9 +96,10 @@ poetry install #Install dependencies.
 - `poetry install --extras "web cli"` - Installation with extras
 - `poetry install --with dev` - Installation for development
 - `poetry install --with docs` - Installation for documentation
-- `poetry run pytest` - Run tests
 - `poetry run ruff .` - Format the code
 - `poetry run mypy .` - Check types
+- `poetry run pre-commit run --all-files` - Run pre-commit
+- `poetry run pytest` - Run tests
 - `poetry run flask-boilerplate` - Start application
 - `poetry add requests` - Add a dependency
 - `poetry add --group dev pytest` - Add a dev dependency

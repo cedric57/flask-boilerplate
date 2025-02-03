@@ -64,7 +64,7 @@ jobs:
       #----------------------------------------------
       - name: Install dependencies
         shell: bash
-        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'  # Installe les dépendances uniquement si le cache n'existe pas
+        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true' # Installe les dépendances uniquement si le cache n'existe pas
         run: |
           poetry lock # Met à jour le fichier poetry.lock
           poetry install --no-interaction --no-root # Installe les dépendances sans interaction utilisateur

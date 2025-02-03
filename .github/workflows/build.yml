@@ -54,10 +54,10 @@ jobs:
         uses: actions/cache@v4 # Cache les dépendances pour accélérer les builds futurs
         with:
           path: |
-            .venv=
+            .venv
             ~/.local
             ~/.cache/pre-commit
-          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock', '**/.pre-commit-config.yaml') }} # Clé unique basée sur le système d'exploitation et les fichiers de configuration
+          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock', '**/.pre-commit-config.yaml') }}
 
       #----------------------------------------------
       # install dependencies if cache does not exist

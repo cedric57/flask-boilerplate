@@ -54,10 +54,10 @@ jobs:
         uses: actions/cache@v4 # Cache les dépendances pour accélérer les builds futurs
         with:
           path: |
-            .venv # Cache l'environnement virtuel
-            ~/.local # Cache les fichiers locaux
-            ~/.cache/pre-commit # Cache les hooks pre-commit
-          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock', '.pre-commit-config.yaml') }} # Clé unique basée sur le système d'exploitation et les fichiers de configuration
+            .venv=
+            ~/.local
+            ~/.cache/pre-commit
+          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock', '**/.pre-commit-config.yaml') }} # Clé unique basée sur le système d'exploitation et les fichiers de configuration
 
       #----------------------------------------------
       # install dependencies if cache does not exist
@@ -84,13 +84,13 @@ jobs:
         uses: actions/checkout@v4 # Récupère le code source du dépôt
 
       - name: Restore .venv from cache
-        uses: actions/cache/restore@v4 # Restaure l'environnement virtuel depuis le cache
+        uses: actions/cache@v4 # Restaure l'environnement virtuel depuis le cache
         with:
           path: |
             .venv
             ~/.local
             ~/.cache/pre-commit
-          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock', '.pre-commit-config.yaml') }}
+          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock', '**/.pre-commit-config.yaml') }}
 
       - name: Activate environment
         shell: bash
@@ -156,7 +156,7 @@ jobs:
             .venv
             ~/.local
             ~/.cache/pre-commit
-          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock', '.pre-commit-config.yaml') }}
+          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock', '**/.pre-commit-config.yaml') }}
 
       - name: Activate environment
         shell: bash

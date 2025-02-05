@@ -204,7 +204,7 @@ repos:
         name: "✨ misc-files · Format misc web files"
         args:
           - "--write"
-        types_or: [yaml, html, scss]
+        types_or: [yaml, html, scss, toml]
         additional_dependencies:
           - prettier@3.4.2
 
@@ -249,9 +249,17 @@ repos:
     rev: v4.1.1
     hooks:
       - id: commitizen
-        name: "🌳 git · Validate commit message"
+        name: "🌳 git · Validate commit message with Commitizen"
         stages: [commit-msg]
         additional_dependencies: [cz-conventional-gitmoji]
+
+  - repo: https://github.com/alessandrojcm/commitlint-pre-commit-hook
+    rev: v10.0.0
+    hooks:
+      - id: commitlint
+        name: "🌳 git · Validate commit message with Commitlint"
+        stages: [commit-msg]
+        additional_dependencies: ["@commitlint/cli", "@commitlint/config-conventional"]
 
   # ---------------------------------------------------------------------------- #
   #                             🧪 Fast Tests (Local)                            #

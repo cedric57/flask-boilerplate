@@ -43,8 +43,9 @@ mypy = "^1.14.1"  # Vérificateur de typage statique.
 bandit = "^1.8.2"  # Analyseur de sécurité pour détecter les vulnérabilités.
 safety = "^3.2.14"  # Outil pour vérifier les dépendances pour les vulnérabilités connues.
 ruff = "^0.9.4"  # Linter et formateur de code rapide.
-pre-commit = "^4.1.0"  # Gestionnaire de hooks Git pour automatiser les vérifications.
 conventional-pre-commit = "^4.0.0"  # Hook pour valider les messages de commit selon les conventions.
+commitizen = "^4.1.1"
+pre-commit = "^4.1.0"
 
 [tool.poetry.extras]
 docs = ["sphinx"]  # Dépendances optionnelles pour générer la documentation.
@@ -173,3 +174,8 @@ addopts = """
 -vv
 """
 testpaths = ["tests"]  # Chemins où Pytest recherche les tests.
+
+[tool.commitizen]
+name = "cz_conventional_changelog"
+version = "0.1.0"  # Version initiale du projet
+tag_format = "v$version"  # Format des tags Git

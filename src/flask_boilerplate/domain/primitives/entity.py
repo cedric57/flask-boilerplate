@@ -38,6 +38,7 @@ class Entity(ABC):
             return False
         return self.id == other.id
 
+    @abstractmethod
     def __hash__(self) -> int:
         """
         Generate a hash value for the entity based on its unique identifier.

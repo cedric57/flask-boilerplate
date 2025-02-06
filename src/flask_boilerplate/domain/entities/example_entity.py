@@ -9,7 +9,7 @@ entities in the domain layer. Entities typically have a unique identifier and at
 that represent their state.
 """
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from uuid import UUID
 
 from flask_boilerplate.domain.primitives.entity import Entity  # Import de la classe abstraite Entity
@@ -28,7 +28,7 @@ class ExampleEntity(Entity):
         description (str): A description of the entity.
     """
 
-    id: UUID
+    id: UUID = field(default_factory=lambda: None)  # L'ID sera initialisé par Entity
     name: str
     description: str
 

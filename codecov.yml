@@ -20,11 +20,11 @@ coverage:
 # --------------
 # which folders/files to ignore
 ignore:
-  - "*/__init__.py"  # Ignore tous les fichiers __init__.py
-  - "tests/*"        # Ignore les fichiers de test
-  - "src/flask_boilerplate/domain/primitives/*"  # Ignore le répertoire des primitives
-  - "src/flask_boilerplate/domain/enums/*"       # Ignore le répertoire des enums
-  - "src/flask_boilerplate/domain/objects_values/*"  # Ignore le répertoire des objects_values
+  - "*/__init__.py" # Ignore tous les fichiers __init__.py
+  - "tests/*" # Ignore les fichiers de test
+  - "src/flask_boilerplate/domain/primitives/*" # Ignore le répertoire des primitives
+  - "src/flask_boilerplate/domain/enums/*" # Ignore le répertoire des enums
+  - "src/flask_boilerplate/domain/objects_values/*" # Ignore le répertoire des objects_values
 
 # Pull request comments:
 # ----------------------

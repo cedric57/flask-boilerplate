@@ -71,7 +71,7 @@ repos:
 
   ### Python Tools ###
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.9.4
+    rev: v0.9.5
     hooks:
       - id: ruff
         name: "🐍 python · Lint and perform safe auto-fixes with Ruff"
@@ -80,7 +80,7 @@ repos:
         name: "🐍 python · Format with Ruff"
 
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.14.1
+    rev: v1.15.0
     hooks:
       - id: mypy
         name: "🐍 python · Check types"
@@ -160,7 +160,7 @@ repos:
 
   ### SQL ###
   - repo: https://github.com/sqlfluff/sqlfluff
-    rev: 3.3.0
+    rev: 3.3.1
     hooks:
       - id: sqlfluff-fix
         name: "📊 SQL · Attempts to fix rule violations."
@@ -254,12 +254,13 @@ repos:
         additional_dependencies: [cz-conventional-gitmoji]
 
   - repo: https://github.com/alessandrojcm/commitlint-pre-commit-hook
-    rev: v10.0.0
+    rev: v9.20.0
     hooks:
       - id: commitlint
         name: "🌳 git · Validate commit message with Commitlint"
         stages: [commit-msg]
-        additional_dependencies: ["@commitlint/cli", "@commitlint/config-conventional"]
+        additional_dependencies:
+          ["@commitlint/cli", "@commitlint/config-conventional"]
 
   # ---------------------------------------------------------------------------- #
   #                             🧪 Fast Tests (Local)                            #

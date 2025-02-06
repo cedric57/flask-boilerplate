@@ -176,6 +176,14 @@ addopts = """
 testpaths = ["tests"]  # Chemins où Pytest recherche les tests.
 
 [tool.commitizen]
-name = "cz_conventional_changelog"
-version = "0.1.0"  # Version initiale du projet
-tag_format = "v$version"  # Format des tags Git
+name = "cz_conventional_commits"
+version = "1.0.0"
+tag_format = "v$version"
+version_files = [
+    "VERSION",
+    "setup.py",
+    "pyproject.toml:version"
+]
+bump_message = "bump: version $current_version → $new_version"
+update_changelog_on_bump = true
+annotated_tag = true

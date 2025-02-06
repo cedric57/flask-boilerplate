@@ -10,7 +10,7 @@ that represent their state.
 """
 
 from dataclasses import dataclass, field
-from uuid import UUID
+from uuid import UUID, uuid4
 
 from flask_boilerplate.domain.primitives.entity import Entity  # Import de la classe abstraite Entity
 
@@ -23,14 +23,14 @@ class ExampleEntity(Entity):
     It encapsulates business logic related to its identity and state.
 
     Attributes:
-        id (UUID): The unique identifier of the entity.
         name (str): The name of the entity.
         description (str): A description of the entity.
+        id (UUID): The unique identifier of the entity.
     """
 
-    id: UUID = field(default_factory=lambda: None)  # L'ID sera initialisé par Entity
     name: str
     description: str
+    id: UUID = field(default_factory=uuid4)  # Génère un UUID par défaut
 
     def __post_init__(self) -> None:
         """
@@ -58,6 +58,17 @@ class ExampleEntity(Entity):
             int: The hash value of the entity.
         """
         return hash(self.id)
+
+    def __str__(self) -> str:
+        """
+        Return a string representation of the entity.
+
+        The string is formatted as:
+        ExampleEntity(id=<UUID>, name=<name>, description=<description>)
+
+        This format ensures consistency and readability when displaying the entity.
+        """
+        return f"ExampleEntity(id={self.id}, name={self.name}, description={self.description})"
 
     def update_name(self, new_name: str) -> None:
         """Update the name of the entity.

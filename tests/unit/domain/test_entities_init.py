@@ -3,7 +3,6 @@ This module contains unit tests to ensure that the `__init__.py` file in the
 `flask_boilerplate.domain.entities` package functions correctly. It validates
 that entities are properly exported and accessible from the module.
 """
-
 from uuid import UUID
 
 from flask_boilerplate.domain.entities import ExampleEntity
@@ -54,3 +53,24 @@ def test_invalid_entity_access() -> None:
     except AttributeError as e:
         # Verify the error message
         assert str(e) == "module 'flask_boilerplate.domain.entities' has no attribute 'NonExistentEntity'"
+
+
+def test_getattr_invalid_name_type() -> None:
+    """Test that __getattr__ raises a TypeError when name is not a string."""
+    try:
+        # Call __getattr__ with an invalid type (e.g., an integer)
+        from flask_boilerplate.domain.entities import __getattr__
+        __getattr__(123)  # Pass a non-string value
+        raise AssertionError("__getattr__ should raise a TypeError for non-string names.")
+    except TypeError as e:
+        # Verify the error message
+        assert str(e) == "Expected a string for entity name, got int"
+
+
+def test_getattr_dynamic_loading() -> None:
+    """Test that __getattr__ dynamically loads and returns an existing entity."""
+    # Access an existing entity
+    from flask_boilerplate.domain.entities import ExampleEntity
+
+    # Verify that the returned object is the expected class
+    assert ExampleEntity.__name__ == "ExampleEntity", "__getattr__ did not return the correct entity."

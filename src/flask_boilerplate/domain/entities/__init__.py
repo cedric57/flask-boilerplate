@@ -11,12 +11,9 @@ Example:
     >>> entity = ExampleEntity(id=UUID("..."), name="Example", description="An example entity")
 """
 
-import logging
 from typing import Any
 
 from .example_entity import ExampleEntity
-
-logger = logging.getLogger(__name__)
 
 # Re-export all entities for easy access.
 __all__ = [
@@ -41,7 +38,6 @@ def __getattr__(name: str) -> Any:
     if not isinstance(name, str):
         raise TypeError(f"Expected a string for entity name, got {type(name).__name__}")
     if name in __all__:
-        logger.debug(f"Lazy-loading entity: {name}")
         # Dynamically import the entity to avoid circular imports.
         module = __import__(f"flask_boilerplate.domain.entities.{name}", fromlist=[name])
         return getattr(module, name)

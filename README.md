@@ -8,6 +8,7 @@ This boilerplate is a robust starting point for creating production-ready Flask 
 
 ### Project Status
 
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/cedric57/flask-boilerplate/main.svg)](https://results.pre-commit.ci/latest/github/cedric57/flask-boilerplate/main)
 ![CI Pipeline](https://github.com/cedric57/flask-boilerplate/actions/workflows/build.yml/badge.svg)
 ![CD Pipeline](https://github.com/cedric57/flask-boilerplate/actions/workflows/deploy.yml/badge.svg)
 ![Release](https://img.shields.io/badge/release-v1.0-blue)
@@ -21,9 +22,9 @@ This boilerplate is a robust starting point for creating production-ready Flask 
 
 ### Code Quality
 
-[![Codecov](https://codecov.io/gh/cedric57/flask-boilerplate/branch/main/graph/badge.svg)](https://codecov.io/gh/user/repo)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 [![Mypy](https://img.shields.io/badge/type%20checker-mypy-blue.svg)](http://mypy-lang.org/)
+[![Codecov](https://codecov.io/gh/cedric57/flask-boilerplate/branch/main/graph/badge.svg)](https://codecov.io/gh/user/repo)
 
 ### Security
 

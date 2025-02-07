@@ -20,6 +20,13 @@ default_install_hook_types:
   - pre-commit # Active les hooks de type "pre-commit"
   - commit-msg # Active les hooks de type "commit-msg"
 
+ci:
+  autofix_prs: true
+  autofix_commit_msg: '[pre-commit.ci] Fixing issues with pre-commit'
+  autoupdate_schedule: weekly
+  autoupdate_commit_msg: '[pre-commit.ci] pre-commit automatically updated revs.'
+  skip: [] # Optionally list ids of hooks to skip on CI
+
 repos:
   # ---------------------------------------------------------------------------- #
   #                              🔄 Pre-Commit Hooks                             #

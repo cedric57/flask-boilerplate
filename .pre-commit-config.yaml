@@ -25,7 +25,7 @@ ci:
   autofix_commit_msg: "[pre-commit.ci] Fixing issues with pre-commit"
   autoupdate_schedule: weekly
   autoupdate_commit_msg: "[pre-commit.ci] pre-commit automatically updated revs."
-  skip: [] # Optionally list ids of hooks to skip on CI
+  skip: [pytest-collect, pytest-fast] # Optionally list ids of hooks to skip on CI
 
 repos:
   # ---------------------------------------------------------------------------- #

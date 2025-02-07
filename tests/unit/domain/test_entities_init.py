@@ -3,6 +3,7 @@ This module contains unit tests to ensure that the `__init__.py` file in the
 `flask_boilerplate.domain.entities` package functions correctly. It validates
 that entities are properly exported and accessible from the module.
 """
+
 from uuid import UUID
 
 from flask_boilerplate.domain.entities import ExampleEntity
@@ -35,9 +36,7 @@ def test_module_exports() -> None:
     `ExampleEntity` is included in the exported names.
     """
     # Verify that ExampleEntity is accessible from the module
-    assert "ExampleEntity" in globals(), (
-        "ExampleEntity should be exported by the module."
-    )
+    assert "ExampleEntity" in globals(), "ExampleEntity should be exported by the module."
 
 
 def test_invalid_entity_access() -> None:

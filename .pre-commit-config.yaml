@@ -22,9 +22,9 @@ default_install_hook_types:
 
 ci:
   autofix_prs: true
-  autofix_commit_msg: '[pre-commit.ci] Fixing issues with pre-commit'
+  autofix_commit_msg: "[pre-commit.ci] Fixing issues with pre-commit"
   autoupdate_schedule: weekly
-  autoupdate_commit_msg: '[pre-commit.ci] pre-commit automatically updated revs.'
+  autoupdate_commit_msg: "[pre-commit.ci] pre-commit automatically updated revs."
   skip: [] # Optionally list ids of hooks to skip on CI
 
 repos:

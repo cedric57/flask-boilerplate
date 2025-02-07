@@ -64,6 +64,21 @@ def test_example_entity_update_description() -> None:
     assert entity.description == new_description
 
 
+def test_example_entity_equality_not_implemented() -> None:
+    """Test the __eq__ method when comparing with a non-Entity object."""
+    # Arrange
+    entity_id = UUID("12345678-1234-5678-1234-567812345678")
+    name = "Test Entity"
+    description = "This is a test entity."
+    entity = ExampleEntity(id=entity_id, name=name, description=description)
+
+    # Act
+    result = entity.__eq__("not an entity")  # Compare with a non-Entity object
+
+    # Assert
+    assert result is NotImplemented, "__eq__ should return NotImplemented for non-Entity objects."
+
+
 def test_example_entity_equality() -> None:
     """Test the equality of two ExampleEntity instances.
 

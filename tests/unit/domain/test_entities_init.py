@@ -72,8 +72,9 @@ def test_getattr_invalid_name_type() -> None:
 
 def test_getattr_dynamic_loading() -> None:
     """Test that __getattr__ dynamically loads and returns an existing entity."""
-    # Access an existing entity
-    from flask_boilerplate.domain.entities import ExampleEntity
+    # Accéder à une entité existante via __getattr__
+    entities_module = __import__("flask_boilerplate.domain.entities", fromlist=["ExampleEntity"])
+    ExampleEntity = entities_module.ExampleEntity
 
     # Verify that the returned object is the expected class
     assert ExampleEntity.__name__ == "ExampleEntity", "__getattr__ did not return the correct entity."

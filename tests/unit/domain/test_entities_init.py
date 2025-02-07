@@ -3,6 +3,7 @@ This module contains unit tests to ensure that the `__init__.py` file in the
 `flask_boilerplate.domain.entities` package functions correctly. It validates
 that entities are properly exported and accessible from the module.
 """
+
 from typing import cast
 from uuid import UUID
 
@@ -61,6 +62,7 @@ def test_getattr_invalid_name_type() -> None:
     try:
         # Call the mocked __getattr__ with an invalid type (e.g., an integer)
         from flask_boilerplate.domain.entities import __getattr__
+
         __getattr__(cast(str, 123))  # Force the type to str
         raise AssertionError("__getattr__ should raise a TypeError for non-string names.")
     except TypeError as e:

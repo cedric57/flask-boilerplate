@@ -70,11 +70,34 @@ def test_getattr_invalid_name_type() -> None:
         assert str(e) == "Expected a string for entity name, got int"
 
 
+def test_getattr_dynamic_loading_with_string() -> None:
+    """Test that __getattr__ dynamically loads and returns an existing entity using a string."""
+    # Simuler l'accès à une entité existante via __getattr__
+    entities_module = __import__("flask_boilerplate.domain.entities", fromlist=["ExampleEntity"])
+    entity_class = entities_module.ExampleEntity
+
+    # Vérifier que l'entité retournée est bien la classe attendue
+    assert entity_class.__name__ == "ExampleEntity", "__getattr__ did not return the correct entity."
+
+
 def test_getattr_dynamic_loading() -> None:
     """Test that __getattr__ dynamically loads and returns an existing entity."""
-    # Accéder à une entité existante via __getattr__
-    entities_module = __import__("flask_boilerplate.domain.entities", fromlist=["ExampleEntity"])
-    ExampleEntity = entities_module.ExampleEntity
+    # Simuler l'accès à une entité existante via __getattr__
+    from flask_boilerplate.domain.entities import __getattr__
 
-    # Verify that the returned object is the expected class
-    assert ExampleEntity.__name__ == "ExampleEntity", "__getattr__ did not return the correct entity."
+    entity_class = __getattr__("ExampleEntity")
+
+    # Vérifier que l'entité retournée est bien la classe attendue
+    assert entity_class.__name__ == "ExampleEntity", "__getattr__ did not return the correct entity."
+
+
+def test_getattr_dynamic_import() -> None:
+    """Test dynamic import of entities using __getattr__."""
+    # Simuler l'accès à une entité existante via __getattr__
+    from flask_boilerplate.domain.entities import __getattr__
+
+    entity_class = __getattr__("ExampleEntity")
+
+    # Vérifier que l'entité est correctement chargée
+    assert entity_class.__module__ == "flask_boilerplate.domain.entities.example_entity"
+    assert entity_class.__name__ == "ExampleEntity"

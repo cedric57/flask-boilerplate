@@ -44,7 +44,7 @@ bandit = "^1.8.2"  # Analyseur de sécurité pour détecter les vulnérabilités
 safety = "^3.2.14"  # Outil pour vérifier les dépendances pour les vulnérabilités connues.
 ruff = "^0.9.6"  # Linter et formateur de code rapide.
 conventional-pre-commit = "^4.0.0"  # Hook pour valider les messages de commit selon les conventions.
-commitizen = "^4.1.1"
+commitizen = "^4.2.1"
 pre-commit = "^4.1.0"
 
 [tool.poetry.extras]

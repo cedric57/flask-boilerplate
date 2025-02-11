@@ -1,13 +1,13 @@
-name: CI Pipeline
+name: CI Features & Develop
 
 # Événements qui déclenchent le workflow
 on:
   push: # Lorsque du code est poussé
     branches:
-      - main # Sur la branche principale
-  pull_request: # Lorsqu'une pull request est ouverte
-    branches:
-      - main # Sur la branche principale
+      - 'feature/**'  # Toute branche feature
+      - 'develop'      # Branche d'intégration
+  pull_request:
+    branches: [develop]
 
 # Définition des jobs
 jobs:

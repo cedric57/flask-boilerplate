@@ -4,8 +4,8 @@ name: CI Features & Develop
 on:
   push: # Lorsque du code est poussé
     branches:
-      - 'feature/**'  # Toute branche feature
-      - 'develop'      # Branche d'intégration
+      - "feature/**" # Toute branche feature
+      - "develop" # Branche d'intégration
   pull_request:
     branches: [develop]
 

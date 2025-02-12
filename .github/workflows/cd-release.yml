@@ -1,0 +1,21 @@
+name: CD Release
+
+on:
+  push:
+    branches:
+      - release/* # Trigger this workflow when pushing to any 'release/*' branch
+
+jobs:
+  build-and-deploy-staging:
+    runs-on: ubuntu-latest # Use the latest Ubuntu runner
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t myapp:${{ github.sha }} .
+
+      - name: Deploy to staging
+        env:
+          STAGING_API_KEY: ${{ secrets.STAGING_API_KEY }}
+        run: ./deploy-to-staging.sh

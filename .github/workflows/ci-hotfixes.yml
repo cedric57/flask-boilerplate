@@ -1,0 +1,22 @@
+name: CI Hotfixes
+
+on:
+  push:
+    branches:
+      - "hotfix/**"
+
+jobs:
+  test-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run tests
+        run: poetry run pytest
+
+      - name: Deploy hotfix to prod
+        if: success()
+        env:
+          PROD_API_KEY: ${{ secrets.PROD_API_KEY }}
+        run: ./deploy-hotfix.sh

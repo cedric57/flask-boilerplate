@@ -39,6 +39,6 @@ def __getattr__(name: str) -> Any:
         raise TypeError(f"Expected a string for entity name, got {type(name).__name__}")
     if name in __all__:
         # Dynamically import the entity to avoid circular imports.
-        module = __import__(f"flask_boilerplate.domain.entities.{name}", fromlist=[name])
+        module = __import__(f"flask_boilerplate.domain.entities.{name.lower()}", fromlist=[name])
         return getattr(module, name)
     raise AttributeError(f"module {__name__!r} has no attribute {name!r}")

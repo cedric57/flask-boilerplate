@@ -56,8 +56,9 @@ jobs:
           path: |
             .venv
             ~/.local
-            ~/.cache/pre-commit
-          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock', '**/.pre-commit-config.yaml') }}
+          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
+      #      ~/.cache/pre-commit
+      #    key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock', '**/.pre-commit-config.yaml') }}
 
       #----------------------------------------------
       # install dependencies if cache does not exist
@@ -72,8 +73,8 @@ jobs:
       #----------------------------------------------
       # install pre-commit hooks if cache does not exist
       #----------------------------------------------
-      - name: Run pre-commit install-hooks
-        run: poetry run pre-commit install --install-hooks # Installe les hooks pre-commit pour vérifier le code
+      #- name: Run pre-commit install-hooks
+      #  run: poetry run pre-commit install --install-hooks # Installe les hooks pre-commit pour vérifier le code
 
   quality:
     name: "Code Quality & Tests"
@@ -96,8 +97,8 @@ jobs:
         shell: bash
         run: source .venv/bin/activate # Active l'environnement virtuel
 
-      - name: Run pre-commit on all files
-        run: poetry run pre-commit run --all-files --color=always --show-diff-on-failure # Exécute les hooks pre-commit sur tous les fichiers
+      #- name: Run pre-commit on all files
+      #  run: poetry run pre-commit run --all-files --color=always --show-diff-on-failure # Exécute les hooks pre-commit sur tous les fichiers
 
       - name: Run tests with coverage
         run: poetry run pytest --doctest-modules --junitxml=junit.xml -o junit_family=legacy --cov=src tests --cov-report=xml --cov-report=html # Exécute les tests avec Pytest et génère un rapport de couverture

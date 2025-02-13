@@ -11,6 +11,7 @@ Example:
     >>> entity = ExampleEntity(id=UUID("..."), name="Example", description="An example entity")
 """
 
+import re
 from typing import Any
 
 from .example_entity import ExampleEntity
@@ -35,10 +36,17 @@ def __getattr__(name: str) -> Any:
     Raises:
         AttributeError: If the entity does not exist.
     """
+
+    def camel_to_snake(name: str) -> str:
+        # Convertit "ExampleEntity" en "example_entity"
+        name = re.sub("(.)([A-Z][a-z]+)", r"\1_\2", name)
+        return re.sub("([a-z0-9])([A-Z])", r"\1_\2", name).lower()
+
     if not isinstance(name, str):
         raise TypeError(f"Expected a string for entity name, got {type(name).__name__}")
     if name in __all__:
         # Dynamically import the entity to avoid circular imports.
-        module = __import__(f"flask_boilerplate.domain.entities.{name.lower()}", fromlist=[name])
+        module_name = camel_to_snake(name)
+        module = __import__(f"flask_boilerplate.domain.entities.{module_name}", fromlist=[name])
         return getattr(module, name)
     raise AttributeError(f"module {__name__!r} has no attribute {name!r}")

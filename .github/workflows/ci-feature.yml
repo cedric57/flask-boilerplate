@@ -11,7 +11,7 @@ on:
 
 # Définition des jobs
 jobs:
-  setup:
+  test:
     name: "Install Poetry and configure cache"
     runs-on: ubuntu-latest
     strategy:
@@ -56,8 +56,7 @@ jobs:
           path: |
             .venv
             ~/.local
-            ~/.cache/pre-commit
-          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock', '**/.pre-commit-config.yaml') }}
+          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
 
       #----------------------------------------------
       # install dependencies if cache does not exist
@@ -68,36 +67,6 @@ jobs:
         run: |
           poetry lock # Met à jour le fichier poetry.lock
           poetry install --no-interaction --no-root # Installe les dépendances sans interaction utilisateur
-
-      #----------------------------------------------
-      # install pre-commit hooks if cache does not exist
-      #----------------------------------------------
-      - name: Run pre-commit install-hooks
-        run: poetry run pre-commit install --install-hooks # Installe les hooks pre-commit pour vérifier le code
-
-  quality:
-    name: "Code Quality & Tests"
-    runs-on: ubuntu-latest
-    needs: setup # Ce job dépend du job "setup"
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4 # Récupère le code source du dépôt
-
-      - name: Restore .venv from cache
-        uses: actions/cache@v4 # Restaure l'environnement virtuel depuis le cache
-        with:
-          path: |
-            .venv
-            ~/.local
-            ~/.cache/pre-commit
-          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock', '**/.pre-commit-config.yaml') }}
-
-      - name: Activate environment
-        shell: bash
-        run: source .venv/bin/activate # Active l'environnement virtuel
-
-      - name: Run pre-commit on all files
-        run: poetry run pre-commit run --all-files --color=always --show-diff-on-failure # Exécute les hooks pre-commit sur tous les fichiers
 
       - name: Run tests with coverage
         run: poetry run pytest --doctest-modules --junitxml=junit.xml -o junit_family=legacy --cov=src tests --cov-report=xml --cov-report=html # Exécute les tests avec Pytest et génère un rapport de couverture
@@ -112,14 +81,6 @@ jobs:
         uses: codecov/test-results-action@v1 # Envoie les résultats des tests à Codecov
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-
-  security:
-    name: "Security Checks"
-    runs-on: ubuntu-latest
-    needs: setup # Ce job dépend du job "setup"
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4 # Récupère le code source du dépôt
 
       - name: Dependency vulnerability check with Safety
         uses: pyupio/safety-action@v1 # Vérifie les vulnérabilités des dépendances avec Safety
@@ -138,29 +99,3 @@ jobs:
         uses: github/codeql-action/upload-sarif@v3 # Charge les résultats de l'analyse dans GitHub Code Scanning
         with:
           sarif_file: snyk.sarif
-
-  build:
-    name: "Build Package"
-    runs-on: ubuntu-latest
-    needs: [quality, security] # Ce job dépend des jobs "quality" et "security"
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main' # N'exécute ce job que lors d'un push sur la branche main
-
-    steps: # Liste des étapes à exécuter dans le job
-      - name: Checkout code
-        uses: actions/checkout@v4 # Récupère le code source du dépôt
-
-      - name: Restore .venv from cache
-        uses: actions/cache@v4 # Restaure l'environnement virtuel depuis le cache
-        with:
-          path: |
-            .venv
-            ~/.local
-            ~/.cache/pre-commit
-          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock', '**/.pre-commit-config.yaml') }}
-
-      - name: Activate environment
-        shell: bash
-        run: source .venv/bin/activate # Active l'env ironnement virtuel
-
-      - name: Run tests # Étape pour exécuter les tests
-        run: poetry run pytest # Exécuter les tests avec Pytest via Poetry

@@ -1,21 +1,69 @@
 name: CD Production
 
 on:
-  push:
+  pull_request:
     branches:
       - main # Déclenché après un merge dans main
 
 jobs:
   deploy-prod:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+    runs-on: ubuntu-latest # Use the latest Ubuntu runner
+    strategy:
+      matrix:
+        python-version: [ "3.12" ]
 
-      - name: Deploy to production
-        env:
-          PROD_API_KEY: ${{ secrets.PROD_API_KEY }}
-        run: ./deploy-to-prod.sh
+    steps:
+      #----------------------------------------------
+      #       check-out repo and set-up python
+      #----------------------------------------------
+      - name: Check out repository
+        uses: actions/checkout@v4 # Récupère le code source du dépôt
+
+      - name: Set up Python ${{ matrix.python-version }}
+        id: setup-python
+        uses: actions/setup-python@v5 # Configure la version de Python spécifiée
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      #----------------------------------------------
+      #       install & configure poetry
+      #----------------------------------------------
+      - name: Install Python poetry
+        uses: snok/install-poetry@v1 # Installe Poetry pour gérer les dépendances
+        with:
+          virtualenvs-create: true # Crée un environnement virtuel
+          virtualenvs-in-project: true # Place l'environnement virtuel dans le projet
+          virtualenvs-path: .venv # Chemin de l'environnement virtuel
+          installer-parallel: true # Active l'installation parallèle des dépendances
+
+      - name: Verify Poetry installation
+        run: poetry --version # Vérifie que Poetry est correctement installé
+
+      #----------------------------------------------
+      # install dependencies if cache does not exist
+      #----------------------------------------------
+      - name: Install dependencies
+        shell: bash
+        run: |
+          poetry lock # Met à jour le fichier poetry.lock
+          poetry install --no-interaction --no-root # Installe les dépendances sans interaction utilisateur
+
+      - name: Run tests
+        run: poetry run pytest
+
+      - name: Build Docker image
+        run: docker build -t flask-boilerplate:${{ github.sha }} .
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}
+
+      - name: Push Docker image
+        run: |
+          docker tag flask-boilerplate:${{ github.sha }} ${{ secrets.DOCKER_HUB_USERNAME }}/flask-boilerplate:${{ github.sha }}
+          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/flask-boilerplate:${{ github.sha }}
 
       - name: Create Git tag
         run: |

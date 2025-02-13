@@ -57,8 +57,6 @@ jobs:
             .venv
             ~/.local
           key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
-      #      ~/.cache/pre-commit
-      #    key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock', '**/.pre-commit-config.yaml') }}
 
       #----------------------------------------------
       # install dependencies if cache does not exist
@@ -69,12 +67,6 @@ jobs:
         run: |
           poetry lock # Met à jour le fichier poetry.lock
           poetry install --no-interaction --no-root # Installe les dépendances sans interaction utilisateur
-
-      #----------------------------------------------
-      # install pre-commit hooks if cache does not exist
-      #----------------------------------------------
-      #- name: Run pre-commit install-hooks
-      #  run: poetry run pre-commit install --install-hooks # Installe les hooks pre-commit pour vérifier le code
 
   quality:
     name: "Code Quality & Tests"
@@ -90,8 +82,7 @@ jobs:
           path: |
             .venv
             ~/.local
-            ~/.cache/pre-commit
-          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock', '**/.pre-commit-config.yaml') }}
+          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
 
       - name: Activate environment
         shell: bash
@@ -156,8 +147,7 @@ jobs:
           path: |
             .venv
             ~/.local
-            ~/.cache/pre-commit
-          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock', '**/.pre-commit-config.yaml') }}
+          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
 
       - name: Activate environment
         shell: bash

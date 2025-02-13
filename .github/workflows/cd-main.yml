@@ -4,13 +4,15 @@ on:
   pull_request:
     branches:
       - main # Déclenché après un merge dans main
+    types: [closed]
 
 jobs:
   deploy-prod:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest # Use the latest Ubuntu runner
     strategy:
       matrix:
-        python-version: [ "3.12" ]
+        python-version: ["3.12"]
 
     steps:
       #----------------------------------------------
@@ -18,6 +20,8 @@ jobs:
       #----------------------------------------------
       - name: Check out repository
         uses: actions/checkout@v4 # Récupère le code source du dépôt
+        with:
+          ref: main # Récupère le code mergé
 
       - name: Set up Python ${{ matrix.python-version }}
         id: setup-python

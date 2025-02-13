@@ -1,18 +1,18 @@
-
-
 name: CI Hotfixes
 
 on:
-  push:
+  pull_request:
     branches:
       - "hotfix/**"
+    types: [closed]
 
 jobs:
   test-and-deploy:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest # Use the latest Ubuntu runner
     strategy:
       matrix:
-        python-version: [ "3.12" ]
+        python-version: ["3.12"]
 
     steps:
       #----------------------------------------------
@@ -20,6 +20,8 @@ jobs:
       #----------------------------------------------
       - name: Check out repository
         uses: actions/checkout@v4 # Récupère le code source du dépôt
+        with:
+          ref: ${{ github.event.pull_request.base.ref }} # Branche hotfix mergée
 
       - name: Set up Python ${{ matrix.python-version }}
         id: setup-python

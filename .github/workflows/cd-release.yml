@@ -1,16 +1,19 @@
 name: CD Release
 
 on:
-  push:
+  pull_request:
     branches:
-      - release/* # Trigger this workflow when pushing to any 'release/*' branch
+      - "release/**" # Déclenché sur les PR vers les branches release
+    types: [closed] # Seulement quand la PR est fermée (merge ou non)
 
 jobs:
-  build-and-deploy-staging:
+  deploy-staging:
+    # Ne s'exécute que si la PR a été mergée
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest # Use the latest Ubuntu runner
     strategy:
       matrix:
-        python-version: [ "3.12" ]
+        python-version: ["3.12"]
 
     steps:
       #----------------------------------------------
@@ -18,6 +21,8 @@ jobs:
       #----------------------------------------------
       - name: Check out repository
         uses: actions/checkout@v4 # Récupère le code source du dépôt
+        with:
+          ref: ${{ github.event.pull_request.base.ref }} # Récupère la branche release
 
       - name: Set up Python ${{ matrix.python-version }}
         id: setup-python

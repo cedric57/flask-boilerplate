@@ -8,12 +8,11 @@ This boilerplate is a robust starting point for creating production-ready Flask 
 
 ### Project Status
 
-[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/cedric57/flask-boilerplate/main.svg)](https://results.pre-commit.ci/latest/github/cedric57/flask-boilerplate/main)
 ![CI Pipeline](https://github.com/cedric57/flask-boilerplate/actions/workflows/build.yml/badge.svg)
 ![CD Pipeline](https://github.com/cedric57/flask-boilerplate/actions/workflows/deploy.yml/badge.svg)
 ![Release](https://img.shields.io/badge/release-v1.0-blue)
 [![License](https://img.shields.io/github/license/cedric57/flask-boilerplate)](https://github.com/cedric57/flask-boilerplate/blob/main/LICENSE)
-[![Pre-commit](https://img.shields.io/badge/pre--commit-enabled-blue?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
+[![Pre-commit](https://img.shields.io/badge/pre--commit-enabled-blue?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
 
 ### Used Languages
 
@@ -22,6 +21,7 @@ This boilerplate is a robust starting point for creating production-ready Flask 
 
 ### Code Quality
 
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/cedric57/flask-boilerplate/main.svg)](https://results.pre-commit.ci/latest/github/cedric57/flask-boilerplate/main)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 [![Mypy](https://img.shields.io/badge/type%20checker-mypy-blue.svg)](http://mypy-lang.org/)
 [![Codecov](https://codecov.io/gh/cedric57/flask-boilerplate/branch/main/graph/badge.svg)](https://codecov.io/gh/user/repo)
@@ -108,65 +108,116 @@ poetry install #Install dependencies.
 
 ## <a name="principles"></a>🧱 Principles
 
+## 🛠 Git Flow Workflow
+
+This project follows the **Git Flow** strategy to ensure organized and secure development. The main branches (`main`, `develop`) and release branches (`release/*`) are **protected**: changes must go through **Pull Requests (PRs)** validated by code reviews, automated tests, and security checks. Below is the workflow:
+
+```mermaid
+graph LR
+    A[Feature Branch] -->|PR + Tests| B[Develop]
+    B -->|PR + Tests| C[Release Branch]
+    C -->|Staging Deployment| D[Staging]
+    C -->|PR + Tests| E[Main]
+    E -->|Prod Deployment + Tag| F[Production]
+    F -->|Hotfix| G[Hotfix Branch]
+    G -->|PR + Tests| E
+```
+
+Key Steps:
+
+```
+Development:
+
+    feature/* branches are created from develop and merged via PR after passing tests (pytest, pre-commit).
+
+    hotfix/* branches address critical issues in main and require an urgent PR.
+
+Release Preparation:
+
+    A release/* branch is created from develop for final testing and staging deployment.
+
+    After validation, a PR merges the release into main.
+
+Production Deployment:
+
+    Merging into main triggers an automated production deployment (Docker) and a semantic tag (v1.2.3).
+
+    Hotfixes deployed to prod generate a new tag.
+```
+
+Automated Tools:
+
+```
+✅ GitHub Actions: Runs tests, security checks (Bandit, Safety, Snyk), and deployments.
+
+🔒 Protected Branches: Direct pushes to main, develop, or release/* are blocked.
+
+📦 Poetry: Manages dependencies and environment isolation.
+```
+
+This workflow ensures continuous integration, reliable delivery, and a clean project history. For contributions, follow the guidelines in CONTRIBUTING.md.
+
 ## <a name="folder"></a>🗄️ Folder Structure and Code Organization
 
 ```
+
 📁 .
-├── ⚙️ .cursorrules                    <- LLM instructions for Cursor IDE
-├── 💻 .devcontainer                   <- Devcontainer config
-├── ⚙️ .gitattributes                  <- GIT-LFS Setup Configuration
+├── ⚙️ .cursorrules \<- LLM instructions for Cursor IDE
+├── 💻 .devcontainer \<- Devcontainer config
+├── ⚙️ .gitattributes \<- GIT-LFS Setup Configuration
 ├── 🧑‍💻 .github
-│   ├── ⚡️ actions
-│   │   └── 📁 setup-python-env       <- Automated python setup w/ uv
-│   ├── 💡 ISSUE_TEMPLATE             <- Templates for Raising Issues on GH
-│   ├── 💡 pull_request_template.md   <- Template for making GitHub PR
-│   └── ⚡️ workflows
-│       ├── 🚀 main.yml               <- Automated cross-platform testing w/ uv, precommit, deptry,
-│       └── 🚀 on-release-main.yml    <- Automated mkdocs updates
-├── 💻 .vscode                        <- Preconfigured extensions, debug profiles, workspaces, and tasks for VSCode/Cursor powerusers
-│   ├── 🚀 launch.json
-│   ├── ⚙️ settings.json
-│   ├── 📋 tasks.json
-│   └── ⚙️ '{{ cookiecutter.repo_name }}.code-workspace'
+│ ├── ⚡️ actions
+│ │ └── 📁 setup-python-env \<- Automated python setup w/ uv
+│ ├── 💡 ISSUE_TEMPLATE \<- Templates for Raising Issues on GH
+│ ├── 💡 pull_request_template.md \<- Template for making GitHub PR
+│ └── ⚡️ workflows
+│ ├── 🚀 main.yml \<- Automated cross-platform testing w/ uv, precommit, deptry,
+│ └── 🚀 on-release-main.yml \<- Automated mkdocs updates
+├── 💻 .vscode \<- Preconfigured extensions, debug profiles, workspaces, and tasks for VSCode/Cursor powerusers
+│ ├── 🚀 launch.json
+│ ├── ⚙️ settings.json
+│ ├── 📋 tasks.json
+│ └── ⚙️ '{{ cookiecutter.repo_name }}.code-workspace'
 ├── 📁 data
-│   ├── 📁 external                      <- Data from third party sources
-│   ├── 📁 interim                       <- Intermediate data that has been transformed
-│   ├── 📁 processed                     <- The final, canonical data sets for modeling
-│   └── 📁 raw                           <- The original, immutable data dump
-├── 🐳 docker                            <- Docker configuration for reproducability
-├── 📚 docs                              <- Project documentation (using mkdocs)
-├── 👩‍⚖️ LICENSE                           <- Open-source license if one is chosen
-├── 📋 logs                              <- Preconfigured logging directory for
-├── 👷‍♂️ Makefile                          <- Makefile with convenience commands (PyPi publishing, formatting, testing, and more)
-├── 🚀 Taskfile.yml                    <- Modern alternative to Makefile w/ same functionality
-├── 📁 notebooks                         <- Jupyter notebooks
-│   ├── 📓 01_name_example.ipynb
-│   └── 📰 README.md
+│ ├── 📁 external \<- Data from third party sources
+│ ├── 📁 interim \<- Intermediate data that has been transformed
+│ ├── 📁 processed \<- The final, canonical data sets for modeling
+│ └── 📁 raw \<- The original, immutable data dump
+├── 🐳 docker \<- Docker configuration for reproducability
+├── 📚 docs \<- Project documentation (using mkdocs)
+├── 👩‍⚖️ LICENSE \<- Open-source license if one is chosen
+├── 📋 logs \<- Preconfigured logging directory for
+├── 👷‍♂️ Makefile \<- Makefile with convenience commands (PyPi publishing, formatting, testing, and more)
+├── 🚀 Taskfile.yml \<- Modern alternative to Makefile w/ same functionality
+├── 📁 notebooks \<- Jupyter notebooks
+│ ├── 📓 01_name_example.ipynb
+│ └── 📰 README.md
 ├── 🗑️ out
-│   ├── 📁 features                      <- Extracted Features
-│   ├── 📁 models                        <- Trained and serialized models
-│   └── 📚 reports                       <- Generated analysis
-│       └── 📊 figures                   <- Generated graphics and figures
-├── 🔒 secrets                           <- Ignored project-level secrets directory to keep API keys and SSH keys safe and separate from your system (no setting up a new SSH-key in ~/.ssh for every project)
-│   └── ⚙️ schema                         <- Clearly outline expected variables
-│       ├── ⚙️ example.env
-│       └── 🔑 ssh
-│           ├── ⚙️ example.config.ssh
-│           ├── 🔑 example.something.key
-│           └── 🔑 example.something.pub
-└── 🚰 '{{ cookiecutter.module_name }}'  <- Easily publishable source code
-    ├── ⚙️ config.py                     <- Store useful variables and configuration (Preset)
-    ├── 🐍 dataset.py                    <- Scripts to download or generate data
-    ├── 🐍 features.py                   <- Code to create features for modeling
-    ├── 📁 modeling
-    │   ├── 🐍 __init__.py
-    │   ├── 🐍 predict.py               <- Code to run model inference with trained models
-    │   └── 🐍 train.py                 <- Code to train models
-    └── 🐍 plots.py                     <- Code to create visualizations
-├── ⚙️ poetry.lock                       <- Project configuration file w/ carefully selected dependency stacks
-├── ⚙️ pyproject.toml                    <- Project configuration file w/ carefully selected dependency stacks
-├── 📰 README.fr.md                      <- The top-level README in french
-└── 📰 README.md                         <- The top-level README
+│ ├── 📁 features \<- Extracted Features
+│ ├── 📁 models \<- Trained and serialized models
+│ └── 📚 reports \<- Generated analysis
+│ └── 📊 figures \<- Generated graphics and figures
+├── 🔒 secrets \<- Ignored project-level secrets directory to keep API keys and SSH keys safe and separate from your system (no setting up a new SSH-key in ~/.ssh for every project)
+│ └── ⚙️ schema \<- Clearly outline expected variables
+│ ├── ⚙️ example.env
+│ └── 🔑 ssh
+│ ├── ⚙️ example.config.ssh
+│ ├── 🔑 example.something.key
+│ └── 🔑 example.something.pub
+└── 🚰 '{{ cookiecutter.module_name }}' \<- Easily publishable source code
+├── ⚙️ config.py \<- Store useful variables and configuration (Preset)
+├── 🐍 dataset.py \<- Scripts to download or generate data
+├── 🐍 features.py \<- Code to create features for modeling
+├── 📁 modeling
+│ ├── 🐍 __init__.py
+│ ├── 🐍 predict.py \<- Code to run model inference with trained models
+│ └── 🐍 train.py \<- Code to train models
+└── 🐍 plots.py \<- Code to create visualizations
+├── ⚙️ poetry.lock \<- Project configuration file w/ carefully selected dependency stacks
+├── ⚙️ pyproject.toml \<- Project configuration file w/ carefully selected dependency stacks
+├── 📰 README.fr.md \<- The top-level README in french
+└── 📰 README.md \<- The top-level README
+
 ```
 
 ## <a name="resources"></a>Useful resources
@@ -186,3 +237,6 @@ Contributions are always welcome! If you have any ideas, suggestions, fixes, fee
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
+
+```
+```

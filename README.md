@@ -123,39 +123,25 @@ graph LR
     G -->|PR + Tests| E
 ```
 
-Key Steps:
+### Key Steps:
+1. **Development**:  
+   - `feature/*` branches are created from `develop` and merged via **PR** after passing tests (`pytest`, `pre-commit`).  
+   - `hotfix/*` branches address critical issues in `main` and require an urgent PR.
 
-```
-Development:
+2. **Release Preparation**:  
+   - A `release/*` branch is created from `develop` for final testing and **staging deployment**.  
+   - After validation, a PR merges the release into `main`.
 
-    feature/* branches are created from develop and merged via PR after passing tests (pytest, pre-commit).
+3. **Production Deployment**:  
+   - Merging into `main` triggers an automated **production deployment** (Docker) and a semantic tag (`v1.2.3`).  
+   - Hotfixes deployed to production generate a new tag.
 
-    hotfix/* branches address critical issues in main and require an urgent PR.
+### Automated Tools:
+- ✅ **GitHub Actions**: Runs tests, security checks (`Bandit`, `Safety`, `Snyk`), and deployments.  
+- 🔒 **Protected Branches**: Direct pushes to `main`, `develop`, or `release/*` are blocked.  
+- 📦 **Poetry**: Manages dependencies and environment isolation.  
 
-Release Preparation:
-
-    A release/* branch is created from develop for final testing and staging deployment.
-
-    After validation, a PR merges the release into main.
-
-Production Deployment:
-
-    Merging into main triggers an automated production deployment (Docker) and a semantic tag (v1.2.3).
-
-    Hotfixes deployed to prod generate a new tag.
-```
-
-Automated Tools:
-
-```
-✅ GitHub Actions: Runs tests, security checks (Bandit, Safety, Snyk), and deployments.
-
-🔒 Protected Branches: Direct pushes to main, develop, or release/* are blocked.
-
-📦 Poetry: Manages dependencies and environment isolation.
-```
-
-This workflow ensures continuous integration, reliable delivery, and a clean project history. For contributions, follow the guidelines in CONTRIBUTING.md.
+This workflow ensures **continuous integration**, **reliable delivery**, and a **clean project history**. For contributions, follow the guidelines in [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 ## <a name="folder"></a>🗄️ Folder Structure and Code Organization
 

@@ -1,4 +1,4 @@
-# flask-boilerplate
+# Flask Boilerplate 🔥
 
 ## Description
 
@@ -8,8 +8,10 @@ This boilerplate is a robust starting point for creating production-ready Flask 
 
 ### Project Status
 
-![CI Pipeline](https://github.com/cedric57/flask-boilerplate/actions/workflows/build.yml/badge.svg)
-![CD Pipeline](https://github.com/cedric57/flask-boilerplate/actions/workflows/deploy.yml/badge.svg)
+[![CI Feature & Develop](https://github.com/cedric57/flask-boilerplate/actions/workflows/ci-feature.yml/badge.svg)](https://github.com/cedric57/flask-boilerplate/actions/workflows/ci-features.yml)
+[![CD Release](https://github.com/cedric57/flask-boilerplate/actions/workflows/cd-release.yml/badge.svg)](https://github.com/cedric57/flask-boilerplate/actions/workflows/cd-release.yml)
+[![CD Production](https://github.com/cedric57/flask-boilerplate/actions/workflows/cd-main.yml/badge.svg)](https://github.com/cedric57/flask-boilerplate/actions/workflows/cd-main.yml)
+[![Hotfixes](https://github.com/cedric57/flask-boilerplate/actions/workflows/ci-hotfixes.yml/badge.svg)](https://github.com/cedric57/flask-boilerplate/actions/workflows/ci-hotfixes.yml)
 ![Release](https://img.shields.io/badge/release-v1.0-blue)
 [![License](https://img.shields.io/github/license/cedric57/flask-boilerplate)](https://github.com/cedric57/flask-boilerplate/blob/main/LICENSE)
 [![Pre-commit](https://img.shields.io/badge/pre--commit-enabled-blue?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
@@ -124,22 +126,27 @@ graph LR
 ```
 
 ### Key Steps:
-1. **Development**:  
-   - `feature/*` branches are created from `develop` and merged via **PR** after passing tests (`pytest`, `pre-commit`).  
+
+1. **Development**:
+
+   - `feature/*` branches are created from `develop` and merged via **PR** after passing tests (`pytest`, `pre-commit`).
    - `hotfix/*` branches address critical issues in `main` and require an urgent PR.
 
-2. **Release Preparation**:  
-   - A `release/*` branch is created from `develop` for final testing and **staging deployment**.  
+1. **Release Preparation**:
+
+   - A `release/*` branch is created from `develop` for final testing and **staging deployment**.
    - After validation, a PR merges the release into `main`.
 
-3. **Production Deployment**:  
-   - Merging into `main` triggers an automated **production deployment** (Docker) and a semantic tag (`v1.2.3`).  
+1. **Production Deployment**:
+
+   - Merging into `main` triggers an automated **production deployment** (Docker) and a semantic tag (`v1.2.3`).
    - Hotfixes deployed to production generate a new tag.
 
 ### Automated Tools:
-- ✅ **GitHub Actions**: Runs tests, security checks (`Bandit`, `Safety`, `Snyk`), and deployments.  
-- 🔒 **Protected Branches**: Direct pushes to `main`, `develop`, or `release/*` are blocked.  
-- 📦 **Poetry**: Manages dependencies and environment isolation.  
+
+- ✅ **GitHub Actions**: Runs tests, security checks (`Bandit`, `Safety`, `Snyk`), and deployments.
+- 🔒 **Protected Branches**: Direct pushes to `main`, `develop`, or `release/*` are blocked.
+- 📦 **Poetry**: Manages dependencies and environment isolation.
 
 This workflow ensures **continuous integration**, **reliable delivery**, and a **clean project history**. For contributions, follow the guidelines in [CONTRIBUTING.md](./CONTRIBUTING.md).
 

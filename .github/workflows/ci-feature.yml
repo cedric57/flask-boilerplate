@@ -5,14 +5,13 @@ on:
   push: # Lorsque du code est poussé
     branches:
       - "feature/**" # Toute branche feature
-      - "develop" # Branche d'intégration
   pull_request:
-    branches: [develop]
+    branches:
+      - "develop"
 
 # Définition des jobs
 jobs:
   test:
-    name: "Install Poetry and configure cache"
     runs-on: ubuntu-latest
     strategy:
       matrix:

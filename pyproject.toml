@@ -177,6 +177,10 @@ addopts = """
 testpaths = ["tests"]  # Chemins où Pytest recherche les tests.
 pythonpath = ["src"]
 
+# ---------------------------------------------------------------------------- #
+#                                 Commitizen                                   #
+# ---------------------------------------------------------------------------- #
+
 [tool.commitizen]
 name = "cz_conventional_commits"
 version_provider = "poetry"

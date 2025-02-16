@@ -19,7 +19,7 @@ This boilerplate is a robust starting point for creating production-ready Flask 
 ### Used Languages
 
 [![Python](https://img.shields.io/badge/Python-3.12-3776AB.svg?style=flat&logo=python&logoColor=white)](https://www.python.org)
-[![Flask](https://img.shields.io/badge/Flask-enable-blue.svg?style=flat&logo=flask&logoColor=white)](#)
+[![Flask](https://img.shields.io/badge/Flask-enable-blue.svg?style=flat&logo=flask&logoColor=white)](https://flask.palletsprojects.com/en/stable/)
 
 ### Code Quality
 
@@ -32,15 +32,15 @@ This boilerplate is a robust starting point for creating production-ready Flask 
 
 ![Dependabot](https://img.shields.io/badge/dependabot-enabled-blue?logo=dependabot&logoColor=white)
 [![security: bandit](https://img.shields.io/badge/security-bandit-yellow.svg)](https://github.com/PyCQA/bandit)
-[![Snyk](https://img.shields.io/badge/Snyk-enabled-4C4A73?logo=snyk&logoColor=fff)](#)
+[![Snyk](https://img.shields.io/badge/Snyk-enabled-4C4A73?logo=snyk&logoColor=fff)](https://snyk.io/)
 
 ### Documentation
 
 [![Documentation Status](https://readthedocs.org/projects/flask-boilerplate/badge/?version=latest)](https://flask-boilerplate.readthedocs.io)
 [![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/cedric57/flask-boilerplate/blob/main/README.md)
 [![fr](https://img.shields.io/badge/lang-fr-green.svg)](https://github.com/cedric57/flask-boilerplate/blob/main/README.fr.md)
-[![Sphinx](https://img.shields.io/badge/Sphinx-000?logo=sphinx&logoColor=fff)](#)
-[![PyCharm](https://img.shields.io/badge/PyCharm-000?logo=pycharm&logoColor=fff)](#)
+[![Sphinx](https://img.shields.io/badge/Sphinx-000?logo=sphinx&logoColor=fff)](https://www.sphinx-doc.org/en/master/)
+[![PyCharm](https://img.shields.io/badge/PyCharm-000?logo=pycharm&logoColor=fff)](https://www.jetbrains.com/pycharm/)
 
 ### Contributions
 
@@ -62,13 +62,14 @@ This boilerplate is a robust starting point for creating production-ready Flask 
 
 ## 👉 Table of Contents
 
-- [Getting Started](#start)
-- [Principles](#principles)
-- [Folder Structure and Code Organization](#folder)
-- [Useful resources](#resources)
-- [Client types generation](#client-types)
+- [Getting Started](#-getting-started)
+- [Principles](#-principles)
+- [Git Flow Workflow](#-git-flow-workflow)
+- [Folder Structure and Code Organization](#folder-structure-and-code-organization)
+- [Useful resources](#useful-resources)
+- [Client types generation](#client-types-generation)
 
-## <a name="start"></a>✨ Getting Started
+## ✨ Getting Started
 
 Set python to UTF8 encoding in Windows shells (cp1252) to avoid conflicts with Git.
 In administrator powershell :
@@ -77,7 +78,7 @@ In administrator powershell :
 [Environment]::SetEnvironmentVariable("PYTHONUTF8", "1", "Machine")
 ```
 
-Configure a Poetry environment : https://www.jetbrains.com/help/pycharm/poetry.html
+Configure a Poetry environment : [Documentation JetBrains](https://www.jetbrains.com/help/pycharm/poetry.html)
 
 ```powershell
 (Invoke-WebRequest -Uri https://install.python-poetry.org -UseBasicParsing).Content | python -
@@ -108,7 +109,7 @@ poetry install #Install dependencies.
 - `poetry add --group dev pytest` - Add a dev dependency
 - `poetry remove requests` - Remove a dependency
 
-## <a name="principles"></a>🧱 Principles
+## 🧱 Principles
 
 ## 🛠 Git Flow Workflow
 
@@ -125,7 +126,7 @@ graph LR
     G -->|PR + Tests| E
 ```
 
-### Key Steps:
+### Key Steps
 
 1. **Development**:
 
@@ -142,7 +143,7 @@ graph LR
    - Merging into `main` triggers an automated **production deployment** (Docker) and a semantic tag (`v1.2.3`).
    - Hotfixes deployed to production generate a new tag.
 
-### Automated Tools:
+### Automated Tools
 
 - ✅ **GitHub Actions**: Runs tests, security checks (`Bandit`, `Safety`, `Snyk`), and deployments.
 - 🔒 **Protected Branches**: Direct pushes to `main`, `develop`, or `release/*` are blocked.
@@ -150,10 +151,9 @@ graph LR
 
 This workflow ensures **continuous integration**, **reliable delivery**, and a **clean project history**. For contributions, follow the guidelines in [CONTRIBUTING.md](./CONTRIBUTING.md).
 
-## <a name="folder"></a>🗄️ Folder Structure and Code Organization
+## 🗄️Folder Structure and Code Organization <!-- {#folder-structure-and-code-organization} -->
 
-```
-
+```text
 📁 .
 ├── ⚙️ .cursorrules \<- LLM instructions for Cursor IDE
 ├── 💻 .devcontainer \<- Devcontainer config
@@ -213,9 +213,9 @@ This workflow ensures **continuous integration**, **reliable delivery**, and a *
 
 ```
 
-## <a name="resources"></a>Useful resources
+## Useful resources
 
-## <a name="client-types"></a>Client types generation
+## Client types generation
 
 ## Contributing
 
@@ -230,6 +230,3 @@ Contributions are always welcome! If you have any ideas, suggestions, fixes, fee
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
-
-```
-```

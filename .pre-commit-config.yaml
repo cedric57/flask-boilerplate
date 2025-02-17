@@ -187,8 +187,8 @@ repos:
       - id: sqlfluff-fix
         name: "📊 SQL · Attempts to fix rule violations."
       # STRICT
-      # - id: sqlfluff-lint
-      #   name: "📊 SQL · Lint SQL code files"
+      - id: sqlfluff-lint
+        name: "📊 SQL · Lint SQL code files"
 
   ### Notebooks ###
   - repo: https://github.com/nbQA-dev/nbQA

@@ -63,6 +63,7 @@ repos:
     hooks:
       # Guard rails
       - id: check-ast # Checks the syntax and structure of Python code using the Abstract Syntax Tree (AST)
+        name: "↩️ hook - Checks the syntax and structure of Python code using the Abstract Syntax Tree (AST)"
       - id: check-json # Validates JSON files for syntax errors
       - id: check-toml # Validates TOML files for syntax errors
       - id: check-yaml # Validates YAML files for syntax errors

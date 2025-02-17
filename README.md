@@ -65,7 +65,7 @@ This boilerplate is a robust starting point for creating production-ready Flask 
 - [Getting Started](#-getting-started)
 - [Principles](#-principles)
 - [Git Flow Workflow](#-git-flow-workflow)
-- [Folder Structure and Code Organization](#folder-structure-and-code-organization)
+- [Folder Structure and Code Organization](#-folder-structure-and-code-organization)
 - [Useful resources](#useful-resources)
 - [Client types generation](#client-types-generation)
 
@@ -151,7 +151,7 @@ graph LR
 
 This workflow ensures **continuous integration**, **reliable delivery**, and a **clean project history**. For contributions, follow the guidelines in [CONTRIBUTING.md](./CONTRIBUTING.md).
 
-## 🗄️Folder Structure and Code Organization <!-- {#folder-structure-and-code-organization} -->
+## 📁 Folder Structure and Code Organization
 
 ```text
 📁 .

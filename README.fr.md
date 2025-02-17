@@ -97,7 +97,7 @@ poetry install #Installer les dépendances.
 
 ## 🛠 Workflow Git Flow
 
-## 🗄️Structure des répertoires et Organisation du code <!-- {#structure-des-repertoires-et-organisation-du-code} -->
+## 📁 Structure des répertoires et Organisation du code <!-- {#structure-des-repertoires-et-organisation-du-code} -->
 
 ## Ressources utiles
 

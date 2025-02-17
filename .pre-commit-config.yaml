@@ -62,20 +62,30 @@ repos:
     rev: v5.0.0
     hooks:
       # Guard rails
-      - id: check-ast # Checks the syntax and structure of Python code using the Abstract Syntax Tree (AST)
-        name: "↩️ hook - Checks the syntax and structure of Python code using the Abstract Syntax Tree (AST)"
-      - id: check-json # Validates JSON files for syntax errors
-      - id: check-toml # Validates TOML files for syntax errors
-      - id: check-yaml # Validates YAML files for syntax errors
+      - id: check-ast
+        name: "↩️ hook - Check Python Syntax (AST)"
+      - id: check-json
+        name: "↩️ hook - Validate JSON Syntax"
+      - id: check-toml
+        name: "↩️ hook - Validate TOML Syntax"
+      - id: check-yaml
+        name: "↩️ hook - Validate YAML Syntax"
       # Formatters
-      - id: end-of-file-fixer # Adds an end-of-file marker at the end of files if missing
-      - id: mixed-line-ending # Corrects inconsistent line endings in files
-      - id: trailing-whitespace # Removes trailing whitespace at the end of lines
+      - id: end-of-file-fixer
+        name: "↩️ hook - Ensure File Ends with Newline"
+      - id: mixed-line-ending
+        name: "↩️ hook - Enforce Consistent Line Endings"
+      - id: trailing-whitespace
+        name: "↩️ hook - Trim Trailing Whitespace"
       # Code Checkers
-      - id: check-docstring-first # Checks if module-level docstring is present and located at the beginning of the file
-      - id: debug-statements # Identifies the usage of debugging statements like print, pdb, etc.
-      - id: detect-private-key # detects the presence of private keys.
-      - id: fix-byte-order-marker # removes utf-8 byte order marker.
+      - id: check-docstring-first
+        name: "↩️ hook - Check Module Docstring Position"
+      - id: debug-statements
+        name: "↩️ hook - Detect Debugger Statements"
+      - id: detect-private-key
+        name: "↩️ hook - Scan for Secrets/Private Keys"
+      - id: fix-byte-order-marker
+        name: "↩️ hook - Remove UTF-8 BOM"
 
   ### Python Tools ###
   - repo: https://github.com/astral-sh/ruff-pre-commit

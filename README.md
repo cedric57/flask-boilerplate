@@ -71,7 +71,7 @@ This boilerplate is a robust starting point for creating production-ready Flask 
 
 ## ✨ Getting Started
 
-Set python to UTF8 encoding in Windows shells (cp1252) to avoid conflicts with Git.  
+Set python to UTF8 encoding in Windows shells (cp1252) to avoid conflicts with Git.
 In administrator powershell :
 
 ```powershell

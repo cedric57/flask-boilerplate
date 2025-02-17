@@ -27,6 +27,7 @@ This boilerplate is a robust starting point for creating production-ready Flask 
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 [![Mypy](https://img.shields.io/badge/type%20checker-mypy-blue.svg)](http://mypy-lang.org/)
 [![Codecov](https://codecov.io/gh/cedric57/flask-boilerplate/branch/main/graph/badge.svg)](https://codecov.io/gh/user/repo)
+[![Check Links](https://github.com/cedric57/flask-boilerplate/actions/workflows/links.yml/badge.svg)](https://github.com/cedric57/flask-boilerplate/actions/workflows/links.yml)
 
 ### Security
 

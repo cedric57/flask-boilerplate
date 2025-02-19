@@ -28,13 +28,12 @@ release = "1.0.0"
 
 # Add Sphinx extensions
 extensions = [
+    "sphinx.ext.apidoc",
     "sphinx.ext.autodoc",  # Automatically generate documentation from docstrings
-    "sphinx.ext.napoleon",  # Support for Google-style and NumPy-style docstrings
-    "sphinx.ext.viewcode",  # Add links to the source code
     "sphinx.ext.coverage",  # Check documentation coverage
     "sphinx.ext.githubpages",  # Publish documentation to GitHub Pages
-    "sphinx_rtd_theme",
-    "sphinx_autodoc_typehints",
+    "sphinx.ext.napoleon",  # Support for Google-style and NumPy-style docstrings
+    "sphinx.ext.viewcode",  # Add links to the source code
 ]
 
 # Add paths to templates

@@ -1,5 +1,5 @@
 # Étape de construction
-FROM python:3.12-slim-buster as builder
+FROM python:3.12-slim as builder
 
 WORKDIR /app
 
@@ -21,7 +21,7 @@ RUN poetry config virtualenvs.create false && \
     poetry install --no-dev --no-interaction --no-ansi
 
 # Étape finale
-FROM python:3.12-slim-buster
+FROM python:3.12-slim
 
 WORKDIR /app
 

@@ -70,6 +70,9 @@ instance/
 
 # Sphinx documentation
 docs/_build/
+docs/source/modules.rst
+docs/source/flask_boilerplate*.rst
+docs/source/locales/*/LC_MESSAGES/*.mo
 
 # PyBuilder
 .pybuilder/

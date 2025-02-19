@@ -17,6 +17,7 @@ documentation for details.
 
    introduction
    getting_started
+   modules
 
 Indices and tables
 ==================

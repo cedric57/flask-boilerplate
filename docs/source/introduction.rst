@@ -1,28 +1,78 @@
-# Introduction
+.. _introduction:
 
-Bienvenue dans la documentation de Flask Boilerplate !
+Introduction au Projet
+======================
 
-## À propos de Flask Boilerplate
+.. image:: https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white
+    :target: https://flask.palletsprojects.com/
+    :alt: Flask
 
-Flask Boilerplate est un modèle de démarrage (boilerplate) pour créer des applications web avec Flask. Il fournit une structure de base solide et configurable pour accélérer le développement de vos projets Flask.
+Un boilerplate moderne pour applications Flask avec les fonctionnalités essentielles pré-configurées.
 
-## Caractéristiques
+Présentation
+------------
+Ce projet est une base de démarrage pour :
 
-- **Structure de Projet Claire** : Une organisation de fichiers et de dossiers claire pour faciliter la maintenance et l'ajout de nouvelles fonctionnalités.
-- **Intégration de SQLAlchemy** : Utilisation de Flask-SQLAlchemy pour la gestion de la base de données.
-- **Migration de Bases de Données** : Utilisation de Flask-Migrate pour la gestion des migrations de base de données.
-- **Tests Unitaires** : Intégration de Flask-Testing pour écrire et exécuter des tests unitaires.
-- **Validation de Formulaires** : Utilisation de Flask-WTF pour la validation de formulaires.
-- **Déploiement Facile** : Configuration pour un déploiement facile avec Gunicorn et Docker.
+* Développement rapide d'API REST
+* Applications web traditionnelles avec templates
+* Microservices modulaires
 
-## Prérequis
+Fonctionnalités Clés
+--------------------
+.. list-table::
+   :header-rows: 1
+   :widths: 30 70
 
-Avant de commencer, assurez-vous d'avoir les éléments suivants installés sur votre système :
+   * - Module
+     - Description
+   * - **Authentification**
+     - JWT, OAuth2 prêt à l'emploi
+   * - **Base de Données**
+     - SQLAlchemy + Alembic migrations
+   * - **Configuration**
+     - Environnements multiples (dev/prod/test)
+   * - **Logging**
+     - Configuration centralisée
+   * - **Tests**
+     - Pytest avec fixtures
 
-- Python 3.12 ou supérieur
-- Poetry (gestionnaire de dépendances)
-- Git (pour cloner le dépôt)
+Stack Technique
+---------------
+.. code-block:: text
 
-## Installation
+    Python 3.12
+    Flask 3.1
+    SQLAlchemy 2.0
+    Pydantic 2.7
+    Celery 5.3 (optionnel)
 
-Suivez ces étapes pour installer et configurer Flask Boilerplate :
+Démarrer un Développement
+-------------------------
+Exemple de création d'endpoint :
+
+.. code-block:: python
+
+    from app.api import api_bp
+
+    @api_bp.route('/health')
+    def health_check():
+        return {'status': 'healthy'}, 200
+
+.. note::
+    Pré-requis :
+    - Python 3.12+ installé
+    - Poetry pour la gestion des dépendances
+
+Pour une configuration complète, voir :doc:`getting_started`.
+
+Architecture du Projet
+----------------------
+.. code-block:: bash
+
+    .
+    ├── app/
+    │   ├── api/          # Endpoints
+    │   ├── core/         # Configuration
+    │   ├── models/       # Modèles DB
+    │   └── utils/        # Helpers
+    └── tests/           # Tests

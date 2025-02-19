@@ -33,6 +33,8 @@ extensions = [
     "sphinx.ext.viewcode",  # Add links to the source code
     "sphinx.ext.coverage",  # Check documentation coverage
     "sphinx.ext.githubpages",  # Publish documentation to GitHub Pages
+    "sphinx_rtd_theme",
+    "sphinx_autodoc_typehints",
 ]
 
 # Add paths to templates

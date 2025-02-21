@@ -44,7 +44,7 @@ extensions = [
 templates_path = ["_templates"]
 
 # List of file patterns to exclude from documentation
-exclude_patterns = ["_build", "Thumbs.db", ".DS_Store", "**/__init__.py"]
+exclude_patterns = ["_build", "Thumbs.db", ".DS_Store", "**/__init__.py", ".nojekyll"]
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output

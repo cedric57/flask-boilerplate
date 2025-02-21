@@ -184,9 +184,35 @@ addopts = """
 --code-highlight=yes
 --color=yes
 -vv
+--cov=src
+--cov-report=term-missing
+--cov-report=html
+--cov-branch
 """
 testpaths = ["tests"]  # Chemins où Pytest recherche les tests.
 pythonpath = ["src"]
+
+# ---------------------------------------------------------------------------- #
+#                                  Coverage                                    #
+# ---------------------------------------------------------------------------- #
+[tool.coverage.run]
+branch = true
+omit = [
+    "*/__init__.py",
+    "tests/*",
+    "src/flask_boilerplate/domain/primitives/*",
+    "src/flask_boilerplate/domain/enums/*",
+]
+
+[tool.coverage.report]
+# Regexes for lines to exclude from consideration
+exclude_also = [
+    ]
+
+ignore_errors = true
+
+[tool.coverage.html]
+directory = "htmlcov"
 
 # ---------------------------------------------------------------------------- #
 #                                 Commitizen                                   #

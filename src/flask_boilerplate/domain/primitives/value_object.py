@@ -9,19 +9,32 @@ custom value objects. Value objects are compared based on their attributes rathe
 than their identity.
 """
 
-from dataclasses import dataclass, fields
+from abc import ABC, abstractmethod
+from dataclasses import dataclass
 from typing import Any
+
+from flask_boilerplate.domain.errors import ValueObjectsError
 
 
 @dataclass(frozen=True)
-class ValueObject:
-    """Base class for value objects in the domain layer.
+class ValueObject(ABC):
+    """Abstract base class for all value objects in the domain layer.
 
     A value object is an immutable object that is defined by its attributes.
     It does not have a unique identity and is compared based on its attribute values.
 
+    Implements core value object characteristics:
+    - Immutability
+    - Structural equality
+    - Validation
+    - Serialization/deserialization
+
     Subclasses should define their attributes using dataclass fields. The `frozen=True`
     parameter ensures immutability.
+
+    Inheriting classes must implement:
+    - _validate() method
+    - to_primitives() method
 
     Example:
         >>> @dataclass(frozen=True)
@@ -35,66 +48,51 @@ class ValueObject:
         True
     """
 
+    def __post_init__(self) -> None:
+        """
+        Post-initialization hook to ensure the value object is properly validated.
+        """
+        self.validate()
+
+    @abstractmethod
     def __eq__(self, other: Any) -> bool:
-        """Compare two value objects for equality.
-
-        Two value objects are considered equal if they are of the same type and
-        all their attributes have the same values.
-
-        Args:
-            other (Any): The object to compare with.
-
-        Returns:
-            bool: True if the objects are equal, False otherwise.
         """
-        if not isinstance(other, self.__class__):
+        Compare two value objects based on their attributes.
+        Args:
+            other (Any): The other value object to compare with.
+        Returns:
+            bool: True if the value objects have the same attributes, False otherwise.
+        """
+        if not isinstance(other, ValueObject):
             return False
-        return self._get_attributes() == other._get_attributes()
+        return self._attributes() == other._attributes()
 
+    @abstractmethod
     def __hash__(self) -> int:
-        """Compute the hash value of the value object.
-
-        The hash value is computed based on the values of the object's attributes.
-
-        Returns:
-            int: The hash value of the object.
         """
-        return hash(self._get_attributes())
-
-    def _get_attributes(self) -> tuple[Any, ...]:
-        """Get the values of all attributes of the value object.
-
+        Generate a hash value for the value object based on its attributes.
         Returns:
-            tuple[Any, ...]: A tuple containing the values of all attributes.
+            int: The hash value of the value object.
         """
-        return tuple(getattr(self, field.name) for field in fields(self))
+        return hash(self._attributes())
 
-    def to_dict(self) -> dict[str, Any]:
-        """Convert the value object to a dictionary.
-
-        Returns:
-            dict[str, Any]: A dictionary representation of the value object.
+    @abstractmethod
+    def _attributes(self) -> tuple[Any, ...]:
         """
-        return {field.name: getattr(self, field.name) for field in fields(self)}
-
-    @classmethod
-    def from_dict(cls, data: dict[str, Any]) -> "ValueObject":
-        """Create a value object from a dictionary.
-
-        Args:
-            data (dict[str, Any]): A dictionary containing the attribute values.
-
+        Get the attributes of the value object for comparison and hashing.
         Returns:
-            ValueObject: A new instance of the value object.
+            tuple[Any, ...]: A tuple of the value object's attributes.
+        """
+        pass
 
+    def validate(self) -> None:
+        """
+        Validate the value object's data.
         Raises:
-            ValueError: If the dictionary contains invalid or missing attributes.
+            ValueObjectsError: If the value object's data is invalid.
         """
-        field_names = {field.name for field in fields(cls)}
-        invalid_keys = set(data.keys()) - field_names
-        if invalid_keys:
-            raise ValueError(f"Invalid keys for {cls.__name__}: {invalid_keys}")
-        return cls(**{key: data[key] for key in field_names if key in data})
+        if not self._attributes():
+            raise ValueObjectsError("Value object attributes cannot be empty.")
 
 
 # Add the class to __all__ for re-export in the parent module.

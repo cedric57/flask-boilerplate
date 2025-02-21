@@ -24,7 +24,6 @@ ignore:
   - "tests/*" # Ignore les fichiers de test
   - "src/flask_boilerplate/domain/primitives/*" # Ignore le répertoire des primitives
   - "src/flask_boilerplate/domain/enums/*" # Ignore le répertoire des enums
-  - "src/flask_boilerplate/domain/value_objects/*" # Ignore le répertoire des value_objects
 
 # Pull request comments:
 # ----------------------

@@ -1,28 +1,30 @@
-"""Module for defining value objects in the domain layer.
+"""Module for exporting value objects in the domain layer.
 
-Value objects are immutable objects that are defined by their attributes rather than
-a unique identity. They are used to encapsulate domain-specific logic and ensure
-consistency and validity of data within the domain.
+This module serves as the entry point for all value objects in the domain layer. It re-exports
+value objects to make them easily accessible from a single location.
 
-This module serves as the entry point for all value objects in the domain layer.
-It exports the necessary classes and functions to be used across the application.
+Value objects are domain objects that are defined by their attributes rather than their identity.
+They are immutable and can be compared based on their attributes.
 
 Example:
-    >>> from flask_boilerplate.domain.value_objects import MyValueObject
-    >>> value_object = MyValueObject(attribute1="value1", attribute2="value2")
+    >>> from flask_boilerplate.domain.value_objects import ValueObjectExample
+    >>> value_object = ValueObjectExample(name="Example", description="An example value object")
     >>> print(value_object.attribute1)
     "value1"
 """
 
+import logging
 from typing import Any
 
-# Re-export all value objects here to make them accessible from this module.
-# This allows for a cleaner import structure in other parts of the application.
-# Example:
-# from .my_value_object import MyValueObject
-# __all__ = ["MyValueObject"]
+from flask_boilerplate.domain.value_objects.value_object_example import ValueObjectExample
 
-__all__: list[str] = []
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+
+# Re-export all value objects for easy access.
+__all__ = [
+    "ValueObjectExample",
+]
 
 
 def __getattr__(name: str) -> Any:
@@ -37,7 +39,10 @@ def __getattr__(name: str) -> Any:
     Raises:
         AttributeError: If the value object does not exist.
     """
+    if not isinstance(name, str):
+        raise TypeError(f"Expected a string for value object name, got {type(name).__name__}")
     if name in __all__:
+        logger.debug(f"Lazy-loading value object: {name}")
         # Dynamically import the value object to avoid circular imports.
         module = __import__(f"flask_boilerplate.domain.value_objects.{name}", fromlist=[name])
         return getattr(module, name)

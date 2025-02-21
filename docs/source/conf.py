@@ -40,7 +40,7 @@ extensions = [
 templates_path = ["_templates"]
 
 # List of file patterns to exclude from documentation
-exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
+exclude_patterns = ["_build", "Thumbs.db", ".DS_Store", "**/__init__.py"]
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
@@ -67,6 +67,7 @@ autodoc_default_options = {
     "members": True,
     "undoc-members": True,
     "show-inheritance": True,
+    "no-index": True,
 }
 
 # Napoleon settings (for Google/NumPy docstrings)

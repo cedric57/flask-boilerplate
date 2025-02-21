@@ -11,6 +11,7 @@ class ValueObjectExample(ValueObject):
     An example value object in the domain layer.
     This value object represents a domain object with attributes that define its state.
     It encapsulates business logic related to its attributes.
+
     Attributes:
         name (str): The name of the value object.
         description (str): A description of the value object.
@@ -22,6 +23,7 @@ class ValueObjectExample(ValueObject):
     def _attributes(self) -> tuple[Any, ...]:
         """
         Get the attributes of the value object for comparison and hashing.
+
         Returns:
             tuple[Any, ...]: A tuple of the value object's attributes.
         """
@@ -30,8 +32,10 @@ class ValueObjectExample(ValueObject):
     def __eq__(self, other: Any) -> bool:
         """
         Compare two value objects based on their attributes.
+
         Args:
             other (Any): The other value object to compare with.
+
         Returns:
             bool: True if the value objects have the same attributes, False otherwise.
         """
@@ -42,6 +46,7 @@ class ValueObjectExample(ValueObject):
     def __hash__(self) -> int:
         """
         Generate a hash value for the value object based on its attributes.
+
         Returns:
             int: The hash value of the value object.
         """
@@ -50,6 +55,7 @@ class ValueObjectExample(ValueObject):
     def validate(self) -> None:
         """
         Validate the value object's data.
+
         Raises:
             ValueObjectsError: If the value object's data is invalid.
         """

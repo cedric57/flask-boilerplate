@@ -3,9 +3,9 @@
 Introduction au Projet
 ======================
 
-.. image:: https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white
+.. image:: https://img.shields.io/badge/flask-%23000.png?style=for-the-badge&logo=flask&logoColor=white
     :target: https://flask.palletsprojects.com/
-    :alt: Flask
+    :alt: Flask Badge
 
 Un boilerplate moderne pour applications Flask avec les fonctionnalités essentielles pré-configurées.
 

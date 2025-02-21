@@ -16,7 +16,7 @@ Example:
 import logging
 from typing import Any
 
-from flask_boilerplate.domain.value_objects.value_object_example import ValueObjectExample
+from .value_object_example import ValueObjectExample
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)

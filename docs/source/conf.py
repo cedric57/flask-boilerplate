@@ -21,7 +21,11 @@ sys.path.insert(0, os.path.abspath("../../src"))
 project = "Flask Boilerplate"
 author = "Cedric Grun"
 copyright = f"{datetime.now().year}, {author}"
-release = "1.0.0"
+
+# Récupérer la version depuis une variable d'environnement
+version = "1.0.0"
+release = version
+
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -60,6 +64,14 @@ html_sidebars = {
         "searchbox.html",
     ]
 }
+
+# Configuration EPUB
+epub_title = project
+epub_author = author
+epub_publisher = "Editions Apollodore"
+epub_copyright = copyright
+epub_identifier = "urn:uuid:XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"  # Identifiant unique
+
 # -- Extension configuration -------------------------------------------------
 
 # Autodoc settings

@@ -31,5 +31,3 @@ build:
 sphinx:
   configuration: docs/source/conf.py # Fichier de configuration Sphinx
   fail_on_warning: true
-  suppress_warnings:
-    - epub.unknown_project_files

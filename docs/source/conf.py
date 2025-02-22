@@ -26,7 +26,6 @@ copyright = f"{datetime.now().year}, {author}"
 version = "1.0.0"
 release = version
 
-
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
@@ -45,6 +44,10 @@ templates_path = ["_templates"]
 
 # List of file patterns to exclude from documentation
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store", "**/__init__.py", ".nojekyll"]
+
+suppress_warnings = [
+    "epub.unknown_project_files",  # Ignorer les warnings liés aux fichiers inconnus dans EPUB
+]
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output

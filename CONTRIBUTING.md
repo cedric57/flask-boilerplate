@@ -119,7 +119,7 @@ Les hooks s'exécutent automatiquement à chaque commit. Pour exécuter manuelle
 poetry run pre-commit run --all-files
 ```
 
-Configuration : [.pre-commit-config.yaml](https://chat.deepseek.com/a/chat/s/.pre-commit-config.yaml)
+Configuration : [.pre-commit-config.yaml](https://github.com/cedric57/flask-boilerplate/blob/main/.pre-commit-config.yaml)
 
 ## Style de code
 
@@ -133,7 +133,7 @@ poetry run ruff format .  # Auto-formatage
 - Documentation : Google-style docstrings
 - Fichiers de configuration : YAML/JSON indenté
 - Exécution automatique via pre-commit
-- Configuration Ruff : [pyproject.toml](https://chat.deepseek.com/a/chat/s/pyproject.toml)
+- Configuration Ruff : [pyproject.toml](https://github.com/cedric57/flask-boilerplate/blob/main/pyproject.toml)
 
 ## Documentation
 

@@ -5,16 +5,16 @@ enums within the domain layer. Enums are useful for representing a fixed set of
 constants or options in a type-safe manner.
 
 Example:
-    >>> from flask_boilerplate.domain.enums.exemple_enum import ExampleEnum
-    >>> status = ExampleEnum.ACTIVE
+    >>> from flask_boilerplate.domain.enums.enum_example import EnumExample
+    >>> status = EnumExample.ACTIVE
     >>> print(status)
-    ExampleEnum.ACTIVE
+    EnumExample.ACTIVE
 """
 
 from enum import Enum
 
 
-class ExampleEnum(Enum):
+class EnumExample(Enum):
     """Example enumeration for the domain layer.
 
     This enum represents a set of predefined states or options that can be used
@@ -40,4 +40,4 @@ class ExampleEnum(Enum):
 
 
 # Add the enum to __all__ for re-export in the parent module.
-__all__ = ["ExampleEnum"]
+__all__ = ["EnumExample"]

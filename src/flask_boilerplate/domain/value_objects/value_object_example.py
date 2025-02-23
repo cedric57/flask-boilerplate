@@ -63,3 +63,7 @@ class ValueObjectExample(ValueObject):
             raise ValueObjectsError("Name cannot be empty.")
         if not self.description or len(self.description.strip()) == 0:
             raise ValueObjectsError("Description cannot be empty.")
+
+
+# Add the class to __all__ for re-export in the parent module.
+__all__ = ["ValueObjectExample"]

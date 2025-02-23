@@ -12,11 +12,12 @@ that represent their state.
 from dataclasses import dataclass, field
 from uuid import UUID, uuid4
 
+from flask_boilerplate.domain.errors.entities_error import EntitiesError
 from flask_boilerplate.domain.primitives.entity import Entity  # Import de la classe abstraite Entity
 
 
 @dataclass
-class ExampleEntity(Entity):
+class EntityExample(Entity):
     """An example entity in the domain layer.
 
     This entity represents a domain object with a unique identity and attributes.
@@ -42,18 +43,21 @@ class ExampleEntity(Entity):
     def __eq__(self, other: object) -> bool:
         """
         Compare two entities based on their unique identifier.
+
         Args:
             other (object): The other entity to compare with.
+
         Returns:
             bool: True if the entities have the same identifier, False otherwise.
         """
-        if not isinstance(other, ExampleEntity):
+        if not isinstance(other, EntityExample):
             return NotImplemented
         return self.id == other.id  # L'égalité se base aussi sur l'UUID
 
     def __hash__(self) -> int:
         """
         Generate a hash value for the entity based on its unique identifier.
+
         Returns:
             int: The hash value of the entity.
         """
@@ -64,11 +68,11 @@ class ExampleEntity(Entity):
         Return a string representation of the entity.
 
         The string is formatted as:
-        ExampleEntity(id=<UUID>, name=<name>, description=<description>)
+        EntityExample(id=<UUID>, name=<name>, description=<description>)
 
         This format ensures consistency and readability when displaying the entity.
         """
-        return f"ExampleEntity(id={self.id}, name={self.name}, description={self.description})"
+        return f"EntityExample(id={self.id}, name={self.name}, description={self.description})"
 
     def update_name(self, new_name: str) -> None:
         """Update the name of the entity.
@@ -89,6 +93,7 @@ class ExampleEntity(Entity):
     def to_dict(self) -> dict[str, str]:
         """
         Convert the entity to a dictionary representation.
+
         Returns:
             dict: A dictionary containing the entity's attributes.
         """
@@ -101,14 +106,15 @@ class ExampleEntity(Entity):
     def validate(self) -> None:
         """
         Validate the entity's data.
+
         Raises:
-            ValueError: If the entity's data is invalid.
+            EntitiesError: If the entity's data is invalid.
         """
         if not self.name or len(self.name.strip()) == 0:
-            raise ValueError("Name cannot be empty.")
+            raise EntitiesError("Name cannot be empty.")
         if not self.description or len(self.description.strip()) == 0:
-            raise ValueError("Description cannot be empty.")
+            raise EntitiesError("Description cannot be empty.")
 
 
 # Add the class to __all__ for re-export in the parent module.
-__all__ = ["ExampleEntity"]
+__all__ = ["EntityExample"]

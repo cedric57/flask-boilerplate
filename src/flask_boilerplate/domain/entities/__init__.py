@@ -7,18 +7,22 @@ Entities are domain objects that have a unique identity and lifecycle. They enca
 business logic related to their identity and state.
 
 Example:
-    >>> from flask_boilerplate.domain.entities import ExampleEntity
-    >>> entity = ExampleEntity(id=UUID("..."), name="Example", description="An example entity")
+    >>> from flask_boilerplate.domain.entities import EntityExample
+    >>> entity = EntityExample(id=UUID("..."), name="Example", description="An example entity")
 """
 
+import logging
 import re
 from typing import Any
 
-from .example_entity import ExampleEntity
+from .entity_example import EntityExample
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
 
 # Re-export all entities for easy access.
 __all__ = [
-    "ExampleEntity",
+    "EntityExample",
 ]
 
 
@@ -45,6 +49,7 @@ def __getattr__(name: str) -> Any:
     if not isinstance(name, str):
         raise TypeError(f"Expected a string for entity name, got {type(name).__name__}")
     if name in __all__:
+        logger.debug(f"Lazy-loading value object: {name}")
         # Dynamically import the entity to avoid circular imports.
         module_name = camel_to_snake(name)
         module = __import__(f"flask_boilerplate.domain.entities.{module_name}", fromlist=[name])

@@ -69,9 +69,20 @@ jobs:
           docker tag flask-boilerplate:${{ github.sha }} ${{ secrets.DOCKER_HUB_USERNAME }}/flask-boilerplate:${{ github.sha }}
           docker push ${{ secrets.DOCKER_HUB_USERNAME }}/flask-boilerplate:${{ github.sha }}
 
-      - name: Create Git tag
+      - name: Setup Git config
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
-          git tag -a v$(date +%Y.%m.%d) -m "Release ${{ github.sha }}"
-          git push origin --tags
+
+      - name: Generate unique tag
+        id: tag
+        run: |
+          DATE_TAG=$(date -u +"%Y.%m.%d")
+          COMMIT_SHA_SHORT=$(git rev-parse --short HEAD)
+          echo "TAG_NAME=${DATE_TAG}-${COMMIT_SHA_SHORT}" >> $GITHUB_OUTPUT
+        shell: bash
+
+      - name: Create and push tag
+        run: |
+          git tag -a ${{ steps.tag.outputs.TAG_NAME }} -m "Production release"
+          git push origin ${{ steps.tag.outputs.TAG_NAME }}

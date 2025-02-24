@@ -85,16 +85,3 @@ jobs:
         uses: pyupio/safety-action@v1 # Vérifie les vulnérabilités des dépendances avec Safety
         with:
           api-key: ${{ secrets.SAFETY_API_KEY }}
-
-      - name: Security analysis with Snyk
-        uses: snyk/actions/python@master # Analyse la sécurité du code avec Snyk
-        continue-on-error: true # Continue même en cas d'erreur
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        with:
-          args: --sarif-file-output=snyk.sarif # Génère un rapport SARIF pour GitHub Code Scanning
-
-      - name: Upload result to GitHub Code Scanning
-        uses: github/codeql-action/upload-sarif@v3 # Charge les résultats de l'analyse dans GitHub Code Scanning
-        with:
-          sarif_file: snyk.sarif

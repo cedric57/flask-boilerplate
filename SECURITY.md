@@ -148,5 +148,5 @@ Les corrections critiques sont publiées via :
 
 Nous reconnaissons volontiers les contributions à la sécurité :
 
-- [Liste des chercheurs en sécurité](https://github.com/cedric57/flask-boilerplate/SECURITY_HALL_OF_FAME.md)
+- [Liste des chercheurs en sécurité](https://github.com/cedric57/flask-boilerplate/blob/main/SECURITY_HALL_OF_FAME.md)
   Vous souhaitez figurer ici ? Indiquez-le dans votre rapport !

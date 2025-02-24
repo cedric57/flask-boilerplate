@@ -57,9 +57,9 @@ jobs:
             ~/.local
           key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
 
-      #----------------------------------------------
+      #-----------------------------------------------
       # install dependencies if cache does not exist
-      #----------------------------------------------
+      #-----------------------------------------------
       - name: Install dependencies
         shell: bash
         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true' # Installe les dépendances uniquement si le cache n'existe pas

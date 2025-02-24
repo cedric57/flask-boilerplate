@@ -16,7 +16,7 @@ Example:
 
 from typing import Any
 
-from .example_enum import ExampleEnum
+from .enum_example import EnumExample
 
 # Re-export all enums here to make them accessible from this module.
 # This allows for a cleaner import structure in other parts of the application.
@@ -24,7 +24,7 @@ from .example_enum import ExampleEnum
 # from .my_enum import MyEnum
 # __all__ = ["MyEnum"]
 
-__all__ = ["ExampleEnum"]
+__all__ = ["EnumExample"]
 
 
 def __getattr__(name: str) -> Any:

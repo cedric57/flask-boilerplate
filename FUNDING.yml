@@ -1,0 +1,16 @@
+github: [cedric57] # Votre nom d'utilisateur GitHub
+
+# Plateformes de sponsorship
+patreon: cedricgrun
+open_collective: flask-boilerplate
+buymeacoffee: cedric57
+
+# Options personnalisées
+custom:
+  - "PayPal": "https://paypal.me/CedricGRUN"
+  - "Crypto (BTC)": "bc1psd987zgutqz9ge3kv60tfsg74pwkesypft4vwt6v3y7cnnyureeq300r73"
+  - "Crypto (ETH)": "0x6cCEdf9D2B78eED615B43A0aF71aC17fd79bBf58"
+  - "Crypto (LTC)": "ltc1qqn6gefwn8lgfayfnntm9ga2kd078phkkfm2sld"
+
+# Message personnalisé
+message: "❤️ Soutenez le développement continu de ce boilerplate !"

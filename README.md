@@ -50,7 +50,7 @@ This boilerplate is a robust starting point for creating production-ready Flask 
 ![Last Commit](https://img.shields.io/github/last-commit/cedric57/flask-boilerplate)
 [![Code of Conduct](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md)
 [![GitHub Sponsors](https://img.shields.io/github/sponsors/cedric57?style=flat-square)](https://github.com/sponsors/cedric57)
-[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=flat-square)](https://www.buymeacoffee.com/cedricgrun)
+[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=flat-square)](https://www.buymeacoffee.com/cedric57)
 [![Paypal](https://img.shields.io/badge/Donate-PayPal-ff3f59.svg)](https://paypal.me/CedricGRUN)
 
 ## ⚡ Features

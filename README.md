@@ -38,6 +38,7 @@ This boilerplate is a robust starting point for creating production-ready Flask 
 ### Documentation
 
 [![Documentation Status](https://readthedocs.org/projects/flask-boilerplate/badge/?version=latest)](https://flask-boilerplate.readthedocs.io)
+[![CITATION](https://img.shields.io/badge/Cite-CITATION.cff-important)](CITATION.cff)
 [![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/cedric57/flask-boilerplate/blob/main/README.md)
 [![fr](https://img.shields.io/badge/lang-fr-green.svg)](https://github.com/cedric57/flask-boilerplate/blob/main/README.fr.md)
 [![Sphinx](https://img.shields.io/badge/Sphinx-000?logo=sphinx&logoColor=fff)](https://www.sphinx-doc.org/en/master/)

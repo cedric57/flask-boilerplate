@@ -1,0 +1,31 @@
+cff-version: 1.2.0
+title: "Flask Boilerplate - A Modern Web Application Template"
+message: >-
+  If you use this software in your work, please cite it using the following metadata.
+  A DOI might be available via Zenodo after publication.
+authors:
+  - family-names: Grun
+    given-names: Cédric
+    orcid: "https://orcid.org/0009-0009-0088-6415"
+    email: "[cedric.grun@gmail.com]"
+repository-code: "https://github.com/cedric57/flask-boilerplate"
+url: "https://github.com/cedric57/flask-boilerplate"
+version: 1.0.0
+date-released: 2025-02-22
+license: MIT
+abstract: >
+  Flask Boilerplate est un projet open source qui fournit une structure de base pour les applications web basées sur Flask.
+  Il suit les principes SOLID, Clean Architecture, DDD, TDD et utilise des patterns DTO pour une architecture évolutive et maintenable.
+keywords:
+  - "web development"
+  - "flask"
+  - "python"
+  - "boilerplate"
+  - "rest api"
+  - "software template"
+  - "web framework"
+  - "SOLID"
+  - "Clean Architecture"
+  - "DDD"
+  - "TDD"
+  - "DTO"

@@ -14,6 +14,7 @@ permissions:
 jobs:
   snyk:
     name: Run Snyk Security Scan
+    if: ${{ github.actor != 'dependabot[bot]' }}
     runs-on: ubuntu-latest
     permissions:
       contents: read # for actions/checkout to fetch code

@@ -33,7 +33,7 @@ python = "^3.12"  # Version de Python requise (compatible avec 3.12+).
 flask = "^3.1.0"  # Framework Flask utilisé pour le développement web.
 jinja2 = "^3.1.6"  # Moteur de templating utilisé par Flask.
 sqlalchemy = "^2.0.40"  # ORM pour interagir avec la base de données.
-alembic = "^1.15.1"  # Outil pour gérer les migrations de base de données.
+alembic = "^1.15.2"  # Outil pour gérer les migrations de base de données.
 
 [tool.poetry.group.dev.dependencies]
 pytest-cov = "^6.0.0"  # Extension pour mesurer la couverture de code.

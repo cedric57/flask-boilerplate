@@ -89,7 +89,7 @@ repos:
 
   ### Python Tools ###
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.11.2
+    rev: v0.11.4
     hooks:
       - id: ruff
         name: "🐍 python · Lint and perform safe auto-fixes with Ruff"
@@ -268,7 +268,7 @@ repos:
 
   ### Commit Message Standards ###
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: v4.4.1
+    rev: v4.5.0
     hooks:
       - id: commitizen
         name: "🌳 git · Validate commit message with Commitizen"

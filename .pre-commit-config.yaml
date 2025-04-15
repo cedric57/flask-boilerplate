@@ -37,7 +37,7 @@ repos:
   # to your repository.
   # Note: TruffleHog is a more comprehensive but complex alternative to GitLeaks.
   - repo: https://github.com/gitleaks/gitleaks
-    rev: v8.24.2
+    rev: v8.24.3
     hooks:
       - id: gitleaks
         name: "🔒 security · Detect hardcoded secrets"
@@ -89,7 +89,7 @@ repos:
 
   ### Python Tools ###
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.11.4
+    rev: v0.11.5
     hooks:
       - id: ruff
         name: "🐍 python · Lint and perform safe auto-fixes with Ruff"
@@ -130,7 +130,7 @@ repos:
 
   ### Data & Config Validation ###
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.32.1
+    rev: 0.33.0
     hooks:
       - id: check-github-workflows
         name: "🐙 github-actions · Validate gh workflow files"
@@ -268,7 +268,7 @@ repos:
 
   ### Commit Message Standards ###
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: v4.5.0
+    rev: v4.6.0
     hooks:
       - id: commitizen
         name: "🌳 git · Validate commit message with Commitizen"

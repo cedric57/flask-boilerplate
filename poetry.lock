@@ -387,14 +387,14 @@ tomlkit = ">=0.5.3,<1.0.0"
 
 [[package]]
 name = "conventional-pre-commit"
-version = "4.0.0"
+version = "4.1.0"
 description = "A pre-commit hook that checks commit messages for Conventional Commits formatting."
 optional = false
 python-versions = ">=3.8"
 groups = ["dev"]
 files = [
-    {file = "conventional_pre_commit-4.0.0-py3-none-any.whl", hash = "sha256:41feb4b698056ef607f916227eee6f6464624d3da3d79970830ab3f202ee930c"},
-    {file = "conventional_pre_commit-4.0.0.tar.gz", hash = "sha256:1e34cf1feb77f94ca39cc99cca940e41fd23c8e5a4ea92f3a5102c68941acba4"},
+    {file = "conventional_pre_commit-4.1.0-py3-none-any.whl", hash = "sha256:00bd7909c66193efb3e380bbe1a8621f6380afad6fbba9ea73c9d3355abd428f"},
+    {file = "conventional_pre_commit-4.1.0.tar.gz", hash = "sha256:9eb5f4adeceadee7696ce7385a02469df994d9283292b4cab387f59731dcf44b"},
 ]
 
 [package.extras]
@@ -2297,4 +2297,4 @@ docs = []
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.12"
-content-hash = "1e1f5707c5c7b65181ee6301629b9e64ed16969c19866408a80b2a8be4e8e9ec"
+content-hash = "199be7850d1bc5fb1764a93b2d1f4ddf7312021198eb01e560fd2750a2dd34b8"

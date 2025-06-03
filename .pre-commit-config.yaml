@@ -37,7 +37,7 @@ repos:
   # to your repository.
   # Note: TruffleHog is a more comprehensive but complex alternative to GitLeaks.
   - repo: https://github.com/gitleaks/gitleaks
-    rev: v8.26.0
+    rev: v8.27.0
     hooks:
       - id: gitleaks
         name: "🔒 security · Detect hardcoded secrets"
@@ -89,7 +89,7 @@ repos:
 
   ### Python Tools ###
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.11.11
+    rev: v0.11.12
     hooks:
       - id: ruff
         name: "🐍 python · Lint and perform safe auto-fixes with Ruff"
@@ -98,7 +98,7 @@ repos:
         name: "🐍 python · Format with Ruff"
 
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.15.0
+    rev: v1.16.0
     hooks:
       - id: mypy
         name: "🐍 python · Check types"

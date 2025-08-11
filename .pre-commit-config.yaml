@@ -59,7 +59,7 @@ repos:
 
   # Hooks généraux fournis par Pre-Commit
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
+    rev: v6.0.0
     hooks:
       # Guard rails
       - id: check-ast
@@ -89,7 +89,7 @@ repos:
 
   ### Python Tools ###
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.12.5
+    rev: v0.12.8
     hooks:
       - id: ruff
         name: "🐍 python · Lint and perform safe auto-fixes with Ruff"
@@ -98,7 +98,7 @@ repos:
         name: "🐍 python · Format with Ruff"
 
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.17.0
+    rev: v1.17.1
     hooks:
       - id: mypy
         name: "🐍 python · Check types"
@@ -122,7 +122,7 @@ repos:
 
   ### Javascript & Web Tools ###
   - repo: https://github.com/biomejs/pre-commit
-    rev: "v2.1.2"
+    rev: "v2.1.4"
     hooks:
       - id: biome-check
         name: "🟨 javascript · Lint, format, and safe fixes with Biome"
@@ -162,7 +162,7 @@ repos:
 
   ### Shell ###
   - repo: https://github.com/shellcheck-py/shellcheck-py
-    rev: v0.10.0.1
+    rev: v0.11.0.1
     hooks:
       - id: shellcheck
         name: "🐚 shell · Lint shell scripts"
@@ -233,7 +233,7 @@ repos:
   # ---------------------------- 📁 Filesystem Tools --------------------------- #
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
+    rev: v6.0.0
     hooks:
       # Filesystem Checks
       - id: check-executables-have-shebangs

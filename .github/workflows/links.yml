@@ -19,7 +19,7 @@ jobs:
           key: cache-lychee-${{ github.sha }}
           restore-keys: cache-lychee-
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Run lychee
         id: lychee

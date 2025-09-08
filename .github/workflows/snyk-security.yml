@@ -27,7 +27,7 @@ jobs:
 
       - name: Set up Python 3.12
         id: setup-python
-        uses: actions/setup-python@v5 # Configure la version de Python spécifiée
+        uses: actions/setup-python@v6 # Configure la version de Python spécifiée
         with:
           python-version: "3.12"
 

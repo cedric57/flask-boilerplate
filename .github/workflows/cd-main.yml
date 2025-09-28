@@ -25,7 +25,7 @@ jobs:
 
       - name: Set up Python ${{ matrix.python-version }}
         id: setup-python
-        uses: actions/setup-python@v5 # Configure la version de Python spécifiée
+        uses: actions/setup-python@v6 # Configure la version de Python spécifiée
         with:
           python-version: ${{ matrix.python-version }}
 

@@ -42,7 +42,7 @@ bandit = "^1.8.6"  # Analyseur de sécurité pour détecter les vulnérabilités
 safety = "^3.6.0"  # Outil pour vérifier les dépendances pour les vulnérabilités connues.
 ruff = "^0.12.10"  # Linter et formateur de code rapide.
 conventional-pre-commit = "^4.2.0"  # Hook pour valider les messages de commit selon les conventions.
-commitizen = "^4.8.3"
+commitizen = "^4.9.1"
 pre-commit = "^4.2.0"
 pytest = "^8.4.2"
 

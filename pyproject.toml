@@ -32,7 +32,7 @@ packages = [
 python = "^3.12"  # Version de Python requise (compatible avec 3.12+).
 flask = "^3.1.2"  # Framework Flask utilisé pour le développement web.
 jinja2 = "^3.1.6"  # Moteur de templating utilisé par Flask.
-sqlalchemy = "^2.0.43"  # ORM pour interagir avec la base de données.
+sqlalchemy = "^2.0.44"  # ORM pour interagir avec la base de données.
 alembic = "^1.16.5"  # Outil pour gérer les migrations de base de données.
 
 [tool.poetry.group.dev.dependencies]

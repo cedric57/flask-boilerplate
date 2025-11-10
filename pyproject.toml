@@ -44,7 +44,7 @@ ruff = "^0.14.0"  # Linter et formateur de code rapide.
 conventional-pre-commit = "^4.3.0"  # Hook pour valider les messages de commit selon les conventions.
 commitizen = "^4.9.1"
 pre-commit = "^4.2.0"
-pytest = "^8.4.2"
+pytest = "^9.0.0"
 
 [tool.poetry.group.docs]
 optional = true

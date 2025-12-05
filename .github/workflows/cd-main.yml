@@ -19,7 +19,7 @@ jobs:
       #       check-out repo and set-up python
       #----------------------------------------------
       - name: Check out repository
-        uses: actions/checkout@v5 # Récupère le code source du dépôt
+        uses: actions/checkout@v6 # Récupère le code source du dépôt
         with:
           ref: main # Récupère le code mergé
 

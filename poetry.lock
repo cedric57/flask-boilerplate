@@ -385,14 +385,14 @@ markers = {main = "platform_system == \"Windows\"", docs = "sys_platform == \"wi
 
 [[package]]
 name = "commitizen"
-version = "4.9.1"
+version = "4.10.0"
 description = "Python commitizen client tool"
 optional = false
 python-versions = "<4.0,>=3.9"
 groups = ["dev"]
 files = [
-    {file = "commitizen-4.9.1-py3-none-any.whl", hash = "sha256:4241b2ecae97b8109af8e587c36bc3b805a09b9a311084d159098e12d6ead497"},
-    {file = "commitizen-4.9.1.tar.gz", hash = "sha256:b076b24657718f7a35b1068f2083bd39b4065d250164a1398d1dac235c51753b"},
+    {file = "commitizen-4.10.0-py3-none-any.whl", hash = "sha256:3fe56c168b30b30b84b8329cba6b132e77b4eb304a5460bbe2186aad0f78c966"},
+    {file = "commitizen-4.10.0.tar.gz", hash = "sha256:cc58067403b9eff21d0423b3d9a29bda05254bd51ad5bdd1fd0594bff31277e1"},
 ]
 
 [package.dependencies]
@@ -407,7 +407,7 @@ prompt_toolkit = "!=3.0.52"
 pyyaml = ">=3.08"
 questionary = ">=2.0,<3.0"
 termcolor = ">=1.1.0,<4.0.0"
-tomlkit = ">=0.5.3,<1.0.0"
+tomlkit = ">=0.8.0,<1.0.0"
 
 [[package]]
 name = "conventional-pre-commit"
@@ -2551,4 +2551,4 @@ docs = []
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.12"
-content-hash = "59d1c2be52b5414926ad0b4d139ec911cdada0aa89249c8373b87c2116f9573a"
+content-hash = "4958bea7c88fce79448aa5a7f9e194d06d995744c6972ebdb1ef70acb4eb65a5"

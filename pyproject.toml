@@ -43,7 +43,7 @@ safety = "^3.6.2"  # Outil pour vérifier les dépendances pour les vulnérabili
 ruff = "^0.14.0"  # Linter et formateur de code rapide.
 conventional-pre-commit = "^4.3.0"  # Hook pour valider les messages de commit selon les conventions.
 commitizen = "^4.9.1"
-pre-commit = "^4.2.0"
+pre-commit = "^4.5.0"
 pytest = "^8.4.2"
 
 [tool.poetry.group.docs]

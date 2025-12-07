@@ -41,7 +41,7 @@ jobs:
           fetch-depth: 2 # Fetch the last two commits to ensure accurate results
 
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@v3
+        uses: github/codeql-action/init@v4
         with:
           languages: ${{ matrix.language }}
           queries: security-extended,security-and-quality
@@ -62,7 +62,7 @@ jobs:
           poetry install --no-root --with dev
 
       - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v3
+        uses: github/codeql-action/analyze@v4
         with:
           category: "/language:${{ matrix.language }}"
           upload-database: true # Permet le débogage via l'UI GitHub

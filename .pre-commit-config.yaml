@@ -89,7 +89,7 @@ repos:
 
   ### Python Tools ###
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.14.7
+    rev: v0.14.8
     hooks:
       - id: ruff
         name: "🐍 python · Lint and perform safe auto-fixes with Ruff"
@@ -212,7 +212,7 @@ repos:
 
   ### PNG Images ###
   - repo: https://github.com/oxipng/oxipng
-    rev: v9.1.5
+    rev: v10.0.0
     hooks:
       - id: oxipng
         name: "🖼️ images · Optimize PNG files"

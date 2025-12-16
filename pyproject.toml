@@ -52,7 +52,7 @@ optional = true
 [tool.poetry.group.docs.dependencies]
 sphinx = "^9.0.4"
 sphinx-rtd-theme = "^3.0.2"
-sphinx-autodoc-typehints = "^3.5.2"
+sphinx-autodoc-typehints = "^3.6.0"
 sphinxcontrib-mermaid = "^1.2.3"
 
 [tool.poetry.extras]

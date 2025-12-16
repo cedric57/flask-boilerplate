@@ -37,8 +37,8 @@ alembic = "^1.17.2"  # Outil pour gérer les migrations de base de données.
 
 [tool.poetry.group.dev.dependencies]
 pytest-cov = "^7.0.0"  # Extension pour mesurer la couverture de code.
-mypy = "^1.18.2"  # Vérificateur de typage statique.
-bandit = "^1.8.6"  # Analyseur de sécurité pour détecter les vulnérabilités.
+mypy = "^1.19.1"  # Vérificateur de typage statique.
+bandit = "^1.9.2"  # Analyseur de sécurité pour détecter les vulnérabilités.
 safety = "^3.7.0"  # Outil pour vérifier les dépendances pour les vulnérabilités connues.
 ruff = "^0.14.9"  # Linter et formateur de code rapide.
 conventional-pre-commit = "^4.3.0"  # Hook pour valider les messages de commit selon les conventions.
@@ -52,7 +52,7 @@ optional = true
 [tool.poetry.group.docs.dependencies]
 sphinx = "^9.0.4"
 sphinx-rtd-theme = "^3.0.2"
-sphinx-autodoc-typehints = "^3.5.2"
+sphinx-autodoc-typehints = "^3.6.0"
 sphinxcontrib-mermaid = "^1.2.3"
 
 [tool.poetry.extras]

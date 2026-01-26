@@ -48,7 +48,7 @@ repos:
   # Bandit generates a detailed report ranking issues by severity (low, medium, high), helping developers fix security
   # flaws early in the development process. It's ideal for promoting secure coding practices.
   - repo: https://github.com/PyCQA/bandit
-    rev: 1.9.2
+    rev: 1.9.3
     hooks:
       - id: bandit
         name: "🔒 security · Python security vulnerability scanner"
@@ -89,7 +89,7 @@ repos:
 
   ### Python Tools ###
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.14.11
+    rev: v0.14.14
     hooks:
       - id: ruff
         name: "🐍 python · Lint and perform safe auto-fixes with Ruff"
@@ -130,7 +130,7 @@ repos:
 
   ### Data & Config Validation ###
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.36.0
+    rev: 0.36.1
     hooks:
       - id: check-github-workflows
         name: "🐙 github-actions · Validate gh workflow files"
@@ -182,7 +182,7 @@ repos:
 
   ### SQL ###
   - repo: https://github.com/sqlfluff/sqlfluff
-    rev: 4.0.0a2
+    rev: 4.0.0
     hooks:
       - id: sqlfluff-fix
         name: "📊 SQL · Attempts to fix rule violations."
@@ -212,7 +212,7 @@ repos:
 
   ### PNG Images ###
   - repo: https://github.com/oxipng/oxipng
-    rev: v10.0.0
+    rev: v10.1.0
     hooks:
       - id: oxipng
         name: "🖼️ images · Optimize PNG files"
@@ -268,7 +268,7 @@ repos:
 
   ### Commit Message Standards ###
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: v4.11.2
+    rev: v4.12.1
     hooks:
       - id: commitizen
         name: "🌳 git · Validate commit message with Commitizen"
@@ -278,7 +278,7 @@ repos:
         stages: [pre-push]
 
   - repo: https://github.com/alessandrojcm/commitlint-pre-commit-hook
-    rev: v9.23.0
+    rev: v9.24.0
     hooks:
       - id: commitlint
         name: "🌳 git · Validate commit message with Commitlint"

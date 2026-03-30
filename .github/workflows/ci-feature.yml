@@ -71,7 +71,7 @@ jobs:
         run: poetry run pytest --doctest-modules --junitxml=junit.xml -o junit_family=legacy --cov=src tests --cov-report=xml --cov-report=html # Exécute les tests avec Pytest et génère un rapport de couverture
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v5 # Envoie les résultats de couverture à Codecov
+        uses: codecov/codecov-action@v6 # Envoie les résultats de couverture à Codecov
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 

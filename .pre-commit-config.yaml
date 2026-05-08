@@ -48,7 +48,7 @@ repos:
   # Bandit generates a detailed report ranking issues by severity (low, medium, high), helping developers fix security
   # flaws early in the development process. It's ideal for promoting secure coding practices.
   - repo: https://github.com/PyCQA/bandit
-    rev: 1.9.3
+    rev: 1.9.4
     hooks:
       - id: bandit
         name: "🔒 security · Python security vulnerability scanner"
@@ -89,7 +89,7 @@ repos:
 
   ### Python Tools ###
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.15.1
+    rev: v0.15.12
     hooks:
       - id: ruff
         name: "🐍 python · Lint and perform safe auto-fixes with Ruff"
@@ -98,7 +98,7 @@ repos:
         name: "🐍 python · Format with Ruff"
 
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.19.1
+    rev: v1.20.2
     hooks:
       - id: mypy
         name: "🐍 python · Check types"
@@ -122,7 +122,7 @@ repos:
 
   ### Javascript & Web Tools ###
   - repo: https://github.com/biomejs/pre-commit
-    rev: "v2.3.15"
+    rev: "v2.4.14"
     hooks:
       - id: biome-check
         name: "🟨 javascript · Lint, format, and safe fixes with Biome"
@@ -130,7 +130,7 @@ repos:
 
   ### Data & Config Validation ###
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.36.2
+    rev: 0.37.2
     hooks:
       - id: check-github-workflows
         name: "🐙 github-actions · Validate gh workflow files"
@@ -154,7 +154,7 @@ repos:
           - ruff
 
   - repo: https://github.com/igorshubovych/markdownlint-cli
-    rev: v0.47.0
+    rev: v0.48.0
     hooks:
       - id: markdownlint
         name: "📝 markdown · Lint markdown"
@@ -182,7 +182,7 @@ repos:
 
   ### SQL ###
   - repo: https://github.com/sqlfluff/sqlfluff
-    rev: 4.0.4
+    rev: 4.1.0
     hooks:
       - id: sqlfluff-fix
         name: "📊 SQL · Attempts to fix rule violations."
@@ -212,7 +212,7 @@ repos:
 
   ### PNG Images ###
   - repo: https://github.com/oxipng/oxipng
-    rev: v10.1.0
+    rev: v10.1.1
     hooks:
       - id: oxipng
         name: "🖼️ images · Optimize PNG files"
@@ -268,7 +268,7 @@ repos:
 
   ### Commit Message Standards ###
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: v4.13.7
+    rev: v4.15.0
     hooks:
       - id: commitizen
         name: "🌳 git · Validate commit message with Commitizen"
@@ -278,7 +278,7 @@ repos:
         stages: [pre-push]
 
   - repo: https://github.com/alessandrojcm/commitlint-pre-commit-hook
-    rev: v9.24.0
+    rev: v9.25.0
     hooks:
       - id: commitlint
         name: "🌳 git · Validate commit message with Commitlint"

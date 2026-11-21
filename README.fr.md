@@ -8,7 +8,7 @@ Ce modèle de base est un point de départ solide pour créer des applications F
 
 ### Statut du projet
 
-[![CI Feature & Develop](https://github.com/cedric57/flask-boilerplate/actions/workflows/ci-feature.yml/badge.svg)](https://github.com/cedric57/flask-boilerplate/actions/workflows/ci-features.yml)
+[![CI Feature & Develop](https://github.com/cedric57/flask-boilerplate/actions/workflows/ci-feature.yml/badge.svg)](https://github.com/cedric57/flask-boilerplate/actions/workflows/ci-feature.yml)
 [![CD Release](https://github.com/cedric57/flask-boilerplate/actions/workflows/cd-release.yml/badge.svg)](https://github.com/cedric57/flask-boilerplate/actions/workflows/cd-release.yml)
 [![CD Production](https://github.com/cedric57/flask-boilerplate/actions/workflows/cd-main.yml/badge.svg)](https://github.com/cedric57/flask-boilerplate/actions/workflows/cd-main.yml)
 [![Hotfixes](https://github.com/cedric57/flask-boilerplate/actions/workflows/ci-hotfixes.yml/badge.svg)](https://github.com/cedric57/flask-boilerplate/actions/workflows/ci-hotfixes.yml)
